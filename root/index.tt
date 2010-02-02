@@ -10,6 +10,8 @@
         [% END %]
       [% END %]
 
+      [% IF message %]<h2 class="message">[% message %]</h2>[% END %]
+
       <form name=[% form.name %] action=[% c.uri_for() %] method=post>
 
         [% f = form.field( 'status' ) %]

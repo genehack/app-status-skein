@@ -39,9 +39,10 @@ sub index :Path :Args(0) {
     _post_status_to_twitter( $result )  if ( $services{twitter}  );
   }
 
-  $c->log->info( $body );
-  $c->response->body( $body );
-
+  $c->stash(
+    message => "Posted" ,
+    form    => StatusShooter::Form::Update->new ,
+  );
 }
 
 sub default :Path {
