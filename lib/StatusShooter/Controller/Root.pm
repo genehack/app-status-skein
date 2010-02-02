@@ -29,22 +29,14 @@ sub index :Path :Args(0) {
   my $body;
 
   if ( $services{blog} ) {
-    $body .= "Post to blog\n";
-    if ( $services{facebook} ) {
-      $body .= "Post note on facebook\n";
-    }
-    if ( $services{twitter} ) {
-      $body .= "Post blog post title to twitter\n";
-    }
+    my $post = _post_on_blog( $result );
+
+    _post_note_to_facebook( $post , $result )           if ( $services{facebook} );
+    _post_blog_post_title_to_twitter( $post , $result ) if ( $services{twitter}  );
   }
   else {
-    if ( $services{facebook} ) {
-      $body .= "Post status to Facebook\n";
-    }
-
-    if ( $services{twitter} ) {
-      $body .= "Post status to Twitter\n";
-    }
+    _post_status_to_facebook( $result ) if ( $services{facebook} );
+    _post_status_to_twitter( $result )  if ( $services{twitter}  );
   }
 
   $c->log->info( $body );
@@ -59,5 +51,32 @@ sub default :Path {
 }
 
 sub end : ActionClass('RenderView') {}
+
+
+sub _post_blog_post_title_to_twitter {
+  my( $post , $result ) = @_;
+
+}
+
+sub _post_note_to_facebook {
+  my( $post , $result ) = @_;
+
+}
+
+sub _post_on_blog {
+  my( $result ) = @_;
+
+}
+
+sub _post_status_to_facebook {
+  my( $result ) = @_;
+
+}
+
+sub _post_status_to_twitter {
+  my( $result ) = @_;
+
+}
+
 
 1;
