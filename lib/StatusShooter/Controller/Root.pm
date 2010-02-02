@@ -1,36 +1,55 @@
 package StatusShooter::Controller::Root;
+use Moose;
+BEGIN { extends 'Catalyst::Controller' }
 
-use strict;
-use warnings;
-use parent 'Catalyst::Controller';
+use StatusShooter::Form::Update;
 
-#
-# Sets the actions in this controller to be registered with no prefix
-# so they function identically to actions created in MyApp.pm
-#
 __PACKAGE__->config->{namespace} = '';
 
-=head1 NAME
-
-StatusShooter::Controller::Root - Root Controller for StatusShooter
-
-=head1 DESCRIPTION
-
-[enter your description here]
-
-=head1 METHODS
-
-=cut
-
-=head2 index
-
-=cut
+has 'form' => (
+  isa => 'StatusShooter::Form::Update' , is => 'rw' , lazy => 1 ,
+  default => sub { StatusShooter::Form::Update->new }
+);
 
 sub index :Path :Args(0) {
-    my ( $self, $c ) = @_;
+  my ( $self, $c ) = @_;
 
-    # Hello World
-    $c->response->body( $c->welcome_message );
+  $c->stash(
+    template => 'index.tt' ,
+    form     => $self->form ,
+    message  => 'Not Valid' ,
+  );
+
+  return unless $self->form->process( params => $c->req->parameters );
+
+  my $result = $self->form->value;
+
+  my %services = map { $_ => 1 } @{ $result->{services} };
+
+  my $body;
+
+  if ( $services{blog} ) {
+    $body .= "Post to blog\n";
+    if ( $services{facebook} ) {
+      $body .= "Post note on facebook\n";
+    }
+    if ( $services{twitter} ) {
+      $body .= "Post blog post title to twitter\n";
+    }
+  }
+  else {
+    if ( $services{facebook} ) {
+      $body .= "Post status to Facebook\n";
+    }
+
+    if ( $services{twitter} ) {
+      $body .= "Post status to Twitter\n";
+    }
+  }
+
+  $c->log->info( $body );
+  $c->response->body( $body );
+
 }
 
 sub default :Path {
@@ -39,23 +58,6 @@ sub default :Path {
     $c->response->status(404);
 }
 
-=head2 end
-
-Attempt to render a view, if needed.
-
-=cut
-
 sub end : ActionClass('RenderView') {}
-
-=head1 AUTHOR
-
-genehack
-
-=head1 LICENSE
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-=cut
 
 1;
