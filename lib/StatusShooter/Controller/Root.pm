@@ -1,4 +1,6 @@
 package StatusShooter::Controller::Root;
+use namespace::autoclean;
+
 use Moose;
 BEGIN { extends 'Catalyst::Controller' }
 

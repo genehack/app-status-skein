@@ -1,5 +1,7 @@
 package StatusShooter::Form::Update;
 
+use namespace::autoclean;
+
 use HTML::FormHandler::Moose;
 extends 'HTML::FormHandler';
 with 'HTML::FormHandler::Render::Simple';
@@ -70,6 +72,4 @@ sub validate {
   }
 }
 
-
-no HTML::FormHandler::Moose;
 1;
