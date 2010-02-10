@@ -7,7 +7,9 @@ use StatusShooter::Form::Update;
 __PACKAGE__->config->{namespace} = '';
 
 has 'form' => (
-  isa => 'StatusShooter::Form::Update' , is => 'rw' , lazy => 1 ,
+  isa     => 'StatusShooter::Form::Update' ,
+  is      => 'rw' ,
+  lazy    => 1 ,
   default => sub { StatusShooter::Form::Update->new }
 );
 
@@ -46,38 +48,31 @@ sub index :Path :Args(0) {
 }
 
 sub default :Path {
-    my ( $self, $c ) = @_;
-    $c->response->body( 'Page not found' );
-    $c->response->status(404);
+  my ( $self, $c ) = @_;
+  $c->response->body( 'Page not found' );
+  $c->response->status(404);
 }
 
 sub end : ActionClass('RenderView') {}
 
-
 sub _post_blog_post_title_to_twitter {
   my( $post , $result ) = @_;
-
 }
 
 sub _post_note_to_facebook {
   my( $post , $result ) = @_;
-
 }
 
 sub _post_on_blog {
   my( $result ) = @_;
-
 }
 
 sub _post_status_to_facebook {
   my( $result ) = @_;
-
 }
 
 sub _post_status_to_twitter {
   my( $result ) = @_;
-
 }
-
 
 1;

@@ -5,12 +5,18 @@ extends 'HTML::FormHandler';
 with 'HTML::FormHandler::Render::Simple';
 
 has_field 'status' => (
-  type => 'Text' , label => 'Status' , required => 1 ,
-  required_message => 'You must enter a status' , size => 140 , maxlength => 140 ,
+  type             => 'Text' ,
+  label            => 'Status' ,
+  required         => 1 ,
+  required_message => 'You must enter a status' ,
+  size             => 140 ,
+  maxlength        => 140 ,
 );
 
 has_field 'services' => (
-  type => 'Multiple' , widget => 'CheckboxGroup' , required => 1 ,
+  type             => 'Multiple' ,
+  widget           => 'CheckboxGroup' ,
+  required         => 1 ,
   required_message => 'You must select one or more services' ,
 );
 
@@ -21,15 +27,21 @@ sub options_services {[
 ]}
 
 has_field 'submit' => (
-  type => 'Submit' , value => 'Post' ,
+  type  => 'Submit' ,
+  value => 'Post' ,
 );
 
 has_field 'body' => (
-  type => 'TextArea' , label => '' , rows => 20 , cols => 80 ,
+  type  => 'TextArea' ,
+  label => '' ,
+  rows  => 20 ,
+  cols  => 80 ,
 );
 
 has_field 'tags' => (
-  type => 'Text' , label => 'Tags' , size => 200 ,
+  type  => 'Text' ,
+  label => 'Tags' ,
+  size  => 100 ,
 );
 
 sub validate {
@@ -59,4 +71,3 @@ sub validate {
 
 no HTML::FormHandler::Moose;
 1;
-
