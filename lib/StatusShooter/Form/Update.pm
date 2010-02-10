@@ -45,7 +45,7 @@ has_field 'body' => (
 has_field 'tags' => (
   type  => 'Text' ,
   label => 'Tags' ,
-  size  => 100 ,
+  size  => 80 ,
 );
 
 sub validate {

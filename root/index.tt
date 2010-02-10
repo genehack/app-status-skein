@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html lang=en>
   <head>
-    <title>StatusShooter</title>
+    <title>Status Shooter</title>
     <meta http-equiv=Content-Type content="text/html;charset=utf-8" />
   </head>
-  <body>
+  <body style="font-family:verdana,helvetica">
     <div style="text-align:center">
-      <h1>StatusShooter</h1>
+      <h1>Status Shooter</h1>
 
       [% FOR field IN form.error_fields %]
         [% FOR error IN field.errors %]
@@ -39,14 +39,17 @@
           <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.value %]" />
         </p>
 
+        <hr style="width:60%;margin-top:50px;"/>
         [% f = form.field( 'body' ) %]
         <p>
-          <textarea name=[% f.name %] id=[% f.name %] rows=[% f.rows %] cols=[% f.cols %]>[% f.value %]</textarea>
+          <label>Blog Post Body:<br/>
+            <textarea name=[% f.name %] id=[% f.name %] rows=[% f.rows %] cols=[% f.cols %]>[% f.value %]</textarea>
+          </label>
         </p>
 
         [% f = form.field( 'tags' ) %]
         <p>
-          <label>[% f.label %]:
+          <label>Blog Post Tags:<br/>
             <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] size=[% f.size %] value="[% f.fif %]" />
           </label>
         </p>
