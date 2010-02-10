@@ -6,3 +6,7 @@ Model::Twitter:
     clientname: 'Status Shooter'
     clientversion: '0.1'
     clienturl: 'http://genehack.org'
+Model::Facebook:
+  args:
+    desktop: 1
+    api_key: 80ee98239b935775526edc8884db8947
