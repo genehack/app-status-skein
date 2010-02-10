@@ -1,0 +1,39 @@
+#! /opt/perl/bin/perl
+
+use strict;
+use warnings;
+use 5.010;
+
+use FindBin;
+use Net::Twitter;
+use YAML          qw/ LoadFile /;
+
+my $conf = LoadFile( "$FindBin::Bin/../statusshooter.yaml" );
+my $local_conf = LoadFile( "$FindBin::Bin/../statusshooter_local.yaml" );
+
+my $cons_key    = $conf->{'Model::Twitter'}{args}{consumer_key};
+my $cons_secret = $local_conf->{'Model::Twitter'}{args}{consumer_secret};
+
+my $twitter = Net::Twitter->new(
+  traits          => [ qw/ API::REST OAuth/ ] ,
+  consumer_key    => $cons_key ,
+  consumer_secret => $cons_secret ,
+);
+
+my $auth_url = $twitter->get_authorization_url;
+print <<EOL;
+Authorize this application at: $auth_url
+Then, enter the PIN# provided to continue:
+EOL
+
+chomp( my $pin = <STDIN> );
+
+my( $user_token , $user_secret ) = $twitter->request_access_token( verifier => $pin );
+
+print <<EOL;
+Your session token is $user_token
+Your session secret is $user_secret
+EOL
+
+exit;
+
