@@ -4,6 +4,8 @@ use HTML::FormHandler::Moose;
 extends 'HTML::FormHandler';
 with 'HTML::FormHandler::Render::Simple';
 
+has '+name' => ( default => 'statusshooter' );
+
 has_field 'status' => (
   type             => 'Text' ,
   label            => 'Status' ,
