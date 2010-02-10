@@ -1,11 +1,13 @@
+---
 # rename this file to StatusShooter.yml and put a ':' in front of 'name' if
 # you want to use YAML like in old versions of Catalyst
 name: StatusShooter
 Model::Twitter:
   args:
-    clientname: 'Status Shooter'
-    clientversion: '0.1'
-    clienturl: 'http://genehack.org'
+    traits:
+      - API::REST
+      - OAuth
+    consumer_key: 1c4qi8rmSJg9bcKZMn22Hg
 Model::Facebook:
   args:
     desktop: 1
