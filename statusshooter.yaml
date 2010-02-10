@@ -4,3 +4,5 @@ name: StatusShooter
 Model::Twitter:
   args:
     clientname: 'Status Shooter'
+    clientversion: '0.1'
+    clienturl: 'http://genehack.org'
