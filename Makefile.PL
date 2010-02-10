@@ -16,6 +16,8 @@ requires 'HTML::FormHandler';
 requires 'HTML::FormHandler::Moose';
 requires 'HTML::FormHandler::Render::Simple';
 requires 'Moose';
+requires 'WWW::Facebook::API';
+requires 'YAML';
 requires 'namespace::autoclean';
 requires 'parent';
 
