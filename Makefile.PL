@@ -7,6 +7,7 @@ name 'StatusShooter';
 all_from 'lib/StatusShooter.pm';
 
 requires 'Catalyst::Action::RenderView';
+requires 'Catalyst::Model::Adaptor';
 requires 'Catalyst::Plugin::ConfigLoader';
 requires 'Catalyst::Plugin::Static::Simple';
 requires 'Catalyst::Runtime'                   => '5.80014';
@@ -16,6 +17,7 @@ requires 'HTML::FormHandler';
 requires 'HTML::FormHandler::Moose';
 requires 'HTML::FormHandler::Render::Simple';
 requires 'Moose';
+requires 'Net::Twitter';
 requires 'namespace::autoclean';
 requires 'parent';
 
