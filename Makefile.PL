@@ -6,13 +6,19 @@ use inc::Module::Install;
 name 'StatusShooter';
 all_from 'lib/StatusShooter.pm';
 
-requires 'Catalyst::Runtime' => '5.80014';
+requires 'Catalyst::Action::RenderView';
 requires 'Catalyst::Plugin::ConfigLoader';
 requires 'Catalyst::Plugin::Static::Simple';
-requires 'Catalyst::Action::RenderView';
+requires 'Catalyst::Runtime'                   => '5.80014';
+requires 'Catalyst::View::TT';
+requires 'Config::Any';
+requires 'HTML::FormHandler';
+requires 'HTML::FormHandler::Moose';
+requires 'HTML::FormHandler::Render::Simple';
+requires 'Moose';
+requires 'namespace::autoclean';
 requires 'parent';
-requires 'Config::General'; # This should reflect the config file format you've chosen
-                 # See Catalyst::Plugin::ConfigLoader for supported formats
+
 catalyst;
 
 install_script glob('script/*.pl');
