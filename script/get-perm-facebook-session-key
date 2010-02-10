@@ -1,0 +1,56 @@
+#! /opt/perl/bin/perl
+
+### HEAVILY BASED ON CODE GANKED FROM
+###  http://search.cpan.org/~simonw/Net-Social-Service-Facebook-0.1/lib/Net/Social/Service/Facebook.pm
+
+use strict;
+use warnings;
+use 5.010;
+
+use FindBin;
+use WWW::Facebook::API;
+use YAML                qw/ LoadFile /;
+
+my $conf       = LoadFile( "$FindBin::Bin/../statusshooter.yaml" );
+my $local_conf = LoadFile( "$FindBin::Bin/../statusshooter_local.yaml" );
+
+my $api_key = $conf->{'Model::Facebook'}{args}{api_key} or die "Failed to read API key";
+my $secret  = $local_conf->{'Model::Facebook'}{args}{secret}  or die "Failed to read secret";
+
+my $client  = WWW::Facebook::API->new(
+  parse        => 1,
+  throw_errors => 1,
+  desktop      => 1,
+  api_key      => $api_key,
+  secret       => $secret,
+);
+
+my $session_url = $client->get_infinite_session_url;
+
+print <<EOL;
+1) Go to $session_url
+2) Press 'generate' and copy the token
+3) Paste the token here:
+EOL
+
+chomp( my $token = <STDIN> );
+
+$client->auth->get_session($token);
+
+my $session_key    = $client->session_key;
+my $session_secret = $client->secret;
+
+my $perms_url  = 'www.facebook.com/connect/prompt_permissions.php';
+$perms_url    .= "?api_key=$api_key&fbconnect=true&v=1.0&display=popup&extern=1";
+$perms_url    .= "&next=http://www.facebook.com/connect/login_success.html?xxRESULTTOKENxx";
+$perms_url    .= "&ext_perm=read_stream,publish_stream";
+
+### FIXME should just write this out into local config...
+print <<EOL;
+4) Your infinite session key is $session_key
+5) Your infinite session secret is $session_secret
+6) Go to $perms_url and authorize the application to read and post to your streams";
+EOL
+
+exit;
+
