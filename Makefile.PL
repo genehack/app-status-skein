@@ -18,6 +18,8 @@ requires 'HTML::FormHandler::Moose';
 requires 'HTML::FormHandler::Render::Simple';
 requires 'Moose';
 requires 'Net::Twitter';
+requires 'WWW::Facebook::API';
+requires 'YAML';
 requires 'namespace::autoclean';
 requires 'parent';
 
