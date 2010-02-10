@@ -37,7 +37,10 @@ sub index :Path :Args(0) {
       _post_blog_post_title_to_twitter( $post , $result ) if ( $services{twitter}  );
     }
     else {
-      _post_status_to_facebook( $result ) if ( $services{facebook} );
+      if ( $services{facebook} ) {
+        $c->model('Facebook')->status->set( status => $result->{status} );
+      }
+
       _post_status_to_twitter( $result )  if ( $services{twitter}  );
     }
 
