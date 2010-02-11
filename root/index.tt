@@ -5,6 +5,13 @@
     <meta http-equiv=Content-Type content="text/html;charset=utf-8" />
   </head>
   <body style="font-family:verdana,helvetica">
+    [% IF twitter_status %]
+    <div style="float:left;font-size:small;width:20%">
+      <ul style="list-style:none">
+      [% INCLUDE STATUS FOREACH status IN twitter_status %]
+      </ul>
+    </div>
+    [% END %]
     <div style="text-align:center">
       <h1>Status Shooter</h1>
 
@@ -56,4 +63,18 @@
       </form>
     </div>
   </body>
+[% BLOCK STATUS %]
+[% user = status.user %]
+<li>
+  <div style="clear:both;">
+    <a href=http://twitter.com/[% user.screen_name %] target="_new">
+      <img src=[% user.profile_image_url %] style="border:1px solid black;float:left;margin:5px;" title="[% user.description %]"/>
+    </a>
+    <a href=http://twitter.com/[% user.screen_name %] class=twitter_user title="[% user.name %]" target="_new">
+      [% user.screen_name %]
+    </a>:
+    [% status.text %]
+  </div>
+</li>
+[% END %]
 </html>
