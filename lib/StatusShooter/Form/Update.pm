@@ -38,7 +38,7 @@ has_field 'submit' => (
 has_field 'body' => (
   type  => 'TextArea' ,
   label => '' ,
-  rows  => 20 ,
+  rows  => 10 ,
   cols  => 80 ,
 );
 
