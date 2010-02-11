@@ -10,6 +10,7 @@ use Catalyst qw/
                  -Debug
                  ConfigLoader
                  Static::Simple
+                 Unicode
                /;
 
 our $VERSION = '0.01';
