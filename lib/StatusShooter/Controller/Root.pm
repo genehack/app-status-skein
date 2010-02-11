@@ -83,12 +83,4 @@ sub _post_on_blog {
   my( $result ) = @_;
 }
 
-sub _post_status_to_facebook {
-  my( $result ) = @_;
-}
-
-sub _post_status_to_twitter {
-  my( $result ) = @_;
-}
-
 1;
