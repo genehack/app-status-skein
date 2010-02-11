@@ -23,6 +23,15 @@ sub index :Path :Args(0) {
     form     => $self->form ,
   );
 
+  eval {
+    my $statuses = $c->model( 'Twitter' )->friends_timeline();
+    foreach ( @$statuses ) {
+      $_->{text} =~ s|(http://\S+)|<a target="_new" href="$1">$1</a>|g;
+      $_->{text} =~ s|\@(\S+)|<a target="_new" href="http://twitter.com/$1">\@$1</a>|g;
+    }
+    $c->stash( twitter_status => $statuses );
+  };
+
   if( $self->form->process( params => $c->req->parameters )) {
     my $result = $self->form->value;
 
