@@ -1,7 +1,8 @@
 use MooseX::Declare;
+
 class StatusShooter::Client::Facebook extends StatusShooter::Client {
-  use WWW::Facebook::API;
   use StatusShooter::Post::Facebook;
+  use WWW::Facebook::API;
 
   has '_client' => (
     is         => 'ro' ,
@@ -13,7 +14,6 @@ class StatusShooter::Client::Facebook extends StatusShooter::Client {
   has desktop     => ( is => 'ro' , isa => 'Int' , default  => 1 );
   has secret      => ( is => 'ro' , isa => 'Str' , required => 1 );
   has session_key => ( is => 'ro' , isa => 'Str' , required => 1 );
-
 
   method _build__client {
     return WWW::Facebook::API->new(
