@@ -31,6 +31,15 @@ class StatusShooter::Post::Twitter extends StatusShooter::Post {
       $self->user_handle , $self->id
   }
 
+  method reply_btn   {
+    my $author = $self->user_handle;
+    my $id     = $self->id;
+
+    return <<EOHTML;
+<a href=# onclick="twitter_reply('\@$author','$id')">Reply</a>
+EOHTML
+  }
+
   method user_desc   { return $self->post->user->description }
   method user_handle { return $self->post->user->screen_name }
   method user_url    { return sprintf 'http://twitter.com/%s' , $self->user_handle }
