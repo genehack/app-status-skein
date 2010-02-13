@@ -3,6 +3,14 @@
   <head>
     <title>Status Shooter</title>
     <meta http-equiv=Content-Type content="text/html;charset=utf-8" />
+    <script type="text/javascript">
+function twitter_reply( author, id ) {
+  document.getElementById('status').value=author;
+  document.getElementById('twitter_in_reply_to').value=id;
+  document.getElementById('services.twitter').checked=true;
+  return true;
+}
+    </script>
   </head>
   <body style="font-family:verdana,helvetica">
     [% IF posts %]
