@@ -10,6 +10,12 @@ function twitter_reply( author, id ) {
   document.getElementById('services.twitter').checked=true;
   return true;
 }
+function identica_reply( author, id ) {
+  document.getElementById('status').value=author;
+  document.getElementById('identica_in_reply_to').value=id;
+  document.getElementById('services.identica').checked=true;
+  return true;
+}
     </script>
   </head>
   <body style="font-family:verdana,helvetica">
@@ -72,6 +78,8 @@ function twitter_reply( author, id ) {
         </p>
 
         <p>
+        [% f = form.field( 'identica_in_reply_to' ) %]
+          <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" />
         [% f = form.field( 'twitter_in_reply_to' ) %]
           <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" />
         </p>
