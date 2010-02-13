@@ -23,7 +23,7 @@ class StatusShooter::Client::Identica extends StatusShooter::Client {
 
   method get_posts {
     my $posts;
-    eval { $posts = $self->_client->friends_timeline };
+    eval { $posts = $self->_client->home_timeline };
     die $@ if $@;
 
     $posts = [ map { StatusShooter::Post::Identica->new({ post => $_ }) } @$posts ];
