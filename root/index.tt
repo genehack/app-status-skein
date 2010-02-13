@@ -31,6 +31,8 @@ function twitter_reply( author, id ) {
 
       [% IF message %]<h2 class="message">[% message %]</h2>[% END %]
 
+      <a href="[% c.uri_for() %]">reload</a>
+
       <form name=[% form.name %] action=[% form.action %] method=post>
 
         [% f = form.field( 'status' ) %]
