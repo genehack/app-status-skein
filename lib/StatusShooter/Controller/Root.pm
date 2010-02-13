@@ -33,7 +33,6 @@ sub index :Path :Args(0) {
 
   my @posts = sort { $b->date <=> $a->date } @$fb_posts , @$tweets , @$identica ;
   $c->stash( posts => \@posts );
-
 }
 
 sub post :Local :Args(0) {
