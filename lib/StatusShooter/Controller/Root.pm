@@ -23,6 +23,8 @@ sub index :Path :Args(0) {
     form     => $self->form ,
   );
 
+  $self->form->action( $c->uri_for( 'post' ));
+
   my $fb_posts = $c->model( 'Facebook' )->get_posts();
   my $tweets   = $c->model( 'Twitter'  )->get_posts();
   my $identica = $c->model( 'Identica' )->get_posts();
