@@ -7,6 +7,7 @@ class StatusShooter::Client::Facebook extends StatusShooter::Client {
   has '_client' => (
     is         => 'ro' ,
     isa        => 'WWW::Facebook::API' ,
+    handles    => [ 'status' ] ,
     lazy_build => 1 ,
   );
 
