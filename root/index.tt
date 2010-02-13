@@ -5,10 +5,10 @@
     <meta http-equiv=Content-Type content="text/html;charset=utf-8" />
   </head>
   <body style="font-family:verdana,helvetica">
-    [% IF twitter_status %]
+    [% IF posts %]
     <div style="float:left;font-size:8pt;width:20%">
       <ul style="list-style:none">
-      [% INCLUDE STATUS FOREACH status IN twitter_status %]
+      [% INCLUDE POST FOREACH post IN posts %]
       </ul>
     </div>
     [% END %]
@@ -63,16 +63,18 @@
       </form>
     </div>
   </body>
-[% BLOCK STATUS %]
-[% user = status.user %]
+[% BLOCK POST %]
 <li style="margin-bottom:10px">
   <div style="clear:both;">
-    <a href=http://twitter.com/[% user.screen_name %] target="_new">
-      <img src=[% user.profile_image_url %] style="border:1px solid black;float:left;margin:5px;" title="[% user.description %]"/>
+    <a href=[% post.user_url %] target="_new">
+      <img src=[% post.avatar_src %] style="border:1px solid black;float:left;margin:5px;" title="[% post.user_desc %]"/>
     </a>
-    <div style="margin-left: 60px"><a href=http://twitter.com/[% user.screen_name %] class=twitter_user title="[% user.name %]" target="_new">
-      [% user.screen_name %]</a>
-    [% status.text %]</div>
+    <div style="margin-left: 60px">
+      <a href=[% post.user_url %] class=user title="[% post.author %]" target="_new">[% post.user_handle %]</a>
+      [% post.text %]
+      <br/>
+      <span style="font-size:0.8em">at <a href=[% post.permalink %] target="_new">[% post.pretty_date %]</a></span>
+    </div>
   </div>
 </li>
 [% END %]
