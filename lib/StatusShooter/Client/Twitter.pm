@@ -7,6 +7,7 @@ class StatusShooter::Client::Twitter extends StatusShooter::Client {
   has '_client' => (
     is         => 'ro' ,
     isa        => 'Net::Twitter' ,
+    handles    => [ 'update' ] ,
     lazy_build => 1 ,
   );
 
