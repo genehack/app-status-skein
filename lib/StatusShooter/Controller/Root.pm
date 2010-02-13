@@ -30,13 +30,17 @@ sub index :Path :Args(0) {
   my @posts = sort { $b->date <=> $a->date } @$fb_posts , @$tweets , @$identica ;
   $c->stash( posts => \@posts );
 
-  if( $self->form->process( params => $c->req->parameters )) {
+}
+
+sub post :Local :Args(0) {
+  my( $self , $c ) = @_;
+
+  if ( $self->form->process( params => $c->req->parameters )) {
     my $result = $self->form->value;
 
     my %services = map { $_ => 1 } @{ $result->{services} };
 
     ### FIXME all the interaction with services should be handled by model classes...
-
     if ( $services{blog} ) {
       my $post = _post_on_blog( $result );
 
@@ -51,10 +55,7 @@ sub index :Path :Args(0) {
 
       if ( $services{identica} ) {
         eval { $c->model( 'Identica' )->update( $result->{status} ) };
-        if ( $@ ) {
-          die $@;
-
-        }
+        die $@ if ( $@ );
       }
 
       if ( $services{twitter} ) {
@@ -68,11 +69,10 @@ sub index :Path :Args(0) {
       }
     }
 
-    $c->stash(
-      message => "Posted" ,
-      form    => StatusShooter::Form::Update->new ,
-    );
+    $self->form->clear_data;
+    $c->flash->{message} = "Posted";
   }
+  $c->response->redirect( $c->uri_for_action( 'index' ));
 }
 
 sub default :Path {
