@@ -4,4 +4,6 @@ class StatusShooter::Client {
     is  => 'ro' ,
     isa => 'Str' ,
   );
+
+  method post_class { return sprintf "StatusShooter::Post::%s" , $self->type }
 }
