@@ -98,7 +98,12 @@ function identica_reply( author, id ) {
       <br/>
       <span style="font-size:0.8em">at <a href=[% post.permalink %] target="_new">[% post.pretty_date %]</a></span>
     </div>
-    <div style="clear:both">[% post.reply_btn %]</div>
+    <div style="clear:both">
+      [% link = 'Favorite' %]
+      [% IF post.favorited %][% link = 'Unfavorite' %]<strong>FAVE</strong><br/>[% END %]
+      [% post.reply_btn %]
+      [% IF post.can_be_favorited %]<a href="[% c.uri_for( 'toggle_fave' , post.type , post.id ) %]">[% link %]</a>[% END %]
+    </div>
   </div>
 </li>
 [% END %]
