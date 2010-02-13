@@ -31,7 +31,7 @@ class StatusShooter::Post::Identica extends StatusShooter::Post {
   method avatar_src  { return $self->post->{user}{profile_image_url} }
 
   method permalink   {
-    return sprintf 'http://twitter.com/%s/notice/%s' ,
+    return sprintf 'http://identi.ca/%s/notice/%s' ,
       $self->user_handle , $self->post->{id}
   }
 
