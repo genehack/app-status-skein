@@ -58,7 +58,10 @@ sub index :Path :Args(0) {
       }
 
       if ( $services{twitter} ) {
-        eval { $c->model('Twitter')->update( $result->{status} ) };
+        my $args = { status => $result->{status} };
+        $args->{in_reply_to_status_id} = $result->{twitter_in_reply_to}
+          if $result->{twitter_in_reply_to};
+        eval { $c->model('Twitter')->update( $args ) };
         if ( $@ ) {
           return $c->stash( message => $@ );
         }
