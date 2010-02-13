@@ -1,5 +1,11 @@
 use MooseX::Declare;
 class StatusShooter::Post {
+  has 'can_be_favorited' => (
+    is      => 'ro' ,
+    isa     => 'Bool' ,
+    default => 0
+  );
+
   has date => (
     is         => 'ro' ,
     isa        => 'DateTime' ,
@@ -16,6 +22,11 @@ class StatusShooter::Post {
     isa        => 'Str' ,
     lazy_build => 1 ,
     writer     => '_set_text' ,
+  );
+
+  has 'type' => (
+    is  => 'ro' ,
+    isa => 'Str'
   );
 
   method BUILD {

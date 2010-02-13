@@ -4,6 +4,7 @@ class StatusShooter::Post::Facebook extends StatusShooter::Post {
   use DateTime;
 
   has '+post' => ( isa => 'HashRef' );
+  has '+type' => ( default => 'Facebook' );
 
   has profile => (
     is       => 'ro' ,

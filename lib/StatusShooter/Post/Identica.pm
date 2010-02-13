@@ -4,7 +4,9 @@ class StatusShooter::Post::Identica extends StatusShooter::Post {
   use DateTime;
   use Date::Parse;
 
-  has '+post' => ( isa => 'HashRef' );
+  has '+can_be_favorited' => ( default => 1 );
+  has '+post'             => ( isa => 'HashRef' );
+  has '+type'             => ( default => 'Identica' );
 
   method BUILD {
     my $text = $self->text;

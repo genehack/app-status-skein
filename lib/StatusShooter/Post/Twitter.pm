@@ -2,7 +2,9 @@ use MooseX::Declare;
 
 class StatusShooter::Post::Twitter extends StatusShooter::Post {
 
-  has '+post' => ( isa => 'Object' );
+  has '+can_be_favorited' => ( default => 1 );
+  has '+post'             => ( isa => 'Object' );
+  has '+type'             => ( default => 'Twitter' );
 
   method BUILD {
     my $text = $self->text;
