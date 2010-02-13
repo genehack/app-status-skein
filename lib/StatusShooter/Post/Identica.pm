@@ -6,6 +6,16 @@ class StatusShooter::Post::Identica extends StatusShooter::Post {
 
   has '+post' => ( isa => 'HashRef' );
 
+  method BUILD {
+    my $text = $self->text;
+
+    $text =~ s|\@(\S+)|<a target="_new" href="http://identi.ca/$1">\@$1</a>|g;
+    $text =~ s|\#(\S+)|<a target="_new" href="http://identi.ca/tag/$1">#$1</a>|g;
+    $text =~ s|\!(\S+)|<a target="_new" href="http://identi.ca/group/$1">!$1</a>|g;
+
+    $self->_set_text( $text );
+  }
+
   # lazy builder for 'date' attr, declared in base class
   method _build_date {
     my $epoch = str2time( $self->post->{created_at} );

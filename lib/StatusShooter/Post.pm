@@ -22,8 +22,6 @@ class StatusShooter::Post {
     my $text = $self->text;
 
     $text =~ s|(http://\S+)|<a target="_new" href="$1">$1</a>|g;
-    $text =~ s|\@(\S+)|<a target="_new" href="http://twitter.com/$1">\@$1</a>|g;
-    $text =~ s|\#(\S+)|<a target="_new" href="http://twitter.com/#search?q=%23$1">#$1</a>|g;
 
     $self->_set_text( $text );
   }
