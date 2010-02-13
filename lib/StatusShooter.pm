@@ -9,6 +9,9 @@ use parent qw/Catalyst/;
 use Catalyst qw/
                  -Debug
                  ConfigLoader
+                 Session
+                 Session::Store::FastMmap
+                 Session::State::Cookie
                  Static::Simple
                  Unicode
                /;
