@@ -24,7 +24,8 @@ has_field 'services' => (
   required_message => 'You must select one or more services' ,
 );
 
-has_field 'twitter_in_reply_to' => ( type => 'Hidden' );
+has_field 'identica_in_reply_to' => ( type => 'Hidden' );
+has_field 'twitter_in_reply_to'  => ( type => 'Hidden' );
 
 sub options_services {[
   twitter  => 'Twitter' ,
