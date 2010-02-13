@@ -28,7 +28,7 @@ class StatusShooter::Post::Twitter extends StatusShooter::Post {
   method id          { return $self->post->id }
   method permalink   {
     return sprintf 'http://twitter.com/%s/status/%s' ,
-      $self->user_handle , $self->post->id
+      $self->user_handle , $self->id
   }
 
   method user_desc   { return $self->post->user->description }
