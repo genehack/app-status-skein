@@ -57,7 +57,10 @@ sub post :Local :Args(0) {
       }
 
       if ( $services{identica} ) {
-        eval { $c->model( 'Identica' )->update( $result->{status} ) };
+        my $args = { status => $result->{status} };
+        $args->{in_reply_to_status_id} = $result->{identica_in_reply_to}
+          if $result->{identica_in_reply_to};
+        eval { $c->model( 'Identica' )->update( $args ) };
         die $@ if ( $@ );
       }
 
