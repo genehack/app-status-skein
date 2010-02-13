@@ -27,15 +27,5 @@ class StatusShooter::Client::Identica extends StatusShooter::Client {
       password => $self->password ,
     );
   }
-
-  method get_posts {
-    my $posts;
-    eval { $posts = $self->_client->home_timeline };
-    die $@ if $@;
-
-    $posts = [ map { StatusShooter::Post::Identica->new({ post => $_ }) } @$posts ];
-
-    return $posts;
-  }
 }
 
