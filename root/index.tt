@@ -73,7 +73,7 @@ function twitter_reply( author, id ) {
 
         <p>
         [% f = form.field( 'twitter_in_reply_to' ) %]
-          <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] size=[% f.size %] maxlength=[% f.maxlength %] value="[% f.fif %]" />
+          <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" />
         </p>
       </form>
     </div>
