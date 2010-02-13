@@ -17,6 +17,7 @@ requires 'HTML::FormHandler';
 requires 'HTML::FormHandler::Moose';
 requires 'HTML::FormHandler::Render::Simple';
 requires 'Moose';
+requires 'MooseX::Declare';
 requires 'Net::Twitter';
 requires 'WWW::Facebook::API';
 requires 'YAML';
