@@ -18,6 +18,8 @@ has 'form' => (
 sub index :Path :Args(0) {
   my ( $self, $c ) = @_;
 
+  $c->stash( message => $c->flash->{message} ) if $c->flash->{message};
+
   $c->stash(
     template => 'index.tt' ,
     form     => $self->form ,
