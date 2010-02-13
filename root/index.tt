@@ -67,7 +67,7 @@
 <li style="margin-bottom:10px">
   <div style="clear:both;">
     <a href=[% post.user_url %] target="_new">
-      <img src=[% post.avatar_src %] style="border:1px solid black;float:left;margin:5px;" title="[% post.user_desc %]"/>
+      <img src=[% post.avatar_src %] style="border:1px solid black;float:left;margin:5px;" title="[% post.user_desc %]" height=48 width=48/>
     </a>
     <div style="margin-left: 60px">
       <a href=[% post.user_url %] class=user title="[% post.author %]" target="_new">[% post.user_handle %]</a>
