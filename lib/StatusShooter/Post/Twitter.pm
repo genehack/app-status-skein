@@ -4,6 +4,15 @@ class StatusShooter::Post::Twitter extends StatusShooter::Post {
 
   has '+post' => ( isa => 'Object' );
 
+  method BUILD {
+    my $text = $self->text;
+
+    $text =~ s|\@(\S+)|<a target="_new" href="http://twitter.com/$1">\@$1</a>|g;
+    $text =~ s|\#(\S+)|<a target="_new" href="http://twitter.com/#search?q=%23$1">#$1</a>|g;
+
+    $self->_set_text( $text );
+  }
+
   # lazy builder for 'date' attr, declared in base class
   method _build_date {
     my $dt = $self->post->created_at;
