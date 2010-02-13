@@ -25,6 +25,7 @@ class StatusShooter::Post::Twitter extends StatusShooter::Post {
 
   method author      { return $self->post->user->name }
   method avatar_src  { return $self->post->user->profile_image_url }
+  method favorited   { return $self->post->favorited }
   method id          { return $self->post->id }
   method permalink   {
     return sprintf 'http://twitter.com/%s/status/%s' ,
