@@ -7,7 +7,12 @@ class StatusShooter::Client::Identica extends StatusShooter::Client {
   has '_client' => (
     is         => 'ro' ,
     isa        => 'Net::Identica' ,
-    handles    => [ 'update' ] ,
+    handles    => [
+      'create_favorite' ,
+      'destroy_favorite' ,
+      'show_status' ,
+      'update'
+    ] ,
     lazy_build => 1 ,
   );
 
