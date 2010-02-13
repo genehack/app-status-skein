@@ -26,6 +26,7 @@ has_field 'services' => (
 
 sub options_services {[
   twitter  => 'Twitter' ,
+  identica => 'Identica' ,
   facebook => 'Facebook' ,
   blog     => 'blog' ,
 ]}
