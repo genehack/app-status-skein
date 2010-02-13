@@ -22,6 +22,8 @@ class StatusShooter::Client::Twitter extends StatusShooter::Client {
   has consumer_secret     => ( is => 'ro' , isa => 'Str'      , required => 1 );
   has consumer_key        => ( is => 'ro' , isa => 'Str'      , required => 1 );
 
+  has '+type' => ( default => 'Twitter' );
+
   method _build__client {
     return Net::Twitter->new(
       traits              => $self->traits ,

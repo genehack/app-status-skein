@@ -19,6 +19,8 @@ class StatusShooter::Client::Identica extends StatusShooter::Client {
   has username => ( is => 'ro' , isa => 'Str' , required => 1 );
   has password => ( is => 'ro' , isa => 'Str' , required => 1 );
 
+  has '+type' => ( default => 'Identica' );
+
   method _build__client {
     return Net::Identica->new(
       username => $self->username ,
