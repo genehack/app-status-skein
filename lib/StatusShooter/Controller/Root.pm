@@ -25,8 +25,9 @@ sub index :Path :Args(0) {
 
   my $fb_posts = $c->model( 'Facebook' )->get_posts();
   my $tweets   = $c->model( 'Twitter'  )->get_posts();
+  my $identica = $c->model( 'Identica' )->get_posts();
 
-  my @posts = sort { $b->date <=> $a->date } @$fb_posts , @$tweets;
+  my @posts = sort { $b->date <=> $a->date } @$fb_posts , @$tweets , @$identica ;
   $c->stash( posts => \@posts );
 
   if( $self->form->process( params => $c->req->parameters )) {
@@ -39,12 +40,21 @@ sub index :Path :Args(0) {
     if ( $services{blog} ) {
       my $post = _post_on_blog( $result );
 
-      _post_note_to_facebook( $post , $result )           if ( $services{facebook} );
-      _post_blog_post_title_to_twitter( $post , $result ) if ( $services{twitter}  );
+      _post_note_to_facebook( $post , $result )            if( $services{facebook} );
+      _post_blog_post_title_to_twitter( $post , $result )  if( $services{twitter}  );
+      _post_blog_post_title_to_identica( $post , $result ) if( $services{identica} );
     }
     else {
       if ( $services{facebook} ) {
         $c->model('Facebook')->status->set( status => $result->{status} );
+      }
+
+      if ( $services{identica} ) {
+        eval { $c->model( 'Identica' )->update( $result->{status} ) };
+        if ( $@ ) {
+          die $@;
+
+        }
       }
 
       if ( $services{twitter} ) {
@@ -71,6 +81,10 @@ sub default :Path {
 sub end : ActionClass('RenderView') {}
 
 sub _post_blog_post_title_to_twitter {
+  my( $post , $result ) = @_;
+}
+
+sub _post_blog_post_title_to_identica {
   my( $post , $result ) = @_;
 }
 
