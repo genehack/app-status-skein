@@ -81,6 +81,23 @@ sub post :Local :Args(0) {
   $c->response->redirect( $c->uri_for_action( 'index' ));
 }
 
+sub toggle_fave :Local :Args(2) {
+  my( $self , $c , $type , $id  ) = @_;
+
+  my $message;
+  eval {
+    my $status = $c->model( $type )->get_post( $id );
+
+    my $method = $status->favorited ? 'destroy_favorite' : 'create_favorite';
+    $message = $status->favorited ? 'Favorite removed' : 'Favorite added';
+    $c->model( $type )->$method( $id );
+  };
+  die $@ if $@;
+
+  $c->flash->{message} = $message;
+  $c->response->redirect( $c->uri_for_action( 'index' ));
+}
+
 sub default :Path {
   my ( $self, $c ) = @_;
   $c->response->body( 'Page not found' );
