@@ -29,7 +29,7 @@ class StatusShooter::Client::Twitter extends StatusShooter::Client {
 
   method get_posts {
     my $posts;
-    eval { $posts = $self->_client->friends_timeline };
+    eval { $posts = $self->_client->home_timeline };
     die $@ if $@;
 
     $posts = [ map { StatusShooter::Post::Twitter->new({ post => $_ }) } @$posts ];
