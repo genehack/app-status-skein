@@ -33,7 +33,7 @@ function identica_reply( author, id ) {
       <a href="[% c.uri_for() %]">(reload)</a>
     </div>
     [% IF posts %]
-    <div style="float:left;font-size:8pt;width:20%">
+    <div style="font-size:8pt;width:50%;margin-left:25%">
       <ul style="list-style:none">
       [% INCLUDE POST FOREACH post IN posts %]
       </ul>
@@ -103,7 +103,15 @@ function identica_reply( author, id ) {
   </body>
 [% BLOCK POST %]
 <li style="margin-bottom:10px">
-  <div>
+  <div style="clear:both">
+    <img src=/images/[% post.type | lower %].png height=32 width=32 style="float:left;margin:10px;" alt="[% post.type %]" title="[% post.type %]" />
+    <div style="float:left;width:50px;text-align:center;vertical-align:middle;margin-top:5px">
+      [% link = 'Favorite' %]
+      [% IF post.favorited %][% link = 'Unfavorite' %]<strong>FAVE</strong><br/>[% END %]
+      [% IF post.can_be_favorited %]<a href="[% c.uri_for( 'toggle_fave' , post.type , post.id ) %]">[% link %]</a><br/>[% END %]
+      [% IF post.can_be_recycled  %]<a href="[% c.uri_for( 'toggle_recycle' , post.type , post.id ) %]">Recycle</a><br/>[% END %]
+      [% post.reply_btn %]
+    </div>
     <a href=[% post.user_url %] target="_new">
       <img src=[% post.avatar_src %] style="border:1px solid black;float:left;margin:5px;" title="[% post.user_desc %]" height=48 width=48/>
     </a>
@@ -112,13 +120,6 @@ function identica_reply( author, id ) {
       [% post.text %]
       <br/>
       <span style="font-size:0.8em">at <a href=[% post.permalink %] target="_new">[% post.pretty_date %]</a></span>
-    </div>
-    <div style="clear:both">
-      [% link = 'Favorite' %]
-      [% IF post.favorited %][% link = 'Unfavorite' %]<strong>FAVE</strong><br/>[% END %]
-      [% IF post.can_be_favorited %]<a href="[% c.uri_for( 'toggle_fave' , post.type , post.id ) %]">[% link %]</a>[% END %]
-      [% IF post.can_be_recycled  %]<a href="[% c.uri_for( 'toggle_recycle' , post.type , post.id ) %]">Recycle</a>[% END %]
-      [% post.reply_btn %]
     </div>
   </div>
 </li>
