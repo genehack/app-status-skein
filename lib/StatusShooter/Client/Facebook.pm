@@ -27,6 +27,20 @@ class StatusShooter::Client::Facebook extends StatusShooter::Client {
     );
   }
 
+  # this is fairly wasteful -- we're going to request the whole stream and
+  # throw away everything but the post we want -- but there doesn't seem to be
+  # a way to ask for a particular single post thru the Facebook API...
+  method get_post ( $id ) {
+    my $response = $self->get_posts;
+
+    foreach ( @{ $response }) {
+      next unless $_->id eq $id;
+      return $_;
+    }
+
+    die "Unable to find post $id";
+  }
+
   method get_posts {
     my $response = $self->_client->stream->get();
 
