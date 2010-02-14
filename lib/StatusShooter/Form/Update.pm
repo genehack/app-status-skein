@@ -31,7 +31,7 @@ sub options_services {[
   twitter  => 'Twitter' ,
   identica => 'Identica' ,
   facebook => 'Facebook' ,
-  blog     => 'blog' ,
+  # blog     => 'blog' ,
 ]}
 
 has_field 'submit' => (
@@ -39,18 +39,18 @@ has_field 'submit' => (
   value => 'Post' ,
 );
 
-has_field 'body' => (
-  type  => 'TextArea' ,
-  label => '' ,
-  rows  => 10 ,
-  cols  => 80 ,
-);
+# has_field 'body' => (
+#   type  => 'TextArea' ,
+#   label => '' ,
+#   rows  => 10 ,
+#   cols  => 80 ,
+# );
 
-has_field 'tags' => (
-  type  => 'Text' ,
-  label => 'Tags' ,
-  size  => 80 ,
-);
+# has_field 'tags' => (
+#   type  => 'Text' ,
+#   label => 'Tags' ,
+#   size  => 80 ,
+# );
 
 sub validate {
   my $self = shift;
@@ -60,19 +60,19 @@ sub validate {
     ref $value or $value = [ $value ];
     my %services = map { $_ => 1 } @$value;
 
-    # if we're posting to a weblog, we need a post body
-    if ( $services{blog} ) {
-      unless ( $self->field( 'body' )->value ) {
-        $self->field( 'body' )->add_error( 'Posting to weblog requires post body!' );
-      }
-    }
+    # # if we're posting to a weblog, we need a post body
+    # if ( $services{blog} ) {
+    #   unless ( $self->field( 'body' )->value ) {
+    #     $self->field( 'body' )->add_error( 'Posting to weblog requires post body!' );
+    #   }
+    # }
 
-    # conversely, if we're not posting to a weblog, we shouldn't have a body or tags
-    else {
-      if ( $self->field( 'body' )->value or $self->field( 'tags' )->value ) {
-        $self->field( 'body' )->add_error( 'If you want to post body text or tags, make sure to select the \'blog\' service' );
-      }
-    }
+    # # conversely, if we're not posting to a weblog, we shouldn't have a body or tags
+    # else {
+    #   if ( $self->field( 'body' )->value or $self->field( 'tags' )->value ) {
+    #     $self->field( 'body' )->add_error( 'If you want to post body text or tags, make sure to select the \'blog\' service' );
+    #   }
+    # }
   }
 }
 
