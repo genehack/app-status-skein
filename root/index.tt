@@ -6,6 +6,9 @@
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/jquery.colorbox.js"></script>
     <script type="text/javascript">
+$(document).ready(function(){
+  $(".post_btn").colorbox({width:"85%", inline:true, opacity:0.5, href:"#update_form"});
+});
 function twitter_reply( author, id ) {
   document.getElementById('status').value=author;
   document.getElementById('twitter_in_reply_to').value=id;
@@ -22,6 +25,11 @@ function identica_reply( author, id ) {
     <link type="text/css" media="screen" rel="stylesheet" href="/css/colorbox.css" />
   </head>
   <body style="font-family:verdana,helvetica">
+    <div style="text-align:center">
+      <h1>Status Shooter</h1>
+      <h2><a href=# class=post_btn>post</a></h2>
+      <a href="[% c.uri_for() %]">(reload)</a>
+    </div>
     [% IF posts %]
     <div style="float:left;font-size:8pt;width:20%">
       <ul style="list-style:none">
@@ -29,8 +37,6 @@ function identica_reply( author, id ) {
       </ul>
     </div>
     [% END %]
-    <div style="text-align:center">
-      <h1>Status Shooter</h1>
 
     <div style="display:none">
       <div id="update_form" style="text-align:center">
