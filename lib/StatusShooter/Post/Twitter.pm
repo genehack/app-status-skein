@@ -3,6 +3,7 @@ use MooseX::Declare;
 class StatusShooter::Post::Twitter extends StatusShooter::Post {
 
   has '+can_be_favorited' => ( default => 1 );
+  has '+can_be_recycled'  => ( default => 1 );
   has '+post'             => ( isa => 'Object' );
   has '+type'             => ( default => 'Twitter' );
 

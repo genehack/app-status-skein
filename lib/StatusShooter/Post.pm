@@ -6,6 +6,12 @@ class StatusShooter::Post {
     default => 0
   );
 
+  has 'can_be_recycled' => (
+    is      => 'ro' ,
+    isa     => 'Bool' ,
+    default => 0
+  );
+
   has date => (
     is         => 'ro' ,
     isa        => 'DateTime' ,
