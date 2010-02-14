@@ -120,6 +120,7 @@ function identica_reply( author, id ) {
       [% post.text %]
       <br/>
       <span style="font-size:0.8em">at <a href=[% post.permalink %] target="_new">[% post.pretty_date %]</a></span>
+      <a href=[% c.uri_for( 'inspect' , post.type , post.id ) %] target="_new">inspect</a>
     </div>
   </div>
 </li>
