@@ -13,12 +13,14 @@ function twitter_reply( author, id ) {
   document.getElementById('status').value=author;
   document.getElementById('twitter_in_reply_to').value=id;
   document.getElementById('services.twitter').checked=true;
+  $(".reply_btn").colorbox({width:"85%", inline:true, opacity:0.5, href:"#update_form"});
   return true;
 }
 function identica_reply( author, id ) {
   document.getElementById('status').value=author;
   document.getElementById('identica_in_reply_to').value=id;
   document.getElementById('services.identica').checked=true;
+  $(".reply_btn").colorbox({width:"85%", inline:true, opacity:0.5, href:"#update_form"});
   return true;
 }
     </script>
