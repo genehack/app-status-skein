@@ -17,6 +17,7 @@ requires 'Catalyst::Plugin::Unicode';
 requires 'Catalyst::Runtime'                   => '5.80014';
 requires 'Catalyst::View::TT';
 requires 'Config::Any';
+requires 'Data::Dumper::HTML';
 requires 'HTML::FormHandler';
 requires 'HTML::FormHandler::Moose';
 requires 'HTML::FormHandler::Render::Simple';
