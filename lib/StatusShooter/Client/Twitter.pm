@@ -10,6 +10,7 @@ class StatusShooter::Client::Twitter extends StatusShooter::Client {
     handles    => [
       'create_favorite' ,
       'destroy_favorite' ,
+      'retweet' ,
       'show_status' ,
       'update' ,
     ] ,
