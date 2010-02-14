@@ -52,7 +52,7 @@ function identica_reply( author, id ) {
           <label>
             <input type=checkbox name=[% f.name %] id=[% f.name _ '.' _ option.value %] value=[% option.value %]
                    [%- FOR fif IN f.fif %][% IF option.value == fif %] checked=checked[% END %][% END %] />
-            [% option.label %]
+            <img src=/images/[% option.value %].png height=32 width=32 alt="[% option.label %]" title="[% option.label %]" />
           </label>
           [% END %]
         </p>
