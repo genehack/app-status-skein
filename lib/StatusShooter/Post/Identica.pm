@@ -43,7 +43,7 @@ class StatusShooter::Post::Identica extends StatusShooter::Post {
     my $id     = $self->id;
 
     return <<EOHTML;
-<a href=# onclick="identica_reply('\@$author','$id')">Reply</a>
+<a href=# class=reply_btn onclick="identica_reply('\@$author','$id')">Reply</a>
 EOHTML
     }
 

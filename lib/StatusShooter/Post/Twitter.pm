@@ -40,7 +40,7 @@ class StatusShooter::Post::Twitter extends StatusShooter::Post {
     my $id     = $self->id;
 
     return <<EOHTML;
-<a href=# onclick="twitter_reply('\@$author','$id')">Reply</a>
+<a href=# class=reply_btn onclick="twitter_reply('\@$author','$id')">Reply</a>
 EOHTML
   }
 
