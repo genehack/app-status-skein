@@ -19,6 +19,7 @@ function identica_reply( author, id ) {
   return true;
 }
     </script>
+    <link type="text/css" media="screen" rel="stylesheet" href="/css/colorbox.css" />
   </head>
   <body style="font-family:verdana,helvetica">
     [% IF posts %]
