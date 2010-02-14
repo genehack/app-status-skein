@@ -24,6 +24,7 @@ class StatusShooter::Post::Facebook extends StatusShooter::Post {
 
   method author      { return $self->profile->{name} }
   method avatar_src  { return $self->profile->{pic_square} }
+  method id          { return $self->post->{post_id} }
   method permalink   { return $self->post->{permalink} }
 
   method reply_btn   {
