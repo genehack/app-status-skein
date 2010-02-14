@@ -32,63 +32,65 @@ function identica_reply( author, id ) {
     <div style="text-align:center">
       <h1>Status Shooter</h1>
 
-      [% FOR field IN form.error_fields %]
-        [% FOR error IN field.errors %]
-          <h2 class="error">[% error %]</h2>
-        [% END %]
-      [% END %]
+    <div style="display:none">
+      <div id="update_form" style="text-align:center">
 
-      [% IF message %]<h2 class="message">[% message %]</h2>[% END %]
-
-      <a href="[% c.uri_for() %]">reload</a>
-
-      <form name=[% form.name %] action=[% form.action %] method=post>
-
-        [% f = form.field( 'status' ) %]
-        <p>
-          <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] size=[% f.size %] maxlength=[% f.maxlength %] value="[% f.fif %]" />
-        </p>
-
-        [% f = form.field( 'services' ) %]
-        <p>
-          [% FOR option IN f.options %]
-          <label>
-            <input type=checkbox name=[% f.name %] id=[% f.name _ '.' _ option.value %] value=[% option.value %]
-                   [%- FOR fif IN f.fif %][% IF option.value == fif %] checked=checked[% END %][% END %] />
-            <img src=/images/[% option.value %].png height=32 width=32 alt="[% option.label %]" title="[% option.label %]" />
-          </label>
+        [% FOR field IN form.error_fields %]
+          [% FOR error IN field.errors %]
+            <h2 class="error">[% error %]</h2>
           [% END %]
-        </p>
+        [% END %]
 
-        [% f = form.field( 'submit' ) %]
-        <p>
-          <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.value %]" />
-        </p>
+        [% IF message %]<h2 class="message">[% message %]</h2>[% END %]
+
+        <form name=[% form.name %] action=[% form.action %] method=post>
+
+          [% f = form.field( 'status' ) %]
+          <p>
+            <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] size=[% f.size %] maxlength=[% f.maxlength %] value="[% f.fif %]" />
+          </p>
+
+          [% f = form.field( 'services' ) %]
+          <p>
+            [% FOR option IN f.options %]
+            <label>
+              <input type=checkbox name=[% f.name %] id=[% f.name _ '.' _ option.value %] value=[% option.value %]
+                     [%- FOR fif IN f.fif %][% IF option.value == fif %] checked=checked[% END %][% END %] />
+              <img src=/images/[% option.value %].png height=32 width=32 alt="[% option.label %]" title="[% option.label %]" />
+            </label>
+            [% END %]
+          </p>
+
+          [% f = form.field( 'submit' ) %]
+          <p>
+            <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.value %]" />
+          </p>
 
 <!--
-        <hr style="width:60%;margin-top:50px;"/>
-        [% f = form.field( 'body' ) %]
-        <p>
-          <label>Blog Post Body:<br/>
-            <textarea name=[% f.name %] id=[% f.name %] rows=[% f.rows %] cols=[% f.cols %]>[% f.value %]</textarea>
-          </label>
-        </p>
+          <hr style="width:60%;margin-top:50px;"/>
+          [% f = form.field( 'body' ) %]
+          <p>
+            <label>Blog Post Body:<br/>
+              <textarea name=[% f.name %] id=[% f.name %] rows=[% f.rows %] cols=[% f.cols %]>[% f.value %]</textarea>
+            </label>
+          </p>
 
-        [% f = form.field( 'tags' ) %]
-        <p>
-          <label>Blog Post Tags:<br/>
-            <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] size=[% f.size %] value="[% f.fif %]" />
-          </label>
-        </p>
+          [% f = form.field( 'tags' ) %]
+          <p>
+            <label>Blog Post Tags:<br/>
+              <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] size=[% f.size %] value="[% f.fif %]" />
+            </label>
+          </p>
 
 -->
-        <p>
-        [% f = form.field( 'identica_in_reply_to' ) %]
-          <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" />
-        [% f = form.field( 'twitter_in_reply_to' ) %]
-          <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" />
-        </p>
-      </form>
+          <p>
+          [% f = form.field( 'identica_in_reply_to' ) %]
+            <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" />
+          [% f = form.field( 'twitter_in_reply_to' ) %]
+            <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" />
+          </p>
+        </form>
+      </div>
     </div>
   </body>
 [% BLOCK POST %]
