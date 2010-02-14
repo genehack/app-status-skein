@@ -4,6 +4,7 @@ use namespace::autoclean;
 use Moose;
 BEGIN { extends 'Catalyst::Controller' }
 
+use Data::Dumper::HTML             qw/ dumper_html /;
 use StatusShooter::Form::Update;
 
 __PACKAGE__->config->{namespace} = '';
@@ -33,6 +34,14 @@ sub index :Path :Args(0) {
 
   my @posts = sort { $b->date <=> $a->date } @$fb_posts , @$tweets , @$identica ;
   $c->stash( posts => \@posts );
+}
+
+sub inspect :Local :Args(2) {
+  my( $self , $c , $type , $id ) = @_;
+
+  my $status = $c->model( $type )->get_post( $id );
+
+  $c->response->body( dumper_html( $status->{post} ));
 }
 
 sub post :Local :Args(0) {
