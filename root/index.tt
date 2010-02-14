@@ -28,9 +28,9 @@ function identica_reply( author, id ) {
   </head>
   <body style="font-family:verdana,helvetica">
     <div style="text-align:center">
-      <h1>Status Shooter</h1>
-      <h2><a href=# class=post_btn>post</a></h2>
-      <a href="[% c.uri_for() %]">(reload)</a>
+      <div style="font-size:2em">Status Shooter</div>
+      <img src="/images/post.png" class=post_btn alt="post" title="post"/>
+      <a href="[% c.uri_for() %]"><img src="/images/reload.png" alt="reload" title="reload" style="border:0"/></a>
     </div>
     [% IF posts %]
     <div style="font-size:8pt;width:50%;margin-left:25%">
