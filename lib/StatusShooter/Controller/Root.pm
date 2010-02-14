@@ -98,6 +98,21 @@ sub toggle_fave :Local :Args(2) {
   $c->response->redirect( $c->uri_for_action( 'index' ));
 }
 
+sub toggle_recycle :Local :Args(2) {
+  my( $self , $c , $type , $id  ) = @_;
+
+  my $message;
+  eval {
+    my $status = $c->model( $type )->get_post( $id );
+
+    $c->model( $type )->retweet( $id );
+  };
+  die $@ if $@;
+
+  $c->flash->{message} = 'Recycled';
+  $c->response->redirect( $c->uri_for_action( 'index' ));
+}
+
 sub default :Path {
   my ( $self, $c ) = @_;
   $c->response->body( 'Page not found' );

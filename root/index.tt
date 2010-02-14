@@ -102,6 +102,7 @@ function identica_reply( author, id ) {
       [% link = 'Favorite' %]
       [% IF post.favorited %][% link = 'Unfavorite' %]<strong>FAVE</strong><br/>[% END %]
       [% IF post.can_be_favorited %]<a href="[% c.uri_for( 'toggle_fave' , post.type , post.id ) %]">[% link %]</a>[% END %]
+      [% IF post.can_be_recycled  %]<a href="[% c.uri_for( 'toggle_recycle' , post.type , post.id ) %]">Recycle</a>[% END %]
       [% post.reply_btn %]
     </div>
   </div>
