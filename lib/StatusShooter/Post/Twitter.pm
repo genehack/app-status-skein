@@ -25,6 +25,7 @@ class StatusShooter::Post::Twitter extends StatusShooter::Post {
   method BUILD {
     if ( $self->post->{retweeted_status} ) {
       $self->_set_retweeter( $self->user );
+      $self->post->{retweeted_status}{id} = $self->id;
       $self->_set_post( $self->post->{retweeted_status} );
       $self->_set_text( $self->post->text );
     }
@@ -52,8 +53,8 @@ class StatusShooter::Post::Twitter extends StatusShooter::Post {
   method is_protected { return $self->user->protected }
 
   method permalink {
-    return sprintf 'http://twitter.com/%s/status/%s' ,
-      $self->user_handle , $self->id
+    my $user = $self->retweeter ? $self->retweeter->screen_name : $self->user_handle;
+    return sprintf 'http://twitter.com/%s/status/%s' , $user , $self->id
   }
 
   method retweeter_url { return sprintf 'http://twitter.com/%s' , $self->retweeter->screen_name }
