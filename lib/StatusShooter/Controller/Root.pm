@@ -4,6 +4,7 @@ use namespace::autoclean;
 use Moose;
 BEGIN { extends 'Catalyst::Controller' }
 
+use Data::Dumper;
 use Data::Dumper::HTML             qw/ dumper_html /;
 use StatusShooter::Form::Update;
 
@@ -117,9 +118,15 @@ sub toggle_recycle :Local :Args(2) {
 
     $c->model( $type )->retweet( $id );
   };
-  die $@ if $@;
+  if ( my $err = $@ ) {
+    die $@ unless blessed $err and $err->isa('Net::Twitter::Error');
+    if ( $err->twitter_error->errors eq 'Share sharing is not permissable for this status' ) {
+      $c->flash->{message} = 'Already recycled that one...';
+    }
+    else { die Dumper $err }
+  }
+  else { $c->flash->{message} = 'Recycled' }
 
-  $c->flash->{message} = 'Recycled';
   $c->response->redirect( $c->uri_for_action( 'index' ));
 }
 
