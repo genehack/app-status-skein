@@ -111,9 +111,10 @@ function identica_reply( author, id ) {
       <a href="[% c.uri_for( 'toggle_fave' , post.type , post.id ) %]"><img src=/images/[% img %] style="border:0" alt=[% link %] title=[% link %] height=16 width=16/></a>
       <br/>
       [% END %]
-      [% IF post.is_protected %]<img src=/images/lock.png alt="Protected post" title="Protected post" height=16 width=16/><br/>
-      [% ELSE %]<a href="[% c.uri_for( 'toggle_recycle' , post.type , post.id ) %]">Recycle</a><br/>
+      [% IF post.is_protected %]<img src=/images/lock.png alt="Protected post" title="Protected post" height=16 width=16/>
+      [% ELSE %]<a href="[% c.uri_for( 'toggle_recycle' , post.type , post.id ) %]"><img src=/images/recycle.png style="border:0" alt=Recycle title=Recycle height=16 width=16</a>
       [% END %]
+      <br/>
       [% post.reply_btn %]
     </div>
     <a href=[% post.user_url %] target="_new">
