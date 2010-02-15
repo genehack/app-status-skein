@@ -3,8 +3,9 @@ use MooseX::Declare;
 class StatusShooter::Post::Facebook extends StatusShooter::Post {
   use DateTime;
 
-  has '+post' => ( isa => 'HashRef' );
-  has '+type' => ( default => 'Facebook' );
+  has '+can_be_favorited' => ( default => 1 );
+  has '+post'             => ( isa => 'HashRef' );
+  has '+type'             => ( default => 'Facebook' );
 
   has profile => (
     is       => 'ro' ,
@@ -24,6 +25,7 @@ class StatusShooter::Post::Facebook extends StatusShooter::Post {
 
   method author      { return $self->profile->{name} }
   method avatar_src  { return $self->profile->{pic_square} }
+  method favorited   { return $self->post->{likes}{user_likes} }
   method id          { return $self->post->{post_id} }
   method permalink   { return $self->post->{permalink} }
 
