@@ -13,6 +13,11 @@ $(document).ready(function(){
     inline:true,
     opacity:0.5,
     href:"#debug_info",
+    onComplete:function(){
+      date = new Date();
+      epoch = Math.round(date.getTime() / 1000);
+      $("#current_epoch").text( epoch );
+    }
   });
   $(".post_btn").colorbox({
     width:"85%",
@@ -85,9 +90,8 @@ function facebook_reply( author , id ) {
     <div style="display:none">
       <div id="debug_info" style="text-align:center">
         <h1>
-          [% USE date %]
-          Current epoch time: [% date.now %]<br/>
-          Epoch time of this page load: [% c.session.time %]<br/>
+          Current epoch time: <span id="current_epoch">REPLACE ME</span><br/>
+          Epoch time of this page load: <span id="session_epoch">[% c.session.time %]</span><br/>
           Max Twitter post id observed: [% c.session.twitter_max %]<br/>
           Max Identi.ca post id observed: [% c.session.identica_max %]
         </h1>
