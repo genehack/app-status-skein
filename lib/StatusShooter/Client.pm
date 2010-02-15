@@ -34,6 +34,10 @@ class StatusShooter::Client {
     eval { $posts = $self->_client->home_timeline( $args )};
     if ( my $err = $@ ) {
       die $@ unless blessed $err and $err->isa('Net::Twitter::Error');
+      # bail on the fail whale
+      return [] if $err->code eq '502';
+
+      use Data::Dumper;
       die Dumper $err;
     }
 
