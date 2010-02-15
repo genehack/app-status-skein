@@ -32,6 +32,7 @@ function identica_reply( author, id ) {
       <img src="/images/post.png" class=post_btn alt="post" title="post"/>
       <a href="[% c.uri_for() %]"><img src="/images/reload.png" alt="reload" title="reload" style="border:0"/></a>
     </div>
+    [% IF message %]<h2 class="message" style="text-align:center">[% message %]</h2>[% END %]
     [% IF posts %]
     <div style="font-size:8pt;width:50%;margin-left:25%">
       <ul style="list-style:none">
@@ -48,8 +49,6 @@ function identica_reply( author, id ) {
             <h2 class="error">[% error %]</h2>
           [% END %]
         [% END %]
-
-        [% IF message %]<h2 class="message">[% message %]</h2>[% END %]
 
         <form name=[% form.name %] action=[% form.action %] method=post>
 
