@@ -28,9 +28,10 @@ $(document).ready(function(){
   });
 });
 function twitter_reply( author, id ) {
-  document.getElementById('status').value=author;
-  document.getElementById('twitter_in_reply_to').value=id;
-  document.getElementById('services.twitter').checked=true;
+  $("#status").val(author);
+  $("#twitter_in_reply_to").val(id);
+  $(".services").val([]);
+  $(".services").val(["twitter"]);
   $(".reply_btn").colorbox({
     width:"85%",
     height:"50%",
@@ -42,9 +43,10 @@ function twitter_reply( author, id ) {
   return true;
 }
 function identica_reply( author, id ) {
-  document.getElementById('status').value=author;
-  document.getElementById('identica_in_reply_to').value=id;
-  document.getElementById('services.identica').checked=true;
+  $("#status").val(author);
+  $("#identica_in_reply_to").val(id);
+  $(".services").val([]);
+  $(".services").val(["identica"]);
   $(".reply_btn").colorbox({
     width:"85%",
     height:"50%",
