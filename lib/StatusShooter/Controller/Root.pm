@@ -126,6 +126,8 @@ sub post :Local :Args(0) {
     $self->form->clear_data;
     $c->flash->{message} = "Posted";
   }
+
+  _reset_session_time_if_needed( $c );
   $c->response->redirect( $c->uri_for_action( 'index' ));
 }
 
@@ -188,6 +190,17 @@ sub _post_note_to_facebook {
 
 sub _post_on_blog {
   my( $result ) = @_;
+}
+
+sub _reset_session_time_if_needed {
+  my $c = shift;
+
+  my $new_time = time();
+  my $old_time = $c->session->{time} || 0;
+
+  if ( $old_time and $new_time - $old_time < 60 ) {
+    $c->session->{time} = $new_time - 61;
+  }
 }
 
 1;
