@@ -32,6 +32,11 @@ sub index :Path :Args(0) {
   my $new_time = time();
   my $old_time = $c->session->{time} || 0;
 
+  if ( $old_time and $new_time - $old_time < 60 ) {
+    $c->stash( message => 'Less than 60 seconds since last page load! Wait longer!' );
+    return;
+  }
+
   my $twitter_max  = $c->session->{twitter_max}  || 0;
   my $identica_max = $c->session->{identica_max} || 0;
 
