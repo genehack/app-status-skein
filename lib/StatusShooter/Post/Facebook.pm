@@ -28,13 +28,6 @@ class StatusShooter::Post::Facebook extends StatusShooter::Post {
   method favorited   { return $self->post->{likes}{user_likes} }
   method id          { return $self->post->{post_id} }
   method permalink   { return $self->post->{permalink} }
-
-  method reply_btn   {
-    return <<EOHTML;
-<strike>REPLY</strike>
-EOHTML
-  }
-
   method user_desc   { return $self->author }
   method user_handle { return $self->profile->{name} }
   method user_url    { return $self->profile->{url} }
