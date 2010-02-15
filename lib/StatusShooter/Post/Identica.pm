@@ -47,10 +47,16 @@ class StatusShooter::Post::Identica extends StatusShooter::Post {
   method avatar_src   { return $self->post->{user}{profile_image_url} }
   method favorited    { return $self->post->{favorited} }
   method id           { return $self->post->{id} }
+  method in_reply_to  { return $self->post->{in_reply_to_screen_name} }
   method is_protected { return $self->post->{user}{protected} }
+  method is_reply     { return $self->in_reply_to ? 1 : 0 }
 
   method permalink {
     return sprintf 'http://identi.ca/notice/%s' , $self->id;
+  }
+
+  method reply_permalink {
+    return sprintf 'http://identi.ca/notice/%s' , $self->post->{in_reply_to_status_id};
   }
 
   method retweeter_url { return sprintf 'http://identi.ca/%s' , $self->retweeter->{screen_name} }
