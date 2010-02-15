@@ -29,6 +29,12 @@ class StatusShooter::Client::Facebook extends StatusShooter::Client {
     );
   }
 
+  method add_like ( $id ) {
+    my $status = $self->stream->add_like( post_id => $id );
+    return if $status;
+    die $status;
+  }
+
   # this is fairly wasteful -- we're going to request the whole stream and
   # throw away everything but the post we want -- but there doesn't seem to be
   # a way to ask for a particular single post thru the Facebook API...
@@ -58,5 +64,11 @@ class StatusShooter::Client::Facebook extends StatusShooter::Client {
     }
 
     return $posts;
+  }
+
+  method remove_like ( $id ) {
+    my $status = $self->stream->remove_like( post_id => $id );
+    return if $status;
+    die $status;
   }
 }
