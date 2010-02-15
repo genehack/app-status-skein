@@ -29,12 +29,38 @@ sub index :Path :Args(0) {
 
   $self->form->action( $c->uri_for( 'post' ));
 
-  my $fb_posts = $c->model( 'Facebook' )->get_posts();
-  my $tweets   = $c->model( 'Twitter'  )->get_posts();
-  my $identica = $c->model( 'Identica' )->get_posts();
+  my $new_time = time();
+  my $old_time = $c->session->{time} || 0;
 
-  my @posts = sort { $b->date <=> $a->date } @$fb_posts , @$tweets , @$identica ;
+  my $twitter_max  = $c->session->{twitter_max}  || 0;
+  my $identica_max = $c->session->{identica_max} || 0;
+
+  my $fb_posts = $c->model( 'Facebook' )->get_posts( start_time => $old_time     );
+  my $tweets   = $c->model( 'Twitter'  )->get_posts( max_id     => $twitter_max  );
+  my $identica = $c->model( 'Identica' )->get_posts( max_id     => $identica_max );
+
+  $c->session->{time} = $new_time;
+
+  my $new_twitter_max = _find_max_id( $tweets );
+  $c->session->{twitter_max}  = $new_twitter_max if $new_twitter_max;
+
+  my $new_identica_max = _find_max_id( $identica );
+  $c->session->{identica_max} = $new_identica_max if $new_identica_max;
+
+  my @posts = sort { $a->date <=> $b->date } @$fb_posts , @$tweets , @$identica ;
   $c->stash( posts => \@posts );
+}
+
+sub _find_max_id {
+  my $array_ref = shift;
+
+  my $max = 0;
+
+  foreach ( @$array_ref ) {
+    $max = $_->id if ($_->id > $max );
+  }
+
+  return $max;
 }
 
 sub inspect :Local :Args(2) {

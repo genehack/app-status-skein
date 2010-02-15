@@ -49,18 +49,23 @@ class StatusShooter::Client::Facebook extends StatusShooter::Client {
     die "Unable to find post $id";
   }
 
-  method get_posts {
-    my $response = $self->stream->get();
+  method get_posts ( :$start_time ){
+    my %args = ();
+    $args{start_time} = $start_time if $start_time;
 
-    my %profiles = map { $_->{id} => $_ } @{ $response->{profiles} };
+    my $response = $self->stream->get( %args );
 
-    my $posts;
+    my $posts = [];
 
-    foreach ( @{ $response->{posts} }) {
-      next unless $_->{message};
-      push @$posts ,
-        StatusShooter::Post::Facebook->new({ post    => $_ ,
-                                             profile => $profiles{$_->{source_id} }});
+    if( ref( $response->{posts} ) eq 'ARRAY' ) {
+      my %profiles = map { $_->{id} => $_ } @{ $response->{profiles} };
+
+      foreach ( @{ $response->{posts} }) {
+        next unless $_->{message};
+        push @$posts ,
+          StatusShooter::Post::Facebook->new({ post    => $_ ,
+                                               profile => $profiles{$_->{source_id} }});
+      }
     }
 
     return $posts;

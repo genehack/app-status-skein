@@ -26,9 +26,12 @@ class StatusShooter::Client {
     return $post_class->new({ post => $post });
   }
 
-  method get_posts {
+  method get_posts ( Int :$max_id ) {
+    my $args = {};
+    $args->{since_id} = $max_id if $max_id;
+
     my $posts;
-    eval { $posts = $self->_client->home_timeline };
+    eval { $posts = $self->_client->home_timeline( $args )};
     die $@ if $@;
 
     my $post_class = $self->post_class;
