@@ -60,7 +60,7 @@ class StatusShooter::Post::Identica extends StatusShooter::Post {
   }
 
   method retweeter_url { return sprintf 'http://identi.ca/%s' , $self->retweeter->{screen_name} }
-  method user_desc   { return $self->post->{user}{description} }
-  method user_handle { return $self->post->{user}{screen_name} }
-  method user_url    { return sprintf 'http://identi.ca/%s' , $self->user_handle }
+  method user_desc     { return $self->post->{user}{description} }
+  method user_handle   { return $self->post->{user}{screen_name} }
+  method user_url      { return sprintf 'http://identi.ca/%s' , $self->user_handle }
 }
