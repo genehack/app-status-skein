@@ -7,7 +7,7 @@ class StatusShooter::Client::Facebook extends StatusShooter::Client {
   has '_client' => (
     is         => 'ro' ,
     isa        => 'WWW::Facebook::API' ,
-    handles    => [ 'status' ] ,
+    handles    => [ 'status' , 'stream' ] ,
     lazy_build => 1 ,
   );
 
@@ -50,7 +50,7 @@ class StatusShooter::Client::Facebook extends StatusShooter::Client {
   }
 
   method get_posts {
-    my $response = $self->_client->stream->get();
+    my $response = $self->stream->get();
 
     my %profiles = map { $_->{id} => $_ } @{ $response->{profiles} };
 
