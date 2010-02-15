@@ -109,7 +109,7 @@ function identica_reply( author, id ) {
       [% IF post.favorited %][% link = 'Unfavorite' ; img='fave_on.png' %]
       [% ELSE %][% link = 'Favorite' ; img = 'fave_off.png' %][% END %]
       [% IF post.can_be_favorited %]
-      <a href="[% c.uri_for( 'toggle_fave' , post.type , post.id ) %]"><img src=/images/[% img %] style="border:0" alt=[% link %] title=[% link %] /></a>
+      <a href="[% c.uri_for( 'toggle_fave' , post.type , post.id ) %]"><img src=/images/[% img %] style="border:0" alt=[% link %] title=[% link %] height=16 width=16/></a>
       <br/>
       [% END %]
       [% IF post.can_be_recycled  %]<a href="[% c.uri_for( 'toggle_recycle' , post.type , post.id ) %]">Recycle</a><br/>[% END %]
