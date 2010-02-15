@@ -21,6 +21,7 @@ class StatusShooter::Post {
   has post => (
     is       => 'ro' ,
     required => 1 ,
+    writer   => '_set_post' ,
   );
 
   has text => (
