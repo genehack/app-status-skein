@@ -1,1 +1,14 @@
-### FIXME
+StatusShooter is a lifestream-style aggregator for Facebook, Twitter,
+Identi.ca, and eventually other sorts of social media networks.
+
+It allows reading, posting, favoriting, re-tweeting/recycling, and
+keeps track of post loads so you (hopefully) only see things that have
+been newly posted since the last time you looked at a service.
+
+Currently, the support for getting this to work yourself is lacking --
+the initialization/setup and application authorization code still
+needs to be written -- so if you want to play, you're going to need to
+jump thru some hoops (or write that code...) Sorry about that, that's
+on the list to get fixed Real Soon Now...
+
+
