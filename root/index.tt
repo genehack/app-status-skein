@@ -20,7 +20,11 @@ $(document).ready(function(){
     inline:true,
     opacity:0.5,
     href:"#update_form",
-    onComplete:function(){ $("#status").focus(); }
+    onComplete:function(){
+      $("#status").val('');
+      $(".services").val([]);
+      $("#status").focus();
+    }
   });
 });
 function twitter_reply( author, id ) {
