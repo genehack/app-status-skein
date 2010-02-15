@@ -10,11 +10,17 @@ class StatusShooter::Post::Twitter extends StatusShooter::Post {
 
   has '+can_be_favorited' => ( default => 1 );
   has '+can_be_recycled'  => ( default => 1 );
-  has '+post'             => (
+
+  has '+post' => (
     isa => 'Object' ,
-    handles => [ 'favorited' , 'id' , 'user' ] ,
+    handles => [
+      'favorited' ,
+      'id' ,
+      'user' ,
+    ] ,
   );
-  has '+type'             => ( default => 'Twitter' );
+
+  has '+type' => ( default => 'Twitter' );
 
   method BUILD {
     if ( $self->post->{retweeted_status} ) {
@@ -60,7 +66,7 @@ EOHTML
   }
 
   method retweeter_url { return sprintf 'http://twitter.com/%s' , $self->retweeter->screen_name }
-  method user_desc   { return $self->user->description }
-  method user_handle { return $self->user->screen_name }
-  method user_url    { return sprintf 'http://twitter.com/%s' , $self->user_handle }
+  method user_desc     { return $self->user->description }
+  method user_handle   { return $self->user->screen_name }
+  method user_url      { return sprintf 'http://twitter.com/%s' , $self->user_handle }
 }
