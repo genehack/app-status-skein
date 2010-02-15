@@ -170,7 +170,10 @@ function facebook_reply( author , id ) {
       },'text')" />
       [% END %]
       [% IF post.is_protected %]<img src=/images/lock.png alt="Protected post" title="Protected post" height=16 width=16/>
-      [% ELSIF post.can_be_recycled %]<a href="[% c.uri_for( 'toggle_recycle' , post.type , post.id ) %]"><img src=/images/recycle.png style="border:0" alt=Recycle title=Recycle height=20 width=20 /></a>
+      [% ELSIF post.can_be_recycled %]
+      <img id=recycle_[% post.id %] src=/images/recycle.png alt="Recycle post" title="Recycle post" height=20 width=20
+      onClick="$.get('[% c.uri_for( 'toggle_recycle' , post.type , post.id ) %]' ,
+        function(data) { if (data == 1 ) { $('#recycle_[% post.id %]').fadeOut(); }} ,'text')" />
       [% END %]
       <a href=# class=reply_btn onclick="[% post.type | lower %]_reply('@[% post.user_handle %] ' , '[% post.id %]' )"><img src=/images/reply.png alt=Reply title=Reply style="border:0" height=16 width=16 /></a>
     </div>

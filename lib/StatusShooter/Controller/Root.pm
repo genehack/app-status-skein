@@ -158,13 +158,12 @@ sub toggle_recycle :Local :Args(2) {
   if ( my $err = $@ ) {
     die $@ unless blessed $err and $err->isa('Net::Twitter::Error');
     if ( $err->twitter_error->errors eq 'Share sharing is not permissable for this status' ) {
-      $c->flash->{message} = 'Already recycled that one...';
+      # this will just fade out the recycle button silently, which is the same thing...
+      $c->response->body(1);
     }
     else { die Dumper $err }
   }
-  else { $c->flash->{message} = 'Recycled' }
-
-  $c->response->redirect( $c->uri_for_action( 'index' ));
+  else { $c->response->body(1) }
 }
 
 sub default :Path {
