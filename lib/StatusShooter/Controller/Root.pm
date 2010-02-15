@@ -138,13 +138,12 @@ sub toggle_fave :Local :Args(2) {
     my $status = $model->get_post( $id );
 
     my $method = $status->favorited ? $model->fave_del_method : $model->fave_add_method;
-    $message = $status->favorited ? 'Favorite removed' : 'Favorite added';
+    $message = $status->favorited ? 'fave_off.png' : 'fave_on.png';
     $c->model( $type )->$method( $id );
   };
   die $@ if $@;
 
-  $c->flash->{message} = $message;
-  $c->response->redirect( $c->uri_for_action( 'index' ));
+  $c->response->body( $message );
 }
 
 sub toggle_recycle :Local :Args(2) {
