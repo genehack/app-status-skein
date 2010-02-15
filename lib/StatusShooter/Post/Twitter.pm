@@ -2,6 +2,12 @@ use MooseX::Declare;
 
 class StatusShooter::Post::Twitter extends StatusShooter::Post {
 
+  has 'retweeter' => (
+    is     => 'ro' ,
+    isa    => 'Object' ,
+    writer => '_set_retweeter' ,
+  );
+
   has '+can_be_favorited' => ( default => 1 );
   has '+can_be_recycled'  => ( default => 1 );
   has '+post'             => (
@@ -11,6 +17,12 @@ class StatusShooter::Post::Twitter extends StatusShooter::Post {
   has '+type'             => ( default => 'Twitter' );
 
   method BUILD {
+    if ( $self->post->{retweeted_status} ) {
+      $self->_set_retweeter( $self->user );
+      $self->_set_post( $self->post->{retweeted_status} );
+      $self->_set_text( $self->post->text );
+    }
+
     my $text = $self->text;
 
     $text =~ s|\@(\S+)|<a target="_new" href="http://twitter.com/$1">\@$1</a>|g;
@@ -47,6 +59,7 @@ class StatusShooter::Post::Twitter extends StatusShooter::Post {
 EOHTML
   }
 
+  method retweeter_url { return sprintf 'http://twitter.com/%s' , $self->retweeter->screen_name }
   method user_desc   { return $self->user->description }
   method user_handle { return $self->user->screen_name }
   method user_url    { return sprintf 'http://twitter.com/%s' , $self->user_handle }

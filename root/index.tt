@@ -120,11 +120,15 @@ function identica_reply( author, id ) {
       <img src=[% post.avatar_src %] style="border:1px solid black;float:left;margin:5px;" title="[% post.user_desc %]" height=48 width=48/>
     </a>
     <div style="margin-left: 60px">
+    [% IF post.retweeter %]<img src=/images/recycle.png style="border:0" alt=Retweeted title=Retweeted height=12 width=12 />[% END %]
       <a href=[% post.user_url %] class=user title="[% post.author %]" target="_new">[% post.user_handle %]</a>
       [% post.text %]
       <br/>
-      <span style="font-size:0.8em">at <a href=[% post.permalink %] target="_new">[% post.pretty_date %]</a></span>
-      <a href=[% c.uri_for( 'inspect' , post.type , post.id ) %] target="_new"><img src=/images/inspect.png height=16 width=16 alt=inspect title=inspect/ style="border:0"></a>
+      <span style="font-size:0.8em">
+        at <a href=[% post.permalink %] target="_new">[% post.pretty_date %]</a>
+        <a href=[% c.uri_for( 'inspect' , post.type , post.id ) %] target="_new"><img src=/images/inspect.png height=16 width=16 alt=inspect title=inspect/ style="border:0"></a>
+        [% IF post.retweeter %]Retweeted by <a href=[% post.retweeter_url %]>[% post.retweeter.screen_name %]</a>[% END %]
+      </span>
     </div>
   </div>
 </li>
