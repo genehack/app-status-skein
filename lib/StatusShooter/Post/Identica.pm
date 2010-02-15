@@ -36,8 +36,7 @@ class StatusShooter::Post::Identica extends StatusShooter::Post {
   method is_protected { return $self->post->{user}{protected} }
 
   method permalink {
-    return sprintf 'http://identi.ca/%s/notice/%s' ,
-      $self->user_handle , $self->id
+    return sprintf 'http://identi.ca/notice/%s' , $self->id;
   }
 
   method user_desc   { return $self->post->{user}{description} }
