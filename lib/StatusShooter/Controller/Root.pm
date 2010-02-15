@@ -17,6 +17,13 @@ has 'form' => (
   default => sub { StatusShooter::Form::Update->new }
 );
 
+sub delete_session :Local :Args(0) {
+  my( $self , $c ) = @_;
+
+  $c->delete_session( 'user request' );
+  $c->response->redirect( $c->uri_for_action( 'index' ));
+}
+
 sub index :Path :Args(0) {
   my ( $self, $c ) = @_;
 
