@@ -95,9 +95,10 @@ sub toggle_fave :Local :Args(2) {
 
   my $message;
   eval {
-    my $status = $c->model( $type )->get_post( $id );
+    my $model  = $c->model( $type );
+    my $status = $model->get_post( $id );
 
-    my $method = $status->favorited ? 'destroy_favorite' : 'create_favorite';
+    my $method = $status->favorited ? $model->fave_del_method : $model->fave_add_method;
     $message = $status->favorited ? 'Favorite removed' : 'Favorite added';
     $c->model( $type )->$method( $id );
   };

@@ -1,5 +1,17 @@
 use MooseX::Declare;
 class StatusShooter::Client {
+  has fave_add_method => (
+    is      => 'ro' ,
+    isa     => 'Str',
+    default => 'create_favorite' ,
+  );
+
+  has fave_del_method => (
+    is      => 'ro' ,
+    isa     => 'Str',
+    default => 'destroy_favorite' ,
+  );
+
   has 'type' => (
     is  => 'ro' ,
     isa => 'Str' ,

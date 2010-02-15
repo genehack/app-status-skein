@@ -16,7 +16,9 @@ class StatusShooter::Client::Facebook extends StatusShooter::Client {
   has secret      => ( is => 'ro' , isa => 'Str' , required => 1 );
   has session_key => ( is => 'ro' , isa => 'Str' , required => 1 );
 
-  has '+type' => ( default => 'Facebook' );
+  has '+fave_add_method' => ( default => 'add_like' );
+  has '+fave_del_method' => ( default => 'remove_like' );
+  has '+type'            => ( default => 'Facebook' );
 
   method _build__client {
     return WWW::Facebook::API->new(
