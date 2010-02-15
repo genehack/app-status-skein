@@ -33,6 +33,7 @@ class StatusShooter::Post::Identica extends StatusShooter::Post {
   method avatar_src  { return $self->post->{user}{profile_image_url} }
   method favorited   { return $self->post->{favorited} }
   method id          { return $self->post->{id} }
+  method is_protected { return $self->post->user->protected }
   method permalink   {
     return sprintf 'http://identi.ca/%s/notice/%s' ,
       $self->user_handle , $self->id
