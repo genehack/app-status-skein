@@ -4,7 +4,10 @@ class StatusShooter::Post::Twitter extends StatusShooter::Post {
 
   has '+can_be_favorited' => ( default => 1 );
   has '+can_be_recycled'  => ( default => 1 );
-  has '+post'             => ( isa => 'Object' );
+  has '+post'             => (
+    isa => 'Object' ,
+    handles => [ 'favorited' , 'id' , 'user' ] ,
+  );
   has '+type'             => ( default => 'Twitter' );
 
   method BUILD {
@@ -26,11 +29,9 @@ class StatusShooter::Post::Twitter extends StatusShooter::Post {
   # lazy builder for 'text' attr, declared in base class
   method _build_text { return $self->post->text }
 
-  method author       { return $self->post->user->name }
-  method avatar_src   { return $self->post->user->profile_image_url }
-  method favorited    { return $self->post->favorited }
-  method id           { return $self->post->id }
-  method is_protected { return $self->post->user->protected }
+  method author       { return $self->user->name }
+  method avatar_src   { return $self->user->profile_image_url }
+  method is_protected { return $self->user->protected }
 
   method permalink {
     return sprintf 'http://twitter.com/%s/status/%s' ,
@@ -46,7 +47,7 @@ class StatusShooter::Post::Twitter extends StatusShooter::Post {
 EOHTML
   }
 
-  method user_desc   { return $self->post->user->description }
-  method user_handle { return $self->post->user->screen_name }
+  method user_desc   { return $self->user->description }
+  method user_handle { return $self->user->screen_name }
   method user_url    { return sprintf 'http://twitter.com/%s' , $self->user_handle }
 }
