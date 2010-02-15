@@ -7,6 +7,13 @@
     <script type="text/javascript" src="/js/jquery.colorbox.js"></script>
     <script type="text/javascript">
 $(document).ready(function(){
+  $("#debug_btn").colorbox({
+    width:"85%",
+    height:"50%",
+    inline:true,
+    opacity:0.5,
+    href:"#debug_info",
+  });
   $(".post_btn").colorbox({
     width:"85%",
     height:"50%",
@@ -56,6 +63,7 @@ function facebook_reply( author , id ) {
       <div style="font-size:2em">Status Shooter</div>
       <img src="/images/post.png" class=post_btn alt="post" title="post"/>
       <a href="[% c.uri_for() %]"><img src="/images/reload.png" alt="reload" title="reload" style="border:0"/></a>
+      <img src="/images/debug.png" id=debug_btn alt="debug" title="debug"/>
     </div>
     [% IF message %]<h2 class="message" style="text-align:center">[% message %]</h2>[% END %]
     [% IF posts %]
@@ -67,6 +75,17 @@ function facebook_reply( author , id ) {
     [% END %]
 
     <div style="display:none">
+      <div id="debug_info" style="text-align:center">
+        <h1>
+          [% USE date %]
+          Current epoch time: [% date.now %]<br/>
+          Epoch time of this page load: [% c.session.time %]<br/>
+          Max Twitter post id observed: [% c.session.twitter_max %]<br/>
+          Max Identi.ca post id observed: [% c.session.identica_max %]
+        </h1>
+        <a href=[% c.uri_for( 'delete_session' ) %]>clear session data</a>
+      </div>
+
       <div id="update_form" style="text-align:center">
 
         [% FOR field IN form.error_fields %]
