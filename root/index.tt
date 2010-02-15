@@ -181,7 +181,10 @@ function facebook_reply( author , id ) {
       <br/>
       <span style="font-size:0.8em">
         at <a href=[% post.permalink %] target="_new">[% post.pretty_date %]</a>
-        <a href=[% c.uri_for( 'inspect' , post.type , post.id ) %] target="_new"><img src=/images/inspect.png height=16 width=16 alt=inspect title=inspect/ style="border:0"></a>
+        [% IF post.is_reply %]
+        <a href=[% post.reply_permalink %] target="_new">in reply to [% post.in_reply_to %]</a>
+        [% END %]
+        <a href=[% c.uri_for( 'inspect' , post.type , post.id ) %] target="_new"><img src=/images/inspect.png height=16 width=16 alt=inspect title=inspect/ style="border:0;float:right"></a>
         [% IF post.retweeter %]Retweeted by <a href=[% post.retweeter_url %]>[% post.retweeter.screen_name %]</a>[% END %]
       </span>
     </div>

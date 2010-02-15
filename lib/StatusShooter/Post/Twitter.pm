@@ -50,11 +50,18 @@ class StatusShooter::Post::Twitter extends StatusShooter::Post {
 
   method author       { return $self->user->name }
   method avatar_src   { return $self->user->profile_image_url }
+  method in_reply_to  { return $self->post->in_reply_to_screen_name }
   method is_protected { return $self->user->protected }
+  method is_reply     { return $self->in_reply_to ? 1 : 0 }
 
   method permalink {
     my $user = $self->retweeter ? $self->retweeter->screen_name : $self->user_handle;
     return sprintf 'http://twitter.com/%s/status/%s' , $user , $self->id
+  }
+
+  method reply_permalink {
+    return sprintf 'http://twitter.com/%s/status/%s' ,
+      $self->in_reply_to , $self->post->in_reply_to_status_id;
   }
 
   method retweeter_url { return sprintf 'http://twitter.com/%s' , $self->retweeter->screen_name }
