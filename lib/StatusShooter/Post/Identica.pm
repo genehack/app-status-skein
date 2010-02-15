@@ -29,17 +29,18 @@ class StatusShooter::Post::Identica extends StatusShooter::Post {
   # lazy builder for 'text' attr, declared in base class
   method _build_text { return $self->post->{text} }
 
-  method author      { return $self->post->{user}{name} }
-  method avatar_src  { return $self->post->{user}{profile_image_url} }
-  method favorited   { return $self->post->{favorited} }
-  method id          { return $self->post->{id} }
+  method author       { return $self->post->{user}{name} }
+  method avatar_src   { return $self->post->{user}{profile_image_url} }
+  method favorited    { return $self->post->{favorited} }
+  method id           { return $self->post->{id} }
   method is_protected { return $self->post->user->protected }
-  method permalink   {
+
+  method permalink {
     return sprintf 'http://identi.ca/%s/notice/%s' ,
       $self->user_handle , $self->id
   }
 
-  method reply_btn   {
+  method reply_btn {
     my $author = $self->user_handle;
     my $id     = $self->id;
 
