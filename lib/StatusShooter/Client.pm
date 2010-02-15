@@ -32,7 +32,10 @@ class StatusShooter::Client {
 
     my $posts;
     eval { $posts = $self->_client->home_timeline( $args )};
-    die $@ if $@;
+    if ( my $err = $@ ) {
+      die $@ unless blessed $err and $err->isa('Net::Twitter::Error');
+      die Dumper $err;
+    }
 
     my $post_class = $self->post_class;
     return [ map { $post_class->new({ post => $_ }) } @$posts ];
