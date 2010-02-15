@@ -63,18 +63,6 @@ sub index :Path :Args(0) {
   $c->stash( posts => \@posts );
 }
 
-sub _find_max_id {
-  my $array_ref = shift;
-
-  my $max = 0;
-
-  foreach ( @$array_ref ) {
-    $max = $_->id if ($_->id > $max );
-  }
-
-  return $max;
-}
-
 sub inspect :Local :Args(2) {
   my( $self , $c , $type , $id ) = @_;
 
@@ -175,6 +163,18 @@ sub default :Path {
 }
 
 sub end : ActionClass('RenderView') {}
+
+sub _find_max_id {
+  my $array_ref = shift;
+
+  my $max = 0;
+
+  foreach ( @$array_ref ) {
+    $max = $_->id if ($_->id > $max );
+  }
+
+  return $max;
+}
 
 sub _post_blog_post_title_to_twitter {
   my( $post , $result ) = @_;
