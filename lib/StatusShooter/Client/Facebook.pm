@@ -53,18 +53,18 @@ class StatusShooter::Client::Facebook extends StatusShooter::Client {
     my %args = ();
     $args{start_time} = $start_time if $start_time;
 
-    my $response = $self->stream->get( %args );
-
     my $posts = [];
 
-    if( ref( $response->{posts} ) eq 'ARRAY' ) {
-      my %profiles = map { $_->{id} => $_ } @{ $response->{profiles} };
+    if ( my $response = $self->stream->get( %args )) {
+      if( ref( $response->{posts} ) eq 'ARRAY' ) {
+        my %profiles = map { $_->{id} => $_ } @{ $response->{profiles} };
 
-      foreach ( @{ $response->{posts} }) {
-        next unless $_->{message};
-        push @$posts ,
-          StatusShooter::Post::Facebook->new({ post    => $_ ,
-                                               profile => $profiles{$_->{source_id} }});
+        foreach ( @{ $response->{posts} }) {
+          next unless $_->{message};
+          push @$posts ,
+            StatusShooter::Post::Facebook->new({ post    => $_ ,
+                                                 profile => $profiles{$_->{source_id} }});
+        }
       }
     }
 
