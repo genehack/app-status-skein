@@ -1,5 +1,23 @@
 - factor colorbox stuff in root/index.tt into common function
 - write setup/application authorization routines
+  - that's going to involve this: http://wiki.developers.facebook.com/index.php/Facebook_Connect
+  - actually, no, it won't, because that requires a stable callback URL.
+  - here's what FB auth is going to look like:
+    - click 'add FB acct'
+    - load page with instructions/explanation of what's about to happen, and 'open auth page' button
+    - clicking button pops up *new* page that loads genehack.org URL/CGI that generates the infinite session URL and 307's to it
+    - also on instruction page is token entry field. user puts token into there, clicks 'submit'
+    - application uses token to generate session key and secret, and writes those out to app_local.yaml
+    - app then opens another new window with perms_url loaded, and instructs user to go there to authorize app
+    - after authorizing, user then returns to page and hit 'next' button, which goes back to index, which hopefully now loads FB shit
+    - FUCK.
+  - and Twitter/Identi.ca at this point is just going to be username/password. <sigh>
+    - alternatively, i distribute the consumer secret with the tarball.
+    - apparently other people are doing this:
+      <http://groups.google.com/group/twitter-development-talk/browse_thread/thread/12c792d39674c496>
+    - but apparently xAuth is coming to save the day:
+      <http://groups.google.com/group/twitter-development-talk/browse_thread/thread/c2c4963061422f28>
+    - applied for xAuth access 20100217; will just use Basic in the meantime...
 - put service enable/disable flags in config and make app respect them
 - add some sort of facebook comment count/display
 - figure out how to support additional facebook stream events
