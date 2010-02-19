@@ -18,6 +18,10 @@
     - but apparently xAuth is coming to save the day:
       <http://groups.google.com/group/twitter-development-talk/browse_thread/thread/c2c4963061422f28>
     - applied for xAuth access 20100217; will just use Basic in the meantime...
+    - but by my reading of the draft xAuth standard proposal, you
+      still need the consumer secret to sign your access_token
+      request, so this seems to not really solve _this_
+      problem... <sigh> Basic it is.
 - put service enable/disable flags in config and make app respect them
 - add some sort of facebook comment count/display
 - figure out how to support additional facebook stream events
