@@ -1,0 +1,13 @@
+---
+name: App::StatusSkein::Web
+Model::Twitter:
+  args:
+    traits:
+      - API::REST
+      - OAuth
+      - InflateObjects
+    consumer_key: 1c4qi8rmSJg9bcKZMn22Hg
+Model::Facebook:
+  args:
+    desktop: 1
+    api_key: 80ee98239b935775526edc8884db8947

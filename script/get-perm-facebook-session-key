@@ -11,8 +11,8 @@ use FindBin;
 use WWW::Facebook::API;
 use YAML                qw/ LoadFile /;
 
-my $conf       = LoadFile( "$FindBin::Bin/../statusshooter.yaml" );
-my $local_conf = LoadFile( "$FindBin::Bin/../statusshooter_local.yaml" );
+my $conf       = LoadFile( "$FindBin::Bin/../app_statusskein_web.yaml" );
+my $local_conf = LoadFile( "$FindBin::Bin/../app_statusskein_web_local.yaml" );
 
 my $api_key = $conf->{'Model::Facebook'}{args}{api_key} or die "Failed to read API key";
 my $secret  = $local_conf->{'Model::Facebook'}{args}{secret}  or die "Failed to read secret";

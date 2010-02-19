@@ -8,8 +8,8 @@ use FindBin;
 use Net::Twitter;
 use YAML          qw/ LoadFile /;
 
-my $conf = LoadFile( "$FindBin::Bin/../statusshooter.yaml" );
-my $local_conf = LoadFile( "$FindBin::Bin/../statusshooter_local.yaml" );
+my $conf = LoadFile( "$FindBin::Bin/../app_statusskein_web.yaml" );
+my $local_conf = LoadFile( "$FindBin::Bin/../app_statusskein_web_local.yaml" );
 
 my $cons_key    = $conf->{'Model::Twitter'}{args}{consumer_key};
 my $cons_secret = $local_conf->{'Model::Twitter'}{args}{consumer_secret};

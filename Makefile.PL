@@ -3,8 +3,8 @@
 # expected.  You have been warned.
 use inc::Module::Install;
 
-name 'StatusShooter';
-all_from 'lib/StatusShooter.pm';
+name 'App::Skein';
+all_from 'lib/App/Skein.pm';
 
 requires 'Catalyst::Action::RenderView';
 requires 'Catalyst::Model::Adaptor';

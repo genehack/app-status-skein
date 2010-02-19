@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang=en>
   <head>
-    <title>Status Shooter</title>
+    <title>StatusSkein</title>
     <meta http-equiv=Content-Type content="text/html;charset=utf-8" />
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/jquery.colorbox.js"></script>
@@ -71,7 +71,7 @@ function facebook_reply( author , id ) {
   </head>
   <body style="font-family:verdana,helvetica">
     <div style="text-align:center">
-      <div style="font-size:2em">Status Shooter</div>
+      <div style="font-size:2em">StatusSkein</div>
       <img src="/images/post.png" class=post_btn alt="post" title="post"/>
       <a href="[% c.uri_for() %]"><img src="/images/reload.png" alt="reload" title="reload" style="border:0"/></a>
       <img src="/images/debug.png" id=debug_btn alt="debug" title="debug"/>
