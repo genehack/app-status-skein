@@ -38,7 +38,9 @@ class StatusShooter::Client {
       return [] if $err->code eq '502';
 
       use Data::Dumper;
-      die Dumper $err;
+#      die Dumper $err;
+      die $err;
+
     }
 
     my $post_class = $self->post_class;
