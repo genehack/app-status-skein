@@ -27,7 +27,9 @@ sub delete_session :Local :Args(0) {
 sub index :Path :Args(0) {
   my ( $self, $c ) = @_;
 
-  unless ( $c->config->{accounts} ) {
+  my $clients = $c->model( 'CLI' )->clients;
+
+  unless ( @$clients ) {
     $c->stash( template => 'initial_run.tt' );
     return;
   }
