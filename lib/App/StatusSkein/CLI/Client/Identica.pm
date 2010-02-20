@@ -2,6 +2,7 @@ use MooseX::Declare;
 
 class App::StatusSkein::CLI::Client::Identica extends App::StatusSkein::CLI::Client {
   use App::StatusSkein::CLI::Post::Identica;
+  use Date::Parse;
   use HTTP::Response;
   use Net::Identica;
   use Net::Twitter::Error;
@@ -30,7 +31,11 @@ class App::StatusSkein::CLI::Client::Identica extends App::StatusSkein::CLI::Cli
       username => $self->username ,
       password => $self->password ,
     );
-  }
+  };
+
+  method filter_posts ( Num :$since , ArrayRef :$posts ) {
+    return [ grep { str2time( $_->{created_at} ) >= $since } @$posts ];
+  };
 
   method verify_credentials {
     my $response = $self->_client->verify_credentials;
