@@ -74,7 +74,8 @@ function facebook_reply( author , id ) {
       <div style="font-size:2em">StatusSkein</div>
       <img src="/images/post.png" class=post_btn alt="post" title="post"/>
       <a href="[% c.uri_for() %]"><img src="/images/reload.png" alt="reload" title="reload" style="border:0"/></a>
-      <img src="/images/debug.png" id=debug_btn alt="debug" title="debug"/>
+      <a href="[% c.uri_for('/add' ) %]"><img src=/images/add.png alt="Add Account" title="Add Account" style="border:0" width=48 height=48/></a>
+      <img src="/images/debug.png" id=debug_btn alt="debug" title="debug" width=48 height=48 />
     </div>
 
     [% IF message %]<h2 class="message" style="text-align:center">[% message %]</h2>[% END %]
