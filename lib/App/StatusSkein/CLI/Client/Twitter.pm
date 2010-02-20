@@ -17,11 +17,15 @@ class App::StatusSkein::CLI::Client::Twitter extends App::StatusSkein::CLI::Clie
     lazy_build => 1 ,
   );
 
-  has traits              => ( is => 'ro' , isa => 'ArrayRef' , required => 1 );
-  has access_token        => ( is => 'ro' , isa => 'Str'      , required => 1 );
-  has access_token_secret => ( is => 'ro' , isa => 'Str'      , required => 1 );
-  has consumer_secret     => ( is => 'ro' , isa => 'Str'      , required => 1 );
-  has consumer_key        => ( is => 'ro' , isa => 'Str'      , required => 1 );
+  has traits => (
+    is       => 'ro' ,
+    isa      => 'ArrayRef' ,
+    required => 1 ,
+    default  => sub { [ qw/ Rest::API InflateObjects / ] }
+  );
+
+  has username => ( is => 'ro' , isa => 'Str'      , required => 1 );
+  has password => ( is => 'ro' , isa => 'Str'      , required => 1 );
 
   has '+type' => ( default => 'Twitter' );
 
