@@ -19,7 +19,7 @@ $(document).ready(function(){
       $("#current_epoch").text( epoch );
     }
   });
-  $(".post_btn").colorbox({
+  $("#post_btn").colorbox({
     width:"85%",
     height:"50%",
     inline:true,
@@ -72,7 +72,7 @@ function facebook_reply( author , id ) {
   <body style="font-family:verdana,helvetica">
     <div style="text-align:center">
       <div style="font-size:2em">StatusSkein</div>
-      <img src="/images/post.png" class=post_btn alt="post" title="post"/>
+      <img src="/images/post.png" id=post_btn alt="post" title="post" width=48 height=48 />
       <a href="[% c.uri_for() %]"><img src="/images/reload.png" alt="reload" title="reload" style="border:0"/></a>
       <a href="[% c.uri_for('/add' ) %]"><img src=/images/add.png alt="Add Account" title="Add Account" style="border:0" width=48 height=48/></a>
       <img src="/images/debug.png" id=debug_btn alt="debug" title="debug" width=48 height=48 />
