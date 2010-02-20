@@ -1,6 +1,7 @@
 use MooseX::Declare;
 
 class App::StatusSkein::CLI {
+  use App::StatusSkein::CLI::Client::Identica;
   use App::StatusSkein::CLI::Client::Twitter;
   use Moose::Util::TypeConstraints;
   use Path::Class::File;
