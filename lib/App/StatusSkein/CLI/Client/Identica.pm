@@ -1,8 +1,10 @@
 use MooseX::Declare;
 
 class App::StatusSkein::CLI::Client::Identica extends App::StatusSkein::CLI::Client {
-  use Net::Identica;
   use App::StatusSkein::CLI::Post::Identica;
+  use HTTP::Response;
+  use Net::Identica;
+  use Net::Twitter::Error;
 
   has '_client' => (
     is         => 'ro' ,
@@ -10,6 +12,7 @@ class App::StatusSkein::CLI::Client::Identica extends App::StatusSkein::CLI::Cli
     handles    => [
       'create_favorite' ,
       'destroy_favorite' ,
+      'get_error' ,
       'retweet' ,
       'show_status' ,
       'update'
@@ -28,5 +31,21 @@ class App::StatusSkein::CLI::Client::Identica extends App::StatusSkein::CLI::Cli
       password => $self->password ,
     );
   }
+
+  method verify_credentials {
+    my $response = $self->_client->verify_credentials;
+    return 1 if defined $response;
+
+    my $error = $self->get_error->{error};
+    if ( $error eq 'Could not authenticate you.' ) {
+      my $err = Net::Twitter::Error->new(
+        http_response => HTTP::Response->new() ,
+        twitter_error => $self->get_error ,
+      );
+      die $err;
+    }
+    die $error;
+  };
+
 }
 
