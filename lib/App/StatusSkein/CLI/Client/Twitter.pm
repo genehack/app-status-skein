@@ -13,6 +13,7 @@ class App::StatusSkein::CLI::Client::Twitter extends App::StatusSkein::CLI::Clie
       'retweet' ,
       'show_status' ,
       'update' ,
+      'verify_credentials' ,
     ] ,
     lazy_build => 1 ,
   );
