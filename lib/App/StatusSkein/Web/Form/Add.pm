@@ -1,4 +1,4 @@
-package StatusShooter::Form::Add;
+package App::StatusSkein::Web::Form::Add;
 
 use namespace::autoclean;
 

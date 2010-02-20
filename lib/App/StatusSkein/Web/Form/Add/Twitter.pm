@@ -1,9 +1,9 @@
-package StatusShooter::Form::Add::Twitter;
+package App::StatusSkein::Web::Form::Add::Twitter;
 
 use namespace::autoclean;
 
 use HTML::FormHandler::Moose;
-extends 'StatusShooter::Form::Add';
+extends 'App::StatusSkein::Web::Form::Add';
 with 'HTML::FormHandler::Render::Simple';
 
 has '+name' => ( default => 'add_twitter' );
@@ -23,6 +23,8 @@ has_field 'password' => (
   required_message => 'You must enter a password' ,
   size             => 12 ,
 );
+
+has_field 'type' => ( type  => 'Hidden' , default => 'Twitter' );
 
 has_field 'submit' => (
   type  => 'Submit' ,
