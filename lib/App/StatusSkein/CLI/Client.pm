@@ -38,10 +38,15 @@ class App::StatusSkein::CLI::Client {
       die $err;
     }
 
+    $posts = $self->filter_posts( since => $since , posts => $posts );
+
     my $post_class = $self->post_class;
-    return [ map { $post_class->new({ post => $_ }) }
-               grep { $_->created_at->epoch >= $since } @$posts ];
+    return [ map { $post_class->new({ post => $_ }) } @$posts ];
   };
+
+  method filter_posts ( Num :$since , ArrayRef :$posts ) {
+    return [ grep { $_->created_at->epoch >= $since } @$posts ];
+  }
 
   method post_class { return sprintf "App::StatusSkein::CLI::Post::%s" , $self->type }
 }
