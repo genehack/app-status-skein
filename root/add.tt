@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html lang=en>
+  <head>
+    <title>StatusSkein</title>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8" />
+  </head>
+  <body style="font-family:verdana,helvetica">
+    <div style="text-align:center">
+      <div style="font-size:2em">Add Additional Account</div>
+
+      <p style="text-align:center;margin: 10px 25%;font-size:1.2em">
+        Please select the service for which you'd like to add an account:
+      </p>
+
+      [% FOREACH service IN [ 'twitter', 'identica', 'facebook' ] %]
+        [% label = service | ucfirst %]
+      <a href=[% c.uri_for( '/add/' _ service ) %]>
+        <img src=/images/[% service %].png height=64 width=64 alt="[% label %]" title="[% label %]"
+             style="border:0;margin:20px"
+        />
+      </a>
+      [% END %]
+    </div>
+
+  </body>
+</html>

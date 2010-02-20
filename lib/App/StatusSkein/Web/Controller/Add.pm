@@ -15,8 +15,13 @@ has 'form' => (
   default => sub { die 'tried to use form before initialization!' }
 );
 
-sub index :Path :Args(1) {
+sub index :Path {
   my ( $self, $c , $service ) = @_;
+
+  unless ( $service ) {
+    $c->stash( template => 'add.tt' );
+    return;
+  }
 
   my $service_name = ucfirst( $service );
   my $class = "App::StatusSkein::Web::Form::Add::$service_name";
