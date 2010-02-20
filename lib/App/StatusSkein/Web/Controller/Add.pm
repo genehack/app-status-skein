@@ -23,7 +23,7 @@ sub facebook :Local {
   $self->form( App::StatusSkein::Web::Form::Add::Facebook->new );
   $self->form->action( $c->uri_for( "/add/facebook" ));
 
-  my $api_key = '80ee98239b935775526edc8884db8947';
+  my $api_key = $c->config->{facebook_api_key};
 
   my $fb_url = get( "http://genehack.org/statusskein/session_url.cgi?api_key=$api_key" );
 
@@ -38,6 +38,11 @@ sub facebook :Local {
     my $token  = $result->{token};
 
     my $session_info = get( "http://genehack.org/statusskein/token2session.cgi?api_key=$api_key&token=$token" );
+
+    if ( $session_info eq 'ERROR' ) {
+      $c->stash( message => 'Token validation failed' );
+      return;
+    }
 
     my( $key , $secret ) = split /\n/ , $session_info;
 
