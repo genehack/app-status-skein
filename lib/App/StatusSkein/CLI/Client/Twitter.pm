@@ -22,7 +22,7 @@ class App::StatusSkein::CLI::Client::Twitter extends App::StatusSkein::CLI::Clie
     is       => 'ro' ,
     isa      => 'ArrayRef' ,
     required => 1 ,
-    default  => sub { [ qw/ Rest::API InflateObjects / ] }
+    default  => sub { [ qw/ API::REST InflateObjects / ] }
   );
 
   has username => ( is => 'ro' , isa => 'Str'      , required => 1 );
