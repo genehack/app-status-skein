@@ -1,5 +1,11 @@
 use MooseX::Declare;
 class App::StatusSkein::CLI::Post {
+  has account_name => (
+    is       => 'ro' ,
+    isa      => 'Str' ,
+    required => 1 ,
+  );
+
   has 'can_be_favorited' => (
     is      => 'ro' ,
     isa     => 'Bool' ,

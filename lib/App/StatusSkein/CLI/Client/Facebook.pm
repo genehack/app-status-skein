@@ -16,8 +16,6 @@ class App::StatusSkein::CLI::Client::Facebook extends App::StatusSkein::CLI::Cli
   has secret      => ( is => 'ro' , isa => 'Str' , required => 1 );
   has session_key => ( is => 'ro' , isa => 'Str' , required => 1 );
 
-  has '+fave_add_method' => ( default => 'add_like' );
-  has '+fave_del_method' => ( default => 'remove_like' );
   has '+type'            => ( default => 'Facebook' );
 
   method _build__client {
@@ -29,11 +27,17 @@ class App::StatusSkein::CLI::Client::Facebook extends App::StatusSkein::CLI::Cli
     );
   }
 
-  method add_like ( $id ) {
+  method add_fave ( $id ) {
     my $status = $self->stream->add_like( post_id => $id );
     return if $status;
     die $status;
-  }
+  };
+
+  method del_fave ( $id ) {
+    my $status = $self->stream->remove_like( post_id => $id );
+    return if $status;
+    die $status;
+  };
 
   # this is fairly wasteful -- we're going to request the whole stream and
   # throw away everything but the post we want -- but there doesn't seem to be
@@ -58,19 +62,15 @@ class App::StatusSkein::CLI::Client::Facebook extends App::StatusSkein::CLI::Cli
 
         foreach ( @{ $response->{posts} }) {
           next unless $_->{message};
-          push @$posts ,
-            App::StatusSkein::CLI::Post::Facebook->new({ post    => $_ ,
-                                                         profile => $profiles{$_->{source_id} }});
+          push @$posts , App::StatusSkein::CLI::Post::Facebook->new({
+            post    => $_ ,
+            account_name => $self->account_name ,
+            profile => $profiles{$_->{source_id} }
+          });
         }
       }
     }
 
     return $posts;
-  }
-
-  method remove_like ( $id ) {
-    my $status = $self->stream->remove_like( post_id => $id );
-    return if $status;
-    die $status;
   }
 }

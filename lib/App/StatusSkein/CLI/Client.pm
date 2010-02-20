@@ -1,30 +1,25 @@
 use MooseX::Declare;
 class App::StatusSkein::CLI::Client {
-  has fave_add_method => (
-    is      => 'ro' ,
-    isa     => 'Str',
-    default => 'create_favorite' ,
-  );
-
-  has fave_del_method => (
-    is      => 'ro' ,
-    isa     => 'Str',
-    default => 'destroy_favorite' ,
+  has 'account_name' => (
+    is       => 'ro' ,
+    isa      => 'Str' ,
+    required => 1 ,
   );
 
   has 'type' => (
-    is  => 'ro' ,
-    isa => 'Str' ,
+    is       => 'ro' ,
+    isa      => 'Str' ,
+    required => 1 ,
   );
 
-  method get_post ( $id ) {
+  method get_post ( Str $id ) {
     my $post;
     eval { $post = $self->show_status( $id ) };
     die $@ if $@;
 
     my $post_class = $self->post_class;
-    return $post_class->new({ post => $post });
-  }
+    return $post_class->new({ post => $post , account_name => $self->account_name });
+  };
 
   method get_posts ( Num :$since ) {
     my $posts;
@@ -41,12 +36,16 @@ class App::StatusSkein::CLI::Client {
     $posts = $self->filter_posts( since => $since , posts => $posts );
 
     my $post_class = $self->post_class;
-    return [ map { $post_class->new({ post => $_ }) } @$posts ];
+    return [ map {
+      $post_class->new({ post => $_ , account_name => $self->account_name })
+    } @$posts ];
   };
 
   method filter_posts ( Num :$since , ArrayRef :$posts ) {
     return [ grep { $_->created_at->epoch >= $since } @$posts ];
-  }
+  };
 
-  method post_class { return sprintf "App::StatusSkein::CLI::Post::%s" , $self->type }
+  method post_class { return sprintf "App::StatusSkein::CLI::Post::%s" , $self->type };
+
+  method recycle_post ( Str $id ) { die "not supported on this client" };
 }

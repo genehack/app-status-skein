@@ -27,9 +27,9 @@ sub delete_session :Local :Args(0) {
 sub index :Path :Args(0) {
   my ( $self, $c ) = @_;
 
-  my $clients = $c->model( 'CLI' )->clients;
+  my $accounts = $c->model( 'CLI' )->accounts;
 
-  unless ( @$clients ) {
+  unless ( @$accounts ) {
     $c->stash( template => 'initial_run.tt' );
     return;
   }
@@ -43,6 +43,12 @@ sub index :Path :Args(0) {
 
   $self->form->action( $c->uri_for( 'post' ));
 
+  my $services = [ map {
+    { value => $_->name , label => $_->type }
+  } sort { $a->type cmp $b->type } @$accounts ];
+
+  $self->form->field( 'services' )->options( $services );
+
   my $old_time = $c->session->{time} || 0;
 
   my $posts = $c->model( 'CLI' )->get_all_posts( since => $old_time );
@@ -54,9 +60,9 @@ sub index :Path :Args(0) {
 }
 
 sub inspect :Local :Args(2) {
-  my( $self , $c , $type , $id ) = @_;
+  my( $self , $c , $name , $id ) = @_;
 
-  my $status = $c->model( $type )->get_post( $id );
+  my $status = $c->model( 'CLI' )->get_post( $name , $id );
 
   $c->response->body( dumper_html( $status->{post} ));
 }
@@ -110,30 +116,26 @@ sub post :Local :Args(0) {
 }
 
 sub toggle_fave :Local :Args(2) {
-  my( $self , $c , $type , $id  ) = @_;
+  my( $self , $c , $account_name , $id  ) = @_;
 
   my $message;
   eval {
-    my $model  = $c->model( $type );
-    my $status = $model->get_post( $id );
-
-    my $method = $status->favorited ? $model->fave_del_method : $model->fave_add_method;
-    $message = $status->favorited ? 'fave_off.png' : 'fave_on.png';
-    $c->model( $type )->$method( $id );
+    my $post = $c->model( 'CLI' )->get_post( $account_name , $id );
+    my $method = $post->favorited ? 'del_fave' : 'add_fave';
+    $c->model( 'CLI' )->$method( $account_name , $id );
+    $message = $post->favorited ? 'fave_off.png' : 'fave_on.png';
   };
   die $@ if $@;
 
   $c->response->body( $message );
 }
 
-sub toggle_recycle :Local :Args(2) {
-  my( $self , $c , $type , $id  ) = @_;
+sub recycle_post :Local :Args(2) {
+  my( $self , $c , $account_name , $id  ) = @_;
 
   my $message;
   eval {
-    my $status = $c->model( $type )->get_post( $id );
-
-    $c->model( $type )->retweet( $id );
+    my $status = $c->model( 'CLI' )->recycle_post( $account_name , $id );
   };
   if ( my $err = $@ ) {
     die $@ unless blessed $err and $err->isa('Net::Twitter::Error');
@@ -153,18 +155,6 @@ sub default :Path {
 }
 
 sub end : ActionClass('RenderView') {}
-
-sub _find_max_id {
-  my $array_ref = shift;
-
-  my $max = 0;
-
-  foreach ( @$array_ref ) {
-    $max = $_->id if ($_->id > $max );
-  }
-
-  return $max;
-}
 
 sub _post_blog_post_title_to_twitter {
   my( $post , $result ) = @_;

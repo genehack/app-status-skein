@@ -36,6 +36,11 @@ class App::StatusSkein::CLI::Client::Twitter extends App::StatusSkein::CLI::Clie
       username => $self->username ,
       password => $self->password ,
     );
-  }
+  };
+
+  method add_fave ( Str $id ) { $self->create_favorite( $id ) };
+  method del_fave ( Str $id ) { $self->destroy_favorite( $id ) };
+
+  method recycle_post ( Str $id ) { $self->retweet( $id ) };
 }
 

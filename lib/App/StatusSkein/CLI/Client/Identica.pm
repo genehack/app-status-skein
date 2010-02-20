@@ -33,9 +33,14 @@ class App::StatusSkein::CLI::Client::Identica extends App::StatusSkein::CLI::Cli
     );
   };
 
+  method add_fave ( Str $id ) { $self->create_favorite( $id ) };
+  method del_fave ( Str $id ) { $self->destroy_favorite( $id ) };
+
   method filter_posts ( Num :$since , ArrayRef :$posts ) {
     return [ grep { str2time( $_->{created_at} ) >= $since } @$posts ];
   };
+
+  method recycle_post ( Str $id ) { $self->retweet( $id ) };
 
   method verify_credentials {
     my $response = $self->_client->verify_credentials;
@@ -51,6 +56,4 @@ class App::StatusSkein::CLI::Client::Identica extends App::StatusSkein::CLI::Cli
     }
     die $error;
   };
-
 }
-

@@ -118,7 +118,7 @@ function facebook_reply( author , id ) {
             <label>
               <input type=checkbox class=[% f.name %] name=[% f.name %] id=[% f.name _ '.' _ option.value %] value=[% option.value %]
                      [%- FOR fif IN f.fif %][% IF option.value == fif %] checked=checked[% END %][% END %] />
-              <img src=/images/[% option.value %].png height=32 width=32 alt="[% option.label %]" title="[% option.label %]" />
+              <img src=/images/[% option.label | lower %].png height=32 width=32 alt="[% option.label %]" title="[% option.label %]" />
             </label>
             [% END %]
           </p>
@@ -164,14 +164,14 @@ function facebook_reply( author , id ) {
         [% IF post.favorited %][% link = 'Unfavorite' ; img='fave_on.png' %]
         [% ELSE %][% link = 'Favorite' ; img = 'fave_off.png' %][% END %]
       <img id=fave_[% post.id %] src=/images/[% img %] alt=[% link %] title=[% link %] height=16 width=16
-      onClick="$.get('[% c.uri_for( 'toggle_fave' , post.type , post.id ) %]' , function(data) {
+      onClick="$.get('[% c.uri_for( 'toggle_fave' , post.account_name , post.id ) %]' , function(data) {
         $('#fave_[% post.id %]').attr('src','/images/'+data);
       },'text')" />
       [% END %]
       [% IF post.is_protected %]<img src=/images/lock.png alt="Protected post" title="Protected post" height=16 width=16/>
       [% ELSIF post.can_be_recycled %]
       <img id=recycle_[% post.id %] src=/images/recycle.png alt="Recycle post" title="Recycle post" height=20 width=20
-      onClick="$.get('[% c.uri_for( 'toggle_recycle' , post.type , post.id ) %]' ,
+      onClick="$.get('[% c.uri_for( 'recycle_post' , post.account_name , post.id ) %]' ,
         function(data) { if (data == 1 ) { $('#recycle_[% post.id %]').fadeOut(); }} ,'text')" />
       [% END %]
       <a href=# class=reply_btn onclick="[% post.type | lower %]_reply('@[% post.user_handle %] ' , '[% post.id %]' )"><img src=/images/reply.png alt=Reply title=Reply style="border:0" height=16 width=16 /></a>
@@ -189,7 +189,7 @@ function facebook_reply( author , id ) {
         [% IF post.is_reply %]
         <a href=[% post.reply_permalink %] target="_new">in reply to [% post.in_reply_to %]</a>
         [% END %]
-        <a href=[% c.uri_for( 'inspect' , post.type , post.id ) %] target="_new"><img src=/images/inspect.png height=16 width=16 alt=inspect title=inspect/ style="border:0;float:right"></a>
+        <a href=[% c.uri_for( 'inspect' , post.account_name , post.id ) %] target="_new"><img src=/images/inspect.png height=16 width=16 alt=inspect title=inspect/ style="border:0;float:right"></a>
         [% IF post.retweeter %]Retweeted by <a href=[% post.retweeter_url %]>[% post.retweeter.screen_name %]</a>[% END %]
       </span>
     </div>
