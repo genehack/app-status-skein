@@ -80,12 +80,15 @@ function facebook_reply( author , id ) {
     <link type="text/css" media="screen" rel="stylesheet" href="/css/colorbox.css" />
   </head>
   <body style="font-family:verdana,helvetica">
-    <div style="text-align:center">
-      <div style="font-size:2em">StatusSkein</div>
+    <div style="float:left;position:fixed; top:0;left:0; background:#ccc;border-right:1px solid black;border-bottom:1px solid black;padding:0.2em;">
       <img src="/images/post.png" id=post_btn alt="post" title="post" width=48 height=48 />
-      <a href="[% c.uri_for() %]"><img src="/images/reload.png" alt="reload" title="reload" style="border:0"/></a>
+      <br/>
+      <img id="reload_btn" src="/images/reload.png" alt="reload" title="reload" width=48 height=48 />
+      <br/>
       <img id="clear_btn" src="/images/clear.png"  alt="clear posts" title="clear posts" width=48 height=48 />
+      <br/>
       <a href="[% c.uri_for('/add' ) %]"><img src=/images/add.png alt="Add Account" title="Add Account" style="border:0" width=48 height=48/></a>
+      <br/>
       <img src="/images/debug.png" id=debug_btn alt="debug" title="debug" width=48 height=48 />
     </div>
 
