@@ -43,23 +43,11 @@ sub index :Path :Args(0) {
 
   $self->form->action( $c->uri_for( 'post' ));
 
-  my $new_time = time();
   my $old_time = $c->session->{time} || 0;
 
-  if ( $old_time and $new_time - $old_time < 60 ) {
-    $c->stash( message => 'Less than 60 seconds since last page load! Wait longer!' );
-    return;
-  }
+  my $posts = $c->model( 'CLI' )->get_all_posts( since => $old_time );
 
-  my $posts = $c->model( 'CLI' )->get_all_posts;
-
-  $c->session->{time} = $new_time;
-
-  my $new_twitter_max = _find_max_id( $tweets );
-  $c->session->{twitter_max}  = $new_twitter_max if $new_twitter_max;
-
-  my $new_identica_max = _find_max_id( $identica );
-  $c->session->{identica_max} = $new_identica_max if $new_identica_max;
+  $c->session->{time} = time();
 
   my @posts = sort { $a->date <=> $b->date } @$posts;
   $c->stash( posts => \@posts );

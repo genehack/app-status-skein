@@ -67,10 +67,13 @@ class App::StatusSkein::CLI {
 
   method get_accounts { return $self->config->{accounts} };
 
-  method get_all_posts {
-    my $posts;
+  method get_all_posts ( Num :$since ) {
+    my $posts = [];
+
+    return $posts if ( time() - $since < 60 );
+
     foreach my $client ( @{ $self->clients }) {
-      push @$posts , @{ $client->get_posts };
+      push @$posts , @{ $client->get_posts( since => $since ) };
     }
     return $posts;
   };

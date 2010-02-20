@@ -26,12 +26,9 @@ class App::StatusSkein::CLI::Client {
     return $post_class->new({ post => $post });
   }
 
-  method get_posts ( Int :$max_id ) {
-    my $args = {};
-    $args->{since_id} = $max_id if $max_id;
-
+  method get_posts ( Num :$since ) {
     my $posts;
-    eval { $posts = $self->_client->home_timeline( $args )};
+    eval { $posts = $self->_client->home_timeline() };
     if ( my $err = $@ ) {
       die $@ unless blessed $err and $err->isa('Net::Twitter::Error');
       # bail on the fail whale
@@ -44,8 +41,9 @@ class App::StatusSkein::CLI::Client {
     }
 
     my $post_class = $self->post_class;
-    return [ map { $post_class->new({ post => $_ }) } @$posts ];
-  }
+    return [ map { $post_class->new({ post => $_ }) }
+               grep { $_->created_at->epoch >= $since } @$posts ];
+  };
 
   method post_class { return sprintf "App::StatusSkein::CLI::Post::%s" , $self->type }
 }

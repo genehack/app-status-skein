@@ -48,10 +48,6 @@ sub index :Path :Args(1) {
 
     $c->model( 'CLI' )->add_account( $account_name => $result );
 
-    ### FIXME this is a kludge. need to figure out how state data should be
-    ### preserved and used with the CLI wrapper model...
-    delete $c->session->{time};
-
     $c->response->redirect( $c->uri_for( '/' ));
   }
 };
