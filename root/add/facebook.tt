@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang=en>
+  <head>
+    <title>StatusSkein: Add A Facebook Account</title>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8" />
+  </head>
+  <body style="font-family:verdana,helvetica">
+    <div style="text-align:center">
+      <div style="font-size:2em">Add A Facebook Account</div>
+
+      [% FOR field IN form.error_fields %]
+        [% FOR error IN field.errors %]
+          <h2 class="error">[% error %]</h2>
+        [% END %]
+      [% END %]
+
+      [% IF message %]<h2 class="message" style="text-align:center">[% message %]</h2>[% END %]
+
+      <p style="text-align:justify;margin: 20px 25%;font-size:1.2em">
+        Adding a Facebook account to StatusSkein is a multi-step
+        process. You need to obtain a token from Facebook by clicking
+        <a href=[% fb_url %] target="new">this link</a>, and then
+        enter it into the form below, and press the submit button.
+      </p>
+
+      <p style="text-align:justify;margin: 20px 25%;font-size:1.2em">
+        Once you've validated your token, you will be taken to a
+        second screen where you must grant StatusSkein permissions to
+        read and write to your Facebook status stream.
+      </p>
+
+      <form name=[% form.name %] action=[% form.action %] method=post>
+
+      [% f = form.field( 'token' ) %]
+        <p style="margin:20px 35%;">
+          <label>
+            [% f.label %]:
+            <input type=[% f.type | lower %]
+                   name=[% f.name %]
+                   id=[% f.name %]
+                   [% IF f.size %] size=[% f.size %][% END %]
+                   value="[% f.fif %]"
+              />
+          </label>
+        </p>
+
+        <p>
+      [% FOREACH field IN [ 'type' , 'submit' ] %]
+        [% f = form.field( field ) %]
+          <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.value %]" />
+      [% END %]
+        </p>
+      </form>
+    </div>
+  </body>
+</html>

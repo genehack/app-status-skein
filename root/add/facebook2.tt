@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html lang=en>
+  <head>
+    <title>StatusSkein: Finish Adding Facebook Account</title>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8" />
+  </head>
+  <body style="font-family:verdana,helvetica">
+    <div style="text-align:center">
+      <div style="font-size:2em">Finish Adding Facebook Account</div>
+
+      <p style="text-align:justify;margin: 20px 25%;font-size:1.2em">
+        To finalize the addition of your Facebook account, please
+        click <a href=[% perms_url %] target="new">this link</a> and
+        authorize StatusSkein to read and write to your Facebook
+        stream.
+      </p>
+
+      <p style="text-align:justify;margin: 20px 25%;font-size:1.2em">
+        Once you've authorized the application, <a href=[% c.uri_for(
+        '/' ) %]>click here</a>
+      </p>
+    </div>
+  </body>
+</html>
