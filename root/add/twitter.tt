@@ -40,11 +40,5 @@
         </p>
       </form>
     </div>
-
-<pre style="font-size:0.8em;">
-[% USE Dumper %]
-[% Dumper.dump_html( c.config ) %]
-</pre>
-
   </body>
 </html>
