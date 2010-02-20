@@ -51,12 +51,7 @@ sub index :Path :Args(0) {
     return;
   }
 
-  my $twitter_max  = $c->session->{twitter_max}  || 0;
-  my $identica_max = $c->session->{identica_max} || 0;
-
-  my $fb_posts = $c->model( 'Facebook' )->get_posts( start_time => $old_time     );
-  my $tweets   = $c->model( 'Twitter'  )->get_posts( max_id     => $twitter_max  );
-  my $identica = $c->model( 'Identica' )->get_posts( max_id     => $identica_max );
+  my $posts = $c->model( 'CLI' )->get_all_posts;
 
   $c->session->{time} = $new_time;
 
@@ -66,7 +61,7 @@ sub index :Path :Args(0) {
   my $new_identica_max = _find_max_id( $identica );
   $c->session->{identica_max} = $new_identica_max if $new_identica_max;
 
-  my @posts = sort { $a->date <=> $b->date } @$fb_posts , @$tweets , @$identica ;
+  my @posts = sort { $a->date <=> $b->date } @$posts;
   $c->stash( posts => \@posts );
 }
 

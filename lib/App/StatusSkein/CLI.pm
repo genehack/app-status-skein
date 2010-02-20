@@ -67,7 +67,13 @@ class App::StatusSkein::CLI {
 
   method get_accounts { return $self->config->{accounts} };
 
-  method get_all_posts {};
+  method get_all_posts {
+    my $posts;
+    foreach my $client ( @{ $self->clients }) {
+      push @$posts , @{ $client->get_posts };
+    }
+    return $posts;
+  };
 
   method get_post {};
 
