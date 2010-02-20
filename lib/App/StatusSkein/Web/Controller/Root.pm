@@ -49,6 +49,9 @@ sub index :Path :Args(0) {
 
   $self->form->field( 'services' )->options( $services );
 
+sub new_posts :Local :Args(0) {
+  my( $self , $c ) = @_;
+
   my $old_time = $c->session->{time} || 0;
 
   my $posts = $c->model( 'CLI' )->get_all_posts( since => $old_time );
@@ -56,7 +59,10 @@ sub index :Path :Args(0) {
   $c->session->{time} = time();
 
   my @posts = sort { $a->date <=> $b->date } @$posts;
-  $c->stash( posts => \@posts );
+  $c->stash(
+    posts    => \@posts ,
+    template => 'new_posts.tt' ,
+  );
 }
 
 sub inspect :Local :Args(2) {
