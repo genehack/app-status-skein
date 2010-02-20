@@ -3,8 +3,8 @@
 # expected.  You have been warned.
 use inc::Module::Install;
 
-name 'App::Skein';
-all_from 'lib/App/Skein.pm';
+name 'App-StatusSkein';
+all_from 'lib/App/StatusSkein.pm';
 
 requires 'Catalyst::Action::RenderView';
 requires 'Catalyst::Model::Adaptor';
