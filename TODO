@@ -1,4 +1,5 @@
 - factor colorbox stuff in root/index.tt into common function
+- update posting to take into account which accounts are configured
 - write setup/application authorization routines
   - and Twitter/Identi.ca at this point is just going to be username/password. <sigh>
     - alternatively, i distribute the consumer secret with the tarball.
