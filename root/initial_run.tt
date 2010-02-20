@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang=en>
   <head>
-    <title>Status Shooter</title>
+    <title>StatusSkein</title>
     <meta http-equiv=Content-Type content="text/html;charset=utf-8" />
   </head>
   <body style="font-family:verdana,helvetica">
@@ -9,9 +9,9 @@
       <div style="font-size:2em">Hi.</div>
 
       <p style="text-align:justify;margin: 20px 25%;font-size:1.2em">
-        Welcome to StatusShooter, a web application you can run on
+        Welcome to StatusSkein, a web application you can run on
         your local machine to aggregate updates from various social
-        networking sites into a single unified "stream". StatusShooter
+        networking sites into a single unified "stream". StatusSkein
         also allows you to favorite, or "like" your friends' status
         updates, reply to individual status updates, retweet or
         recycle status updates, and post new status updates of your
@@ -19,9 +19,9 @@
       </p>
 
       <p style="text-align:justify;margin: 10px 25%;font-size:1.2em">
-        The first step in using StatusShooter is to add an account on
+        The first step in using StatusSkein is to add an account on
         a social networking service. Note that you must already have
-        an existing account set up to use StatusShooter. Please select
+        an existing account set up to use StatusSkein. Please select
         an icon below to continue.
       </p>
 
