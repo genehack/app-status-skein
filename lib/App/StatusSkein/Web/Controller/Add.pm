@@ -47,6 +47,11 @@ sub index :Path :Args(1) {
     my $account_name = sprintf "%s-%s" , $service , $result->{username};
 
     $c->model( 'CLI' )->add_account( $account_name => $result );
+
+    ### FIXME this is a kludge. need to figure out how state data should be
+    ### preserved and used with the CLI wrapper model...
+    delete $c->session->{time};
+
     $c->response->redirect( $c->uri_for( '/' ));
   }
 };
