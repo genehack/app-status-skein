@@ -79,6 +79,12 @@ class App::StatusSkein::CLI {
 
   method reply_to_post {};
 
+  method test_account ( Str $name , HashRef $account ) {
+    my $client_class = "App::StatusSkein::CLI::Client::$name";
+    my $client = $client_class->new( $account );
+    return $client->verify_credentials;
+  };
+
   method toggle_favorite {};
 
   method write_config_and_reload {
