@@ -96,13 +96,11 @@ function facebook_reply( author , id ) {
     </div>
     [% IF message %]<h2 class="message" style="text-align:center">[% message %]</h2>[% END %]
 
-    [% IF posts %]
-    <div style="font-size:8pt;width:50%;margin-left:25%">
+    <div id=posts style="font-size:8pt;width:50%;margin-left:25%;">
       <ul style="list-style:none">
-      [% INCLUDE POST FOREACH post IN posts %]
+        <li>&nbsp;</li>
       </ul>
     </div>
-    [% END %]
 
     <div style="display:none">
       <div id="debug_info" style="text-align:center">
