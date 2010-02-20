@@ -5,7 +5,7 @@ use Moose;
 BEGIN { extends 'Catalyst::Controller' }
 
 #use App::StatusSkein::Web::Form::Add::Facebook;
-#use App::StatusSkein::Web::Form::Add::Idenitca;
+use App::StatusSkein::Web::Form::Add::Identica;
 use App::StatusSkein::Web::Form::Add::Twitter;
 
 has 'form' => (
