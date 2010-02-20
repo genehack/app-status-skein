@@ -32,6 +32,11 @@ $(document).ready(function(){
     }
   });
 });
+function load_posts () {
+  $.get('[% c.uri_for( '/new_posts' ) %]' ,
+    function( data ) { $("#posts").append(data) }
+  );
+}
 function twitter_reply( author, id ) {
   $("#status").val(author);
   $("#twitter_in_reply_to").val(id);
