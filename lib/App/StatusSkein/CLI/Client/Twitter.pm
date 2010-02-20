@@ -31,11 +31,9 @@ class App::StatusSkein::CLI::Client::Twitter extends App::StatusSkein::CLI::Clie
 
   method _build__client {
     return Net::Twitter->new(
-      traits              => $self->traits ,
-      access_token        => $self->access_token ,
-      access_token_secret => $self->access_token_secret ,
-      consumer_secret     => $self->consumer_secret ,
-      consumer_key        => $self->consumer_key ,
+      traits   => $self->traits ,
+      username => $self->username ,
+      password => $self->password ,
     );
   }
 }
