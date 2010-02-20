@@ -48,6 +48,15 @@ sub index :Path :Args(0) {
   } sort { $a->type cmp $b->type } @$accounts ];
 
   $self->form->field( 'services' )->options( $services );
+}
+
+sub inspect :Local :Args(2) {
+  my( $self , $c , $name , $id ) = @_;
+
+  my $status = $c->model( 'CLI' )->get_post( $name , $id );
+
+  $c->response->body( dumper_html( $status->{post} ));
+}
 
 sub new_posts :Local :Args(0) {
   my( $self , $c ) = @_;
@@ -59,18 +68,11 @@ sub new_posts :Local :Args(0) {
   $c->session->{time} = time();
 
   my @posts = sort { $a->date <=> $b->date } @$posts;
+
   $c->stash(
     posts    => \@posts ,
     template => 'new_posts.tt' ,
   );
-}
-
-sub inspect :Local :Args(2) {
-  my( $self , $c , $name , $id ) = @_;
-
-  my $status = $c->model( 'CLI' )->get_post( $name , $id );
-
-  $c->response->body( dumper_html( $status->{post} ));
 }
 
 sub post :Local :Args(0) {
