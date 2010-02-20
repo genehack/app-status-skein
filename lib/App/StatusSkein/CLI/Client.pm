@@ -31,13 +31,11 @@ class App::StatusSkein::CLI::Client {
     eval { $posts = $self->_client->home_timeline() };
     if ( my $err = $@ ) {
       die $@ unless blessed $err and $err->isa('Net::Twitter::Error');
+
       # bail on the fail whale
       return [] if $err->code eq '502';
 
-      use Data::Dumper;
-#      die Dumper $err;
       die $err;
-
     }
 
     my $post_class = $self->post_class;
