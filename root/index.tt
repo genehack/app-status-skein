@@ -6,6 +6,7 @@
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/jquery.colorbox.js"></script>
     <script type="text/javascript" src="/js/jquery.timers.js"></script>
+    <script type="text/javascript" src="/js/jquery.countdown.js"></script>
     <script type="text/javascript">
 $(document).ready(function(){
   $("#debug_btn").colorbox({
@@ -38,9 +39,11 @@ $(document).ready(function(){
   load_posts();
 });
 function load_posts () {
-  $.get('[% c.uri_for( '/new_posts' ) %]' ,
-    function( data ) { $("#posts").append(data) }
-  );
+  $.get('[% c.uri_for( '/new_posts' ) %]' , function( data ) {
+    $("#countdown").countdown('destroy');
+    $("#posts").append(data) ;
+    $("#countdown").countdown({ until: +300 , compact: true , layout: 'Reload in {mnn}{sep}{snn}' });
+  });
 }
 function twitter_reply( author, id ) {
   $("#status").val(author);
@@ -78,6 +81,7 @@ function facebook_reply( author , id ) {
 }
     </script>
     <link type="text/css" media="screen" rel="stylesheet" href="/css/colorbox.css" />
+    <link type="text/css" media="screen" rel="stylesheet" href="/css/jquery.countdown.css" />
   </head>
   <body style="font-family:verdana,helvetica">
     <div style="float:left;position:fixed; top:0;left:0; background:#ccc;border-right:1px solid black;border-bottom:1px solid black;padding:0.2em;">
@@ -93,6 +97,7 @@ function facebook_reply( author , id ) {
     </div>
     <div style="float:right;position:fixed;top:0;right:0">
           <span style="background:#999;border-left:1px solid black;border-bottom:1px solid black;padding:0.2em;color:#be3;font-size:2em">StatusSkein</span>
+      <div id="countdown" style="color:#999;margin-top:0.5em;text-align:right;"></div>
     </div>
     [% IF message %]<h2 class="message" style="text-align:center">[% message %]</h2>[% END %]
 
