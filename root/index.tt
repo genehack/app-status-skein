@@ -9,6 +9,7 @@
     <script type="text/javascript" src="/js/jquery.countdown.js"></script>
     <script type="text/javascript">
 $(document).ready(function(){
+  $("#countdown").hide();
   load_posts();
   $("#debug_btn").colorbox({
     width:"85%",
@@ -37,6 +38,14 @@ $(document).ready(function(){
   $("#reload_btn").click(function() { load_posts() });
   $("#reload_btn").everyTime( '300s' , function() { load_posts() });
   $("#clear_btn").click( function() { $("#posts").html('') });
+  $("#app-name").hover(
+    function () { $("#countdown").fadeIn() } ,
+    function () { $("#countdown").fadeOut() }
+  );
+  $("#icon-bar").hover(
+    function () { $("#countdown").fadeIn() } ,
+    function () { $("#countdown").fadeOut() }
+  );
 });
 function load_posts () {
   $.get('[% c.uri_for( '/new_posts' ) %]' , function( data ) {
@@ -84,7 +93,7 @@ function facebook_reply( author , id ) {
     <link type="text/css" media="screen" rel="stylesheet" href="/css/jquery.countdown.css" />
   </head>
   <body style="font-family:verdana,helvetica">
-    <div style="float:left;position:fixed; top:0;left:0; background:#ccc;border-right:1px solid black;border-bottom:1px solid black;padding:0.2em;">
+    <div id="icon-bar" style="float:left;position:fixed; top:0;left:0; background:#ccc;border-right:1px solid black;border-bottom:1px solid black;padding:0.2em;">
       <img src="/images/post.png" id=post_btn alt="post" title="post" width=48 height=48 />
       <br/>
       <img id="reload_btn" src="/images/reload.png" alt="reload" title="reload" width=48 height=48 />
@@ -95,11 +104,11 @@ function facebook_reply( author , id ) {
       <br/>
       <img src="/images/debug.png" id=debug_btn alt="debug" title="debug" width=48 height=48 />
     </div>
-    <div style="float:right;position:fixed;top:0;right:0">
+    <div id="app-name" style="float:right;position:fixed;top:0;right:0">
       <span style="background:#999;border-left:1px solid black;border-bottom:1px solid black;padding:0.2em;color:#be3;font-size:2em">
         StatusSkein
       </span>
-      <div id="countdown" style="color:#999;margin-top:0.5em;text-align:right;"></div>
+      <div id="countdown" style="color:#ccc;margin-top:0.5em;text-align:right;padding-right:15px;"></div>
     </div>
     [% IF message %]<h2 class="message" style="text-align:center">[% message %]</h2>[% END %]
 
