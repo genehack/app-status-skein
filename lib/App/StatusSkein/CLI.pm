@@ -103,7 +103,7 @@ class App::StatusSkein::CLI {
     return $self->get_account( $account_name )->recycle_post( $id );
   };
 
-  method reload_accounts { $self->_set_accounts( $self->_build_clients ) };
+  method reload_accounts { $self->_set_accounts( $self->_build_accounts ) };
 
   method reply_to_post {};
 
