@@ -14,7 +14,7 @@ requires 'Catalyst::Plugin::Session::Store::FastMmap';
 requires 'Catalyst::Plugin::Session::State::Cookie';
 requires 'Catalyst::Plugin::Static::Simple';
 requires 'Catalyst::Plugin::Unicode';
-requires 'Catalyst::Runtime'                   => '5.80014';
+requires 'Catalyst::Runtime'                   => '5.8002';
 requires 'Catalyst::View::TT';
 requires 'Config::Any';
 requires 'Data::Dumper::HTML';
