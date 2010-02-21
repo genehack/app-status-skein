@@ -34,6 +34,8 @@ sub index :Path :Args(0) {
     return;
   }
 
+  $c->session->{time} = 1;
+
   $c->stash( message => $c->flash->{message} ) if $c->flash->{message};
 
   $c->stash(
