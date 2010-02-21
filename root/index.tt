@@ -9,6 +9,7 @@
     <script type="text/javascript" src="/js/jquery.countdown.js"></script>
     <script type="text/javascript">
 $(document).ready(function(){
+  load_posts();
   $("#debug_btn").colorbox({
     width:"85%",
     height:"50%",
@@ -36,7 +37,6 @@ $(document).ready(function(){
   $("#reload_btn").click(function() { load_posts() });
   $("#reload_btn").everyTime( '300s' , function() { load_posts() });
   $("#clear_btn").click( function() { $("#posts").html('') });
-  load_posts();
 });
 function load_posts () {
   $.get('[% c.uri_for( '/new_posts' ) %]' , function( data ) {
