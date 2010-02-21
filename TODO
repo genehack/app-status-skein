@@ -1,6 +1,9 @@
 - factor colorbox stuff in root/index.tt into common function
 - make posting work again
 - when doing a reply, auto-select the right account, and disable the others
+- remove the time-based filtering from twitter/identica accounts; go
+  back to storing max post ids -- just hide it in the client layer
+  (somehow... need to figure out how the state will get passed in)
 - post to twitter dev list about pros/cons of including consumer secret
   - write setup/application authorization routines
     - and Twitter/Identi.ca at this point is just going to be username/password. <sigh>
