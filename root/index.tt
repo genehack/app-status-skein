@@ -96,7 +96,9 @@ function facebook_reply( author , id ) {
       <img src="/images/debug.png" id=debug_btn alt="debug" title="debug" width=48 height=48 />
     </div>
     <div style="float:right;position:fixed;top:0;right:0">
-          <span style="background:#999;border-left:1px solid black;border-bottom:1px solid black;padding:0.2em;color:#be3;font-size:2em">StatusSkein</span>
+      <span style="background:#999;border-left:1px solid black;border-bottom:1px solid black;padding:0.2em;color:#be3;font-size:2em">
+        StatusSkein
+      </span>
       <div id="countdown" style="color:#999;margin-top:0.5em;text-align:right;"></div>
     </div>
     [% IF message %]<h2 class="message" style="text-align:center">[% message %]</h2>[% END %]
