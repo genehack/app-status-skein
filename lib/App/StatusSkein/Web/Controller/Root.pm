@@ -45,11 +45,11 @@ sub index :Path :Args(0) {
 
   $self->form->action( $c->uri_for( 'post' ));
 
-  my $services = [ map {
+  my $account_checkbox_options = [ map {
     { value => $_->name , label => $_->type }
   } sort { $a->type cmp $b->type } @$accounts ];
 
-  $self->form->field( 'services' )->options( $services );
+  $self->form->field( 'accounts' )->options( $account_checkbox_options );
 }
 
 sub inspect :Local :Args(2) {
@@ -83,38 +83,10 @@ sub post :Local :Args(0) {
   if ( $self->form->process( params => $c->req->parameters )) {
     my $result = $self->form->value;
 
-    my %services = map { $_ => 1 } @{ $result->{services} };
+    my $args = { status => $result->{status} };
 
-    ### FIXME all the interaction with services should be handled by model classes...
-    if ( $services{blog} ) {
-      my $post = _post_on_blog( $result );
-
-      _post_note_to_facebook( $post , $result )            if( $services{facebook} );
-      _post_blog_post_title_to_twitter( $post , $result )  if( $services{twitter}  );
-      _post_blog_post_title_to_identica( $post , $result ) if( $services{identica} );
-    }
-    else {
-      if ( $services{facebook} ) {
-        $c->model('Facebook')->status->set( status => $result->{status} );
-      }
-
-      if ( $services{identica} ) {
-        my $args = { status => $result->{status} };
-        $args->{in_reply_to_status_id} = $result->{identica_in_reply_to}
-          if $result->{identica_in_reply_to};
-        eval { $c->model( 'Identica' )->update( $args ) };
-        die $@ if ( $@ );
-      }
-
-      if ( $services{twitter} ) {
-        my $args = { status => $result->{status} };
-        $args->{in_reply_to_status_id} = $result->{twitter_in_reply_to}
-          if $result->{twitter_in_reply_to};
-        eval { $c->model('Twitter')->update( $args ) };
-        if ( $@ ) {
-          return $c->stash( message => $@ );
-        }
-      }
+    foreach ( @{ $result->{accounts} } ) {
+      $c->model( 'CLI' )->post_new_status( $_ , $args );
     }
 
     $self->form->clear_data;

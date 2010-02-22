@@ -97,7 +97,9 @@ class App::StatusSkein::CLI {
     return $self->get_account( $account )->get_post( $id );
   };
 
-  method post_new_status {};
+  method post_new_status ( Str $account , HashRef $args ) {
+    return $self->get_account( $account )->post_new_status( $args );
+  };
 
   method recycle_post ( Str $account_name , Str $id ){
     return $self->get_account( $account_name )->recycle_post( $id );
