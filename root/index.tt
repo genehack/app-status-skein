@@ -7,15 +7,13 @@
     <script type="text/javascript" src="/js/jquery.colorbox.js"></script>
     <script type="text/javascript" src="/js/jquery.timers.js"></script>
     <script type="text/javascript" src="/js/jquery.countdown.js"></script>
+[%- colorbox_attrs = 'width:"85%", height:"50%", inline:true, opacity:0.5' %]
     <script type="text/javascript">
 $(document).ready(function(){
   $("#countdown").hide();
   load_posts();
   $("#debug_btn").colorbox({
-    width:"85%",
-    height:"50%",
-    inline:true,
-    opacity:0.5,
+    [% colorbox_attrs %] ,
     href:"#debug_info",
     onComplete:function(){
       date = new Date();
@@ -24,10 +22,7 @@ $(document).ready(function(){
     }
   });
   $("#post_btn").colorbox({
-    width:"85%",
-    height:"50%",
-    inline:true,
-    opacity:0.5,
+    [% colorbox_attrs %] ,
     href:"#update_form",
     onComplete:function(){
       $(".accounts").removeAttr('disabled');
@@ -59,10 +54,7 @@ function load_posts () {
 function reply( account, author, id ) {
   var account_id = "#accounts\\." + account;
   $(".reply_btn").colorbox({
-    width:"85%",
-    height:"50%",
-    inline:true,
-    opacity:0.5,
+    [% colorbox_attrs %] ,
     href:"#update_form",
     onComplete:function(){
       $("#status").val( author );
