@@ -30,6 +30,7 @@ $(document).ready(function(){
     opacity:0.5,
     href:"#update_form",
     onComplete:function(){
+      $(".accounts").removeAttr('disabled');
       $(".accounts").val([]);
       $("#in_reply_to").val();
       $("#status").val('');
@@ -55,38 +56,23 @@ function load_posts () {
     $("#countdown").countdown({ until: +300 , compact: true , layout: 'Reload in {mnn}{sep}{snn}' });
   });
 }
-function twitter_reply( author, id ) {
-  $("#status").val(author);
-  $("#twitter_in_reply_to").val(id);
-  $(".services").val([]);
-  $(".services").val(["twitter"]);
+function reply( account, author, id ) {
+  var account_id = "#accounts\\." + account;
   $(".reply_btn").colorbox({
     width:"85%",
     height:"50%",
     inline:true,
     opacity:0.5,
     href:"#update_form",
-    onComplete:function(){ $("#status").focus(); }
+    onComplete:function(){
+      $("#status").val( author );
+      $("#in_reply_to").val(id);
+      $(".accounts").attr('disabled',true);
+      $(account_id).removeAttr('disabled');
+      $(".accounts").val([account]);
+      $("#status").focus();
+    }
   });
-  return true;
-}
-function identica_reply( author, id ) {
-  $("#status").val(author);
-  $("#identica_in_reply_to").val(id);
-  $(".services").val([]);
-  $(".services").val(["identica"]);
-  $(".reply_btn").colorbox({
-    width:"85%",
-    height:"50%",
-    inline:true,
-    opacity:0.5,
-    href:"#update_form",
-    onComplete:function(){ $("#status").focus(); }
-  });
-  return true;
-}
-function facebook_reply( author , id ) {
-  window.alert( "Facebook reply not yet implemented." );
   return true;
 }
     </script>
@@ -177,11 +163,8 @@ function facebook_reply( author , id ) {
 
 -->
           <p>
-          [% f = form.field( 'identica_in_reply_to' ) %]
-            <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" />
-          [% f = form.field( 'twitter_in_reply_to' ) %]
-            <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" />
-          </p>
+          [% f = form.field( 'in_reply_to' ) %]
+          <p><input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" /></p>
         </form>
       </div>
     </div>

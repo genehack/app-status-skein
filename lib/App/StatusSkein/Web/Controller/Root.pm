@@ -84,6 +84,7 @@ sub post :Local :Args(0) {
     my $result = $self->form->value;
 
     my $args = { status => $result->{status} };
+    $args->{in_reply_to_status_id} = $result->{in_reply_to} if $result->{in_reply_to};
 
     foreach ( @{ $result->{accounts} } ) {
       $c->model( 'CLI' )->post_new_status( $_ , $args );

@@ -24,8 +24,7 @@ has_field 'accounts' => (
   required_message => 'You must select one or more accounts' ,
 );
 
-has_field 'identica_in_reply_to' => ( type => 'Hidden' );
-has_field 'twitter_in_reply_to'  => ( type => 'Hidden' );
+has_field 'in_reply_to' => ( type => 'Hidden' );
 
 has_field 'submit' => (
   type  => 'Submit' ,
