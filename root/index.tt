@@ -131,28 +131,8 @@ function reply( account, author, id ) {
           </p>
 
           [% f = form.field( 'submit' ) %]
-          <p>
-            <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.value %]" />
-          </p>
+          <p><input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.value %]" /></p>
 
-<!--
-          <hr style="width:60%;margin-top:50px;"/>
-          [% f = form.field( 'body' ) %]
-          <p>
-            <label>Blog Post Body:<br/>
-              <textarea name=[% f.name %] id=[% f.name %] rows=[% f.rows %] cols=[% f.cols %]>[% f.value %]</textarea>
-            </label>
-          </p>
-
-          [% f = form.field( 'tags' ) %]
-          <p>
-            <label>Blog Post Tags:<br/>
-              <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] size=[% f.size %] value="[% f.fif %]" />
-            </label>
-          </p>
-
--->
-          <p>
           [% f = form.field( 'in_reply_to' ) %]
           <p><input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" /></p>
         </form>
