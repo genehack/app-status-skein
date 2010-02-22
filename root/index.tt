@@ -35,14 +35,12 @@ $(document).ready(function(){
   $("#reload_btn").click(function() { load_posts() });
   $("#reload_btn").everyTime( '300s' , function() { load_posts() });
   $("#clear_btn").click( function() { $("#posts").html('') });
-  $("#app-name").hover(
+  [% FOREACH id IN [ '#app-name' , '#icon-bar' ] %]
+  $("[% id %]").hover(
     function () { $("#countdown").fadeIn() } ,
     function () { $("#countdown").fadeOut() }
   );
-  $("#icon-bar").hover(
-    function () { $("#countdown").fadeIn() } ,
-    function () { $("#countdown").fadeOut() }
-  );
+  [% END %]
 });
 function load_posts () {
   $.get('[% c.uri_for( '/new_posts' ) %]' , function( data ) {
