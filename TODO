@@ -1,6 +1,3 @@
-- factor colorbox stuff in root/index.tt into common function
-- make posting work again
-- when doing a reply, auto-select the right account, and disable the others
 - remove the time-based filtering from twitter/identica accounts; go
   back to storing max post ids -- just hide it in the client layer
   (somehow... need to figure out how the state will get passed in)
@@ -19,3 +16,4 @@
         problem... <sigh> Basic it is.
 - add some sort of facebook comment count/display
 - figure out how to support additional facebook stream events
+- add 140 char countdown JS to post form

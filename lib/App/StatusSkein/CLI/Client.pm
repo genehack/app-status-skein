@@ -47,5 +47,7 @@ class App::StatusSkein::CLI::Client {
 
   method post_class { return sprintf "App::StatusSkein::CLI::Post::%s" , $self->type };
 
+  method post_new_status ( HashRef $args ) { $self->update( $args ) };
+
   method recycle_post ( Str $id ) { die "not supported on this client" };
 }

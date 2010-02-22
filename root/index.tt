@@ -7,14 +7,13 @@
     <script type="text/javascript" src="/js/jquery.colorbox.js"></script>
     <script type="text/javascript" src="/js/jquery.timers.js"></script>
     <script type="text/javascript" src="/js/jquery.countdown.js"></script>
+[%- colorbox_attrs = 'width:"85%", height:"50%", inline:true, opacity:0.5' %]
     <script type="text/javascript">
 $(document).ready(function(){
+  $("#countdown").hide();
   load_posts();
   $("#debug_btn").colorbox({
-    width:"85%",
-    height:"50%",
-    inline:true,
-    opacity:0.5,
+    [% colorbox_attrs %] ,
     href:"#debug_info",
     onComplete:function(){
       date = new Date();
@@ -23,20 +22,25 @@ $(document).ready(function(){
     }
   });
   $("#post_btn").colorbox({
-    width:"85%",
-    height:"50%",
-    inline:true,
-    opacity:0.5,
+    [% colorbox_attrs %] ,
     href:"#update_form",
     onComplete:function(){
+      $(".accounts").removeAttr('disabled');
+      $(".accounts").val([]);
+      $("#in_reply_to").val();
       $("#status").val('');
-      $(".services").val([]);
       $("#status").focus();
     }
   });
   $("#reload_btn").click(function() { load_posts() });
   $("#reload_btn").everyTime( '300s' , function() { load_posts() });
   $("#clear_btn").click( function() { $("#posts").html('') });
+  [% FOREACH id IN [ '#app-name' , '#icon-bar' ] %]
+  $("[% id %]").hover(
+    function () { $("#countdown").fadeIn() } ,
+    function () { $("#countdown").fadeOut() }
+  );
+  [% END %]
 });
 function load_posts () {
   $.get('[% c.uri_for( '/new_posts' ) %]' , function( data ) {
@@ -45,38 +49,20 @@ function load_posts () {
     $("#countdown").countdown({ until: +300 , compact: true , layout: 'Reload in {mnn}{sep}{snn}' });
   });
 }
-function twitter_reply( author, id ) {
-  $("#status").val(author);
-  $("#twitter_in_reply_to").val(id);
-  $(".services").val([]);
-  $(".services").val(["twitter"]);
+function reply( account, author, id ) {
+  var account_id = "#accounts\\." + account;
   $(".reply_btn").colorbox({
-    width:"85%",
-    height:"50%",
-    inline:true,
-    opacity:0.5,
+    [% colorbox_attrs %] ,
     href:"#update_form",
-    onComplete:function(){ $("#status").focus(); }
+    onComplete:function(){
+      $("#status").val( author );
+      $("#in_reply_to").val(id);
+      $(".accounts").attr('disabled',true);
+      $(account_id).removeAttr('disabled');
+      $(".accounts").val([account]);
+      $("#status").focus();
+    }
   });
-  return true;
-}
-function identica_reply( author, id ) {
-  $("#status").val(author);
-  $("#identica_in_reply_to").val(id);
-  $(".services").val([]);
-  $(".services").val(["identica"]);
-  $(".reply_btn").colorbox({
-    width:"85%",
-    height:"50%",
-    inline:true,
-    opacity:0.5,
-    href:"#update_form",
-    onComplete:function(){ $("#status").focus(); }
-  });
-  return true;
-}
-function facebook_reply( author , id ) {
-  window.alert( "Facebook reply not yet implemented." );
   return true;
 }
     </script>
@@ -84,7 +70,7 @@ function facebook_reply( author , id ) {
     <link type="text/css" media="screen" rel="stylesheet" href="/css/jquery.countdown.css" />
   </head>
   <body style="font-family:verdana,helvetica">
-    <div style="float:left;position:fixed; top:0;left:0; background:#ccc;border-right:1px solid black;border-bottom:1px solid black;padding:0.2em;">
+    <div id="icon-bar" style="float:left;position:fixed; top:0;left:0; background:#ccc;border-right:1px solid black;border-bottom:1px solid black;padding:0.2em;">
       <img src="/images/post.png" id=post_btn alt="post" title="post" width=48 height=48 />
       <br/>
       <img id="reload_btn" src="/images/reload.png" alt="reload" title="reload" width=48 height=48 />
@@ -95,11 +81,11 @@ function facebook_reply( author , id ) {
       <br/>
       <img src="/images/debug.png" id=debug_btn alt="debug" title="debug" width=48 height=48 />
     </div>
-    <div style="float:right;position:fixed;top:0;right:0">
+    <div id="app-name" style="float:right;position:fixed;top:0;right:0">
       <span style="background:#999;border-left:1px solid black;border-bottom:1px solid black;padding:0.2em;color:#be3;font-size:2em">
         StatusSkein
       </span>
-      <div id="countdown" style="color:#999;margin-top:0.5em;text-align:right;"></div>
+      <div id="countdown" style="color:#ccc;margin-top:0.5em;text-align:right;padding-right:15px;"></div>
     </div>
     [% IF message %]<h2 class="message" style="text-align:center">[% message %]</h2>[% END %]
 
@@ -133,7 +119,7 @@ function facebook_reply( author , id ) {
             <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] size=[% f.size %] maxlength=[% f.maxlength %] value="[% f.fif %]" />
           </p>
 
-          [% f = form.field( 'services' ) %]
+          [% f = form.field( 'accounts' ) %]
           <p>
             [% FOR option IN f.options %]
             <label>
@@ -145,33 +131,10 @@ function facebook_reply( author , id ) {
           </p>
 
           [% f = form.field( 'submit' ) %]
-          <p>
-            <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.value %]" />
-          </p>
+          <p><input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.value %]" /></p>
 
-<!--
-          <hr style="width:60%;margin-top:50px;"/>
-          [% f = form.field( 'body' ) %]
-          <p>
-            <label>Blog Post Body:<br/>
-              <textarea name=[% f.name %] id=[% f.name %] rows=[% f.rows %] cols=[% f.cols %]>[% f.value %]</textarea>
-            </label>
-          </p>
-
-          [% f = form.field( 'tags' ) %]
-          <p>
-            <label>Blog Post Tags:<br/>
-              <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] size=[% f.size %] value="[% f.fif %]" />
-            </label>
-          </p>
-
--->
-          <p>
-          [% f = form.field( 'identica_in_reply_to' ) %]
-            <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" />
-          [% f = form.field( 'twitter_in_reply_to' ) %]
-            <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" />
-          </p>
+          [% f = form.field( 'in_reply_to' ) %]
+          <p><input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" /></p>
         </form>
       </div>
     </div>

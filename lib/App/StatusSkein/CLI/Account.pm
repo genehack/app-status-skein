@@ -13,6 +13,7 @@ class App::StatusSkein::CLI::Account {
       'del_fave' ,
       'get_post'  ,
       'get_posts' ,
+      'post_new_status' ,
       'recycle_post' ,
       'verify_credentials' ,
     ] ,

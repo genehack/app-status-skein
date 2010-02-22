@@ -17,15 +17,14 @@ has_field 'status' => (
   maxlength        => 140 ,
 );
 
-has_field 'services' => (
+has_field 'accounts' => (
   type             => 'Multiple' ,
   widget           => 'CheckboxGroup' ,
   required         => 1 ,
-  required_message => 'You must select one or more services' ,
+  required_message => 'You must select one or more accounts' ,
 );
 
-has_field 'identica_in_reply_to' => ( type => 'Hidden' );
-has_field 'twitter_in_reply_to'  => ( type => 'Hidden' );
+has_field 'in_reply_to' => ( type => 'Hidden' );
 
 has_field 'submit' => (
   type  => 'Submit' ,

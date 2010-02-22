@@ -73,4 +73,6 @@ class App::StatusSkein::CLI::Client::Facebook extends App::StatusSkein::CLI::Cli
 
     return $posts;
   }
+
+  method post_new_status ( HashRef $args ) { $self->status->set( %$args ) };
 }
