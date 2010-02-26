@@ -33,6 +33,9 @@ class App::StatusSkein::CLI::Post::Twitter extends App::StatusSkein::CLI::Post {
     my $text = $self->text;
 
     $text =~ s|\@(\S+)|<a target="_new" href="http://twitter.com/$1">\@$1</a>|g;
+    ### FIXME this causes FUBARed hotlinking sometimes because it will fire
+    ### for a '#' inside an anchor tag. need to think about this, may be
+    ### hitting the "don't parse HTML with regexps" barrier...
     $text =~ s|\#(\S+)|<a target="_new" href="http://twitter.com/#search?q=%23$1">#$1</a>|g;
 
     $self->_set_text( $text );
