@@ -1,3 +1,4 @@
+- the post form should submit over AJAX, not force a reload of the whole page...
 - remove the time-based filtering from twitter/identica accounts; go
   back to storing max post ids -- just hide it in the client layer
   (somehow... need to figure out how the state will get passed in)
