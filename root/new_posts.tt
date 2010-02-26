@@ -1,7 +1,7 @@
 [% USE date %]
 [% IF posts.size %]
   [% INCLUDE POST FOREACH post IN posts %]
-<li style="list-style:none;padding-top:25px; margin-bottom:25px;border-bottom:1px solid #ccc;color:#ccc;text-align:right">
+<li style="list-style:none;padding-top:25px; margin-bottom:25px;border-bottom:1px solid #ccc;color:#999;text-align:right">
   [% date.format( time = date.now , format = 'Loaded at %H:%M:%S' ) %]
 </li>
 [% END %]
