@@ -56,8 +56,11 @@ sub inspect :Local :Args(2) {
   my( $self , $c , $name , $id ) = @_;
 
   my $status = $c->model( 'CLI' )->get_post( $name , $id );
+  my $text   = $status->text;
+  my $body   =  "TEXT: $text\n\n" . Dumper( $status->{post} );
 
-  $c->response->body( dumper_html( $status->{post} ));
+  $c->response->content_type( 'text/plain' );
+  $c->response->body( $body );
 }
 
 sub new_posts :Local :Args(0) {
