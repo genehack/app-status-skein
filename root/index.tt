@@ -28,13 +28,14 @@ $(document).ready(function() {
   });
   $("#post_btn").colorbox({
     [% colorbox_attrs %] ,
-    href:"#update_form",
+    href:"#update-form-div",
     onComplete:function(){
       $(".accounts").removeAttr('disabled');
       $(".accounts").val([]);
       $("#in_reply_to").val();
       $("#status").val('');
       $("#status").focus();
+      $("#update-form-output").html('');
     }
   });
   $("#reload_btn").click(function() { load_posts() });
