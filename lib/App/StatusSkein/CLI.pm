@@ -119,6 +119,7 @@ class App::StatusSkein::CLI {
 
   method write_config_and_reload {
     DumpFile( $self->config_file , $self->config );
+    chmod 0600 , $self->config_file;
     $self->_set_config( $self->_build_config );
     $self->reload_accounts;
   };
