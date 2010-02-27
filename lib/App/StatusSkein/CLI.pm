@@ -108,8 +108,6 @@ class App::StatusSkein::CLI {
 
   method reload_accounts { $self->_set_accounts( $self->_build_accounts ) };
 
-  method reply_to_post {};
-
   method test_account ( Str $type , HashRef $client_args ) {
     my $account = App::StatusSkein::CLI::Account->new({
       name        => 'test' ,
