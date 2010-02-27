@@ -125,7 +125,7 @@ function reply( account, author, id ) {
             <label>
               <input type=checkbox class=[% f.name %] name=[% f.name %] id=[% f.name _ '.' _ option.value %] value=[% option.value %]
                      [%- FOR fif IN f.fif %][% IF option.value == fif %] checked=checked[% END %][% END %] />
-              <img src=/images/[% option.label | lower %].png height=32 width=32 alt="[% option.label %]" title="[% option.label %]" />
+              <img src=/images/[% option.label | lower %].png height=32 width=32 alt="[% option.label %]" title="[% option.label %] ([% option.value %])" />
             </label>
             [% END %]
           </p>
