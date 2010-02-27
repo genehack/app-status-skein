@@ -7,6 +7,7 @@
     <script type="text/javascript" src="/js/jquery.colorbox.js"></script>
     <script type="text/javascript" src="/js/jquery.timers.js"></script>
     <script type="text/javascript" src="/js/jquery.countdown.js"></script>
+    <script type="text/javascript" src="/js/jquery.form.js"></script>
 [%- colorbox_attrs = 'width:"85%", height:"50%", inline:true, opacity:0.5' %]
     <script type="text/javascript">
 $(document).ready(function(){
