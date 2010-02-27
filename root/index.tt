@@ -68,7 +68,7 @@ function load_posts () {
 }
 function reply( account, author, id ) {
   var account_id = "#accounts\\." + account;
-  $(".reply_btn").colorbox({
+  $.fn.colorbox({
     [% colorbox_attrs %] ,
     href:"#update-form-div",
     onComplete:function(){
