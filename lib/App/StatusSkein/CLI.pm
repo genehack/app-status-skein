@@ -82,10 +82,10 @@ class App::StatusSkein::CLI {
     return first { $_->name eq $name } @{ $self->accounts };
   };
 
-  method get_all_posts ( Num :$since ) {
+  method get_all_posts ( Num :$since , Bool :$force ) {
     my $posts = [];
 
-    return $posts if ( time() - $since < 60 );
+    return $posts if ( time() - $since < 60 ) and ! $force;
 
     foreach my $account ( @{ $self->accounts }) {
       push @$posts , @{ $account->get_posts( since => $since ) };

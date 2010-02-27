@@ -63,14 +63,17 @@ sub inspect :Local :Args(2) {
   $c->response->body( $body );
 }
 
-sub new_posts :Local :Args(0) {
-  my( $self , $c ) = @_;
+sub new_posts :Local {
+  my( $self , $c , $force ) = @_;
 
+  $force ||= 0;
+
+  my $new_time = time();
   my $old_time = $c->session->{time} || 0;
 
-  my $posts = $c->model( 'CLI' )->get_all_posts( since => $old_time );
+  my $posts = $c->model( 'CLI' )->get_all_posts( since => $old_time , force => $force );
 
-  $c->session->{time} = time();
+  $c->session->{time} = $new_time;
 
   my @posts = sort { $a->date <=> $b->date } @$posts;
 
