@@ -25,7 +25,8 @@
       onClick="$.get('[% c.uri_for( 'recycle_post' , post.account_name , post.id ) %]' ,
         function(data) { if (data == 1 ) { $('#recycle_[% post.id %]').fadeOut(); }} ,'text')" />
       [% END %]
-      <a href=# class=reply_btn onclick="reply('[% post.account_name %]' , '@[% post.user_handle %] ' , '[% post.id %]' )"><img src=/images/reply.png alt=Reply title=Reply style="border:0" height=16 width=16 /></a>
+      <img src=/images/reply.png alt=Reply title=Reply style="border:0" height=16 width=16 class=reply_btn
+           onclick="reply('[% post.account_name %]' , '@[% post.user_handle %] ' , '[% post.id %]' )" />
     </div>
     <a href=[% post.user_url %] target="_new">
       <img src=[% post.avatar_src %] style="border:1px solid black;float:left;margin:5px;" title="[% post.user_desc %]" height=48 width=48/>
