@@ -61,6 +61,7 @@ class App::StatusSkein::CLI {
   };
 
   method add_account ( Str $name , HashRef $account ) {
+    $account->{account_name} = $name;
     $self->config->{accounts}{$name} = $account;
     $self->write_config_and_reload;
   };
