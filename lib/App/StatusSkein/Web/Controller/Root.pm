@@ -83,8 +83,18 @@ sub new_posts :Local :Args(0) {
 sub post :Local :Args(0) {
   my( $self , $c ) = @_;
 
-  if ( $self->form->process( params => $c->req->parameters )) {
-    my $result = $self->form->value;
+  my $form = $self->form;
+  my $accounts = $c->model( 'CLI' )->accounts;
+  my $account_checkbox_options = [ map {
+    { value => $_->name , label => $_->type }
+  } sort { $a->type cmp $b->type } @$accounts ];
+
+  $self->form->field( 'accounts' )->options( $account_checkbox_options );
+
+  my $response = {};
+
+  if ( $form->process( params => $c->req->parameters )) {
+    my $result = $form->value;
 
     my $args = { status => $result->{status} };
     $args->{in_reply_to_status_id} = $result->{in_reply_to} if $result->{in_reply_to};
@@ -93,12 +103,28 @@ sub post :Local :Args(0) {
       $c->model( 'CLI' )->post_new_status( $_ , $args );
     }
 
-    $self->form->clear_data;
-    $c->flash->{message} = "Posted";
+    $response = {
+      message => '<h2>Posted</h2>' ,
+      success => 1 ,
+    };
+  }
+  else {
+    my $message;
+    foreach my $field ( $form->error_fields ) {
+      foreach my $error ( @{ $field->errors }) {
+        $message .= qq|<h2 class="error">$error</h2>|;
+      }
+    }
+    $response = {
+      message => $message ,
+      success => 0 ,
+    };
   }
 
-  _reset_session_time_if_needed( $c );
-  $c->response->redirect( $c->uri_for_action( 'index' ));
+  $c->stash(
+    current_view  => 'JSON' ,
+    json_response => $response ,
+  );
 }
 
 sub toggle_fave :Local :Args(2) {
