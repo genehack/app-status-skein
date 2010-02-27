@@ -10,7 +10,11 @@
     <script type="text/javascript" src="/js/jquery.form.js"></script>
 [%- colorbox_attrs = 'width:"85%", height:"50%", inline:true, opacity:0.5' %]
     <script type="text/javascript">
-$(document).ready(function(){
+$(document).ready(function() {
+  $("#update-form").ajaxForm({
+    dataType: 'json' ,
+    success: showResponse ,
+  });
   $("#countdown").hide();
   load_posts();
   $("#debug_btn").colorbox({
@@ -43,6 +47,17 @@ $(document).ready(function(){
   );
   [% END %]
 });
+function showResponse(data)  {
+  $("#update-form-output").html( data.message );
+  if( data.success ) {
+    setTimeout(function() { $("#post_btn").colorbox.close() } , 2000 );
+    $.get('[% c.uri_for( '/new_posts/1' ) %]' , function( data ) {
+      $("#posts").append(data) ;
+    });
+  }
+  else { window.alert( data.message ); }
+}
+
 function load_posts () {
   $.get('[% c.uri_for( '/new_posts' ) %]' , function( data ) {
     $("#countdown").countdown('destroy');
@@ -54,8 +69,9 @@ function reply( account, author, id ) {
   var account_id = "#accounts\\." + account;
   $(".reply_btn").colorbox({
     [% colorbox_attrs %] ,
-    href:"#update_form",
+    href:"#update-form-div",
     onComplete:function(){
+      $("#update-form-output").html('');
       $("#status").val( author );
       $("#in_reply_to").val(id);
       $(".accounts").attr('disabled',true);
@@ -105,15 +121,10 @@ function reply( account, author, id ) {
         <a href=[% c.uri_for( 'delete_session' ) %]>clear session data</a>
       </div>
 
-      <div id="update_form" style="text-align:center">
+      <div id="update-form-div" style="text-align:center">
 
-        [% FOR field IN form.error_fields %]
-          [% FOR error IN field.errors %]
-            <h2 class="error">[% error %]</h2>
-          [% END %]
-        [% END %]
-
-        <form name=[% form.name %] action=[% form.action %] method=post>
+        <form id=[% form.name %] action=[% form.action %] method=post>
+          <div id=update-form-output></div>
 
           [% f = form.field( 'status' ) %]
           <p>

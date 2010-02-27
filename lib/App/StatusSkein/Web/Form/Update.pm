@@ -6,7 +6,7 @@ use HTML::FormHandler::Moose;
 extends 'HTML::FormHandler';
 with 'HTML::FormHandler::Render::Simple';
 
-has '+name' => ( default => 'statusskein' );
+has '+name' => ( default => 'update-form' );
 
 has_field 'status' => (
   type             => 'Text' ,
