@@ -3,7 +3,9 @@
   <head>
     <title>StatusSkein</title>
     <meta http-equiv=Content-Type content="text/html;charset=utf-8" />
+    <link type="text/css" media="screen" rel="stylesheet" href="/css/jquery.countdown.css" />
     <script type="text/javascript" src="/js/jquery.js"></script>
+    <link type="text/css" media="screen" rel="stylesheet" href="/css/colorbox.css" />
     <script type="text/javascript" src="/js/jquery.colorbox.js"></script>
     <script type="text/javascript" src="/js/jquery.timers.js"></script>
     <script type="text/javascript" src="/js/jquery.countdown.js"></script>
@@ -84,8 +86,6 @@ function reply( account, author, id ) {
   return true;
 }
     </script>
-    <link type="text/css" media="screen" rel="stylesheet" href="/css/colorbox.css" />
-    <link type="text/css" media="screen" rel="stylesheet" href="/css/jquery.countdown.css" />
   </head>
   <body style="font-family:verdana,helvetica">
     <div id="icon-bar" style="float:left;position:fixed; top:0;left:0; background:#ccc;border-right:1px solid black;border-bottom:1px solid black;padding:0.2em;">
@@ -147,7 +147,8 @@ function reply( account, author, id ) {
           <p><input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.value %]" /></p>
 
           [% f = form.field( 'in_reply_to' ) %]
-          <p><input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" /></p>
+          <p><input type=[% f.type | lo
+wer %] name=[% f.name %] id=[% f.name %] value="[% f.fif %]" /></p>
         </form>
       </div>
     </div>
