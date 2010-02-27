@@ -15,9 +15,9 @@
         [% IF post.favorited %][% link = 'Unfavorite' ; img='fave_on.png' %]
         [% ELSE %][% link = 'Favorite' ; img = 'fave_off.png' %][% END %]
       <img id=fave_[% post.id %] src=/images/[% img %] alt=[% link %] title=[% link %] height=16 width=16
-      onClick="$.get('[% c.uri_for( 'toggle_fave' , post.account_name , post.id ) %]' , function(data) {
-        $('#fave_[% post.id %]').attr('src','/images/'+data);
-      },'text')" />
+           onClick="$.get('[% c.uri_for( 'toggle_fave' , post.account_name , post.id ) %]' , function(data) {
+             $('#fave_[% post.id %]').attr('src','/images/'+data);
+           },'text')" />
       [% END %]
       [% IF post.is_protected %]<img src=/images/lock.png alt="Protected post" title="Protected post" height=16 width=16/>
       [% ELSIF post.can_be_recycled %]
