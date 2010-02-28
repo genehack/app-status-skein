@@ -25,9 +25,9 @@ class App::StatusSkein::CLI::Post::Identica extends App::StatusSkein::CLI::Post 
 
     my $text = $self->text;
 
-    $text =~ s|\@(\S+)|<a target="_new" href="http://identi.ca/$1">\@$1</a>|g;
-    $text =~ s|\#(\S+)|<a target="_new" href="http://identi.ca/tag/$1">#$1</a>|g;
-    $text =~ s|\!(\S+)|<a target="_new" href="http://identi.ca/group/$1">!$1</a>|g;
+    $text =~ s|\@(\S+)|<a target=_blank href=http://identi.ca/$1>\@$1</a>|g;
+    $text =~ s| \#(\S+)| <a target=_blank href=http://identi.ca/tag/$1>#$1</a>|g;
+    $text =~ s| \!(\S+)| <a target=_blank href=http://identi.ca/group/$1>!$1</a>|g;
 
     $self->_set_text( $text );
   }

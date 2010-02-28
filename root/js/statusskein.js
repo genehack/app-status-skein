@@ -34,7 +34,7 @@ $(document).ready(
     debug_colorboxAttrs['onComplete'] = function(){
       date = new Date();
       epoch = Math.round(date.getTime() / 1000);
-      $("#current_epoch").text( epoch );
+      $("#current-epoch").text( epoch );
     };
     $("#debug_btn").colorbox( debug_colorboxAttrs );
 
