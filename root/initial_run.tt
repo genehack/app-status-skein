@@ -3,12 +3,13 @@
   <head>
     <title>StatusSkein</title>
     <meta http-equiv=Content-Type content="text/html;charset=utf-8" />
+    <link type=text/css media=screen rel=stylesheet href=/css/statusskein.css />
   </head>
-  <body style="font-family:verdana,helvetica">
-    <div style="text-align:center">
-      <div style="font-size:2em">Hi.</div>
+  <body>
+    <div id=page-content>
+      <div id=page-title>Hi.</div>
 
-      <p style="text-align:justify;margin: 20px 25%;font-size:1.2em">
+      <p>
         Welcome to StatusSkein, a web application you can run on
         your local machine to aggregate updates from various social
         networking sites into a single unified "stream". StatusSkein
@@ -18,22 +19,19 @@
         own to one or more of the services you have configured.
       </p>
 
-      <p style="text-align:justify;margin: 10px 25%;font-size:1.2em">
+      <p>
         The first step in using StatusSkein is to add an account on
         a social networking service. Note that you must already have
         an existing account set up to use StatusSkein. Please select
         an icon below to continue.
       </p>
 
-      [% FOREACH service IN [ 'twitter', 'identica', 'facebook' ] %]
-        [% label = service | ucfirst %]
+      [% FOREACH service IN [ 'twitter', 'identica', 'facebook' ] %] [% label = service | ucfirst %]
       <a href=[% c.uri_for( 'add/' _ service ) %]>
-        <img src=/images/[% service %].png height=64 width=64 alt="[% label %]" title="[% label %]"
-             style="border:0;margin:20px"
-        />
+        <img id=[% service %]-icon class=service-icon
+             src=/images/[% service %].png alt="[% label %]" title="[% label %]" height=64 width=64 />
       </a>
       [% END %]
     </div>
-
   </body>
 </html>

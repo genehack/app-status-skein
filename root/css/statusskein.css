@@ -1,0 +1,106 @@
+a > img { border-style: none; }
+
+body { font-family: verdana,helvetica; }
+
+#app-name {
+   float:right;
+   position:fixed;
+   right:0;
+   top:0;
+}
+
+#app-name-span {
+   background:#999;
+   border-bottom:1px solid black;
+   border-left:1px solid black;
+   color:#be3;
+   font-size:2em;
+   padding:0.2em;
+}
+
+#countdown {
+   color:#ccc;
+   margin-top:0.5em;
+   padding-right:15px;
+   text-align:right;
+}
+
+#hidden-div-wrapper { display:none }
+
+#icon-bar {
+   background:#ccc;
+   border-bottom:1px solid black;
+   border-right:1px solid black;
+   float:left;
+   left:0;
+   padding:0.2em;
+   position:fixed;
+   top:0;
+}
+
+#page-content {
+   font-size:1.2em;
+   text-align:center;
+}
+#page-content > p {
+   margin: 20px 25%;
+   text-align:justify;
+}
+#page-content > p.centered {
+   margin: 10px 25%;
+   text-align:center;
+}
+
+#page-title { font-size:2em }
+
+#posts {
+   font-size:8pt;
+   margin-bottom:50px;
+   margin-left:25%;
+   width:50%;
+}
+#posts > ul > li { list-style:none }
+
+#update-form-div { text-align:center }
+
+.add-form-field { margin:20px 35% }
+
+.centered { text-align: center }
+
+.error { font-color: red }
+
+.message { text-align: center }
+
+.post {
+   list-style:none;
+   margin-bottom:10px;
+}
+
+.post-avatar {
+   border:1px solid black;
+   float:left;
+   margin:5px;
+}
+
+.post-content { margin-left: 60px }
+
+.post-content-footer { font-size:0.8em }
+
+.post-footer {
+   border-bottom:1px solid #ccc;
+   color:#999;
+   list-style:none;
+   margin-bottom:25px;
+   padding-top:25px;
+   text-align:right;
+}
+
+.post-icons {
+   float:left;
+   margin-top:5px;
+   text-align:center;
+   vertical-align:middle;
+   width:50px;
+}
+
+.service-icon { margin:20px }

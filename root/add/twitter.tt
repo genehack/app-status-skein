@@ -3,29 +3,30 @@
   <head>
     <title>StatusSkein: Add A Twitter Account</title>
     <meta http-equiv=Content-Type content="text/html;charset=utf-8" />
+    <link type=text/css media=screen rel=stylesheet href=/css/statusskein.css />
   </head>
-  <body style="font-family:verdana,helvetica">
-    <div style="text-align:center">
-      <div style="font-size:2em">Add A Twitter Account</div>
+  <body>
+    <div id=page-content>
+      <div id=page-title>Add A Twitter Account</div>
 
       [% FOR field IN form.error_fields %]
         [% FOR error IN field.errors %]
-          <h2 class="error">[% error %]</h2>
+          <h2 class=error>[% error %]</h2>
         [% END %]
       [% END %]
 
-      [% IF message %]<h2 class="message" style="text-align:center">[% message %]</h2>[% END %]
+      [% IF message %]<h2 class=message>[% message %]</h2>[% END %]
 
       <form name=[% form.name %] action=[% form.action %] method=post>
 
       [% FOREACH field IN [ 'username' , 'password' ] %]
         [% f = form.field( field ) %]
-        <p style="margin:20px 35%;">
+        <p class=add-form-field>
           <label>
             [% f.label %]:
-            <input type=[% f.type | lower %]
+            <input id=[% f.name %]
                    name=[% f.name %]
-                   id=[% f.name %]
+                   type=[% f.type | lower %]
                    [% IF f.size %] size=[% f.size %][% END %]
                    value="[% f.fif %]"
               />
@@ -35,7 +36,7 @@
         <p>
       [% FOREACH field IN [ 'type' , 'submit' ] %]
         [% f = form.field( field ) %]
-          <input type=[% f.type | lower %] name=[% f.name %] id=[% f.name %] value="[% f.value %]" />
+          <input id=[% f.name %] name=[% f.name %] type=[% f.type | lower %] value="[% f.value %]" />
       [% END %]
         </p>
       </form>

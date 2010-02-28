@@ -45,7 +45,7 @@ class App::StatusSkein::CLI::Post {
   method BUILD {
     my $text = $self->text;
 
-    $text =~ s|(http://\S+)|<a target="_new" href="$1">$1</a>|g;
+    $text =~ s|(http://\S+)|<a target=_blank href=$1>$1</a>|g;
 
     $self->_set_text( $text );
   }
