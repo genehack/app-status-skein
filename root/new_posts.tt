@@ -16,7 +16,7 @@
       <img id=fave-[% post.id %] class=fave-btn
            src=/images/[% img %] alt=[% link %] title=[% link %] height=16 width=16
            onClick="$.get('[% c.uri_for( 'toggle_fave' , post.account_name , post.id ) %]' , function(data) {
-             $('#fave_[% post.id %]').attr('src','/images/'+data);
+             $('#fave-[% post.id %]').attr('src','/images/'+data);
            },'text')" />
       [% END %]
       [% IF post.is_protected %]
