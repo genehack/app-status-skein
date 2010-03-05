@@ -18,3 +18,5 @@
 - figure out how to support additional facebook stream events
 - add 140 char countdown JS to post form
 - pause button
+- fix retweet button fade
+- add half-star on click to fave btn
