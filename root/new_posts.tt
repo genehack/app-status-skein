@@ -26,7 +26,7 @@
       <img id=recycle-[% post.id %] class=recycle-btn
            src=/images/recycle.png alt="Recycle post" title="Recycle post" height=20 width=20
            onClick="$.get('[% c.uri_for( 'recycle_post' , post.account_name , post.id ) %]' , function(data) {
-             if (data == 1 ) { $('#recycle_[% post.id %]').fadeOut(); }
+             if (data == 1 ) { $('#recycle-[% post.id %]').fadeOut(); }
            } ,'text')" />
       [% END %]
       <img id=reply-[% post.id %] class=reply-btn
