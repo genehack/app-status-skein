@@ -154,7 +154,7 @@ sub recycle_post :Local :Args(2) {
   };
   if ( my $err = $@ ) {
     die $@ unless blessed $err and $err->isa('Net::Twitter::Error');
-    if ( $err->twitter_error->errors eq 'Share sharing is not permissable for this status' ) {
+    if ( $err->twitter_error->errors =~ 'Share sharing is not permissable for this status' ) {
       # this will just fade out the recycle button silently, which is the same thing...
       $c->response->body(1);
     }
