@@ -27,7 +27,7 @@ requires 'Moose';
 requires 'MooseX::Declare';
 requires 'Net::Twitter';
 requires 'WWW::Facebook::API';
-requires 'YAML';
+requires 'YAML::XS';
 requires 'namespace::autoclean';
 requires 'parent';
 
