@@ -19,6 +19,7 @@ requires 'Catalyst::View::JSON';
 requires 'Catalyst::View::TT';
 requires 'Config::Any';
 requires 'Data::Dumper::HTML';
+requires 'Date::Parse';
 requires 'HTML::FormHandler';
 requires 'HTML::FormHandler::Moose';
 requires 'HTML::FormHandler::Render::Simple';
