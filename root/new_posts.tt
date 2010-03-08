@@ -15,7 +15,8 @@
         [% ELSE %][% link = 'Favorite this post' ; img = 'fave_off.png' %][% END %]
       <img id=fave-[% post.id %] class=fave-btn
            src=/images/[% img %] alt=[% link %] title=[% link %] height=16 width=16
-           onClick="$.get('[% c.uri_for( 'toggle_fave' , post.account_name , post.id ) %]' , function(data) {
+           onClick="$('#fave-[% post.id %]').attr('src','/images/fave_click.png');
+                    $.get('[% c.uri_for( 'toggle_fave' , post.account_name , post.id ) %]' , function(data) {
              $('#fave-[% post.id %]').attr('src','/images/'+data);
            },'text')" />
       [% END %]
