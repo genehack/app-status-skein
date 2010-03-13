@@ -18,5 +18,9 @@
 - figure out how to support additional facebook stream events
 - add 140 char countdown JS to post form
 - pause button
-- fix retweet button fade
-- add half-star on click to fave btn
+- CSS reset (<http://www.ejeliot.com/blog/85>)
+- App bundle (<http://bulknews.typepad.com/blog/2009/09/remedie-slides-from-yapcasia.html>)
+- http://github.com/miyagawa/perl-app-builder/blob/master/perl-app-builder.pl
+
+- name ideas
+  - lazy kate
