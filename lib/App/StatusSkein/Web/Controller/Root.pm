@@ -4,9 +4,10 @@ use namespace::autoclean;
 use Moose;
 BEGIN { extends 'Catalyst::Controller' }
 
-use Data::Dumper;
-use Data::Dumper::HTML             qw/ dumper_html /;
 use App::StatusSkein::Web::Form::Update;
+use Data::Dumper;
+
+use namespace::autoclean;
 
 __PACKAGE__->config->{namespace} = '';
 
