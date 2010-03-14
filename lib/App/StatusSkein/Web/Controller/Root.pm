@@ -170,31 +170,4 @@ sub default :Path {
 
 sub end : ActionClass('RenderView') {}
 
-sub _post_blog_post_title_to_twitter {
-  my( $post , $result ) = @_;
-}
-
-sub _post_blog_post_title_to_identica {
-  my( $post , $result ) = @_;
-}
-
-sub _post_note_to_facebook {
-  my( $post , $result ) = @_;
-}
-
-sub _post_on_blog {
-  my( $result ) = @_;
-}
-
-sub _reset_session_time_if_needed {
-  my $c = shift;
-
-  my $new_time = time();
-  my $old_time = $c->session->{time} || 0;
-
-  if ( $old_time and $new_time - $old_time < 60 ) {
-    $c->session->{time} = $new_time - 61;
-  }
-}
-
 1;

@@ -16,7 +16,10 @@ has_field 'token' => (
   size             => 12 ,
 );
 
-has_field 'type' => ( type  => 'Hidden' , default => 'Facebook' );
+has_field 'type' => (
+  type    => 'Hidden' ,
+  default => 'Facebook' ,
+);
 
 has_field 'submit' => (
   type  => 'Submit' ,

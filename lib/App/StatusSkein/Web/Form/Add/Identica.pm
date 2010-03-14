@@ -24,7 +24,10 @@ has_field 'password' => (
   size             => 12 ,
 );
 
-has_field 'type' => ( type  => 'Hidden' , default => 'Identica' );
+has_field 'type' => (
+  type   => 'Hidden' ,
+  default => 'Identica' ,
+);
 
 has_field 'submit' => (
   type  => 'Submit' ,
