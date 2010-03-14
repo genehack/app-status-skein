@@ -1,6 +1,4 @@
 package App::StatusSkein::Web::Controller::Root;
-use namespace::autoclean;
-
 use Moose;
 BEGIN { extends 'Catalyst::Controller' }
 

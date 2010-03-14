@@ -1,11 +1,7 @@
 package App::StatusSkein::Web;
 
-use strict;
-use warnings;
-
-use Catalyst::Runtime 5.80;
-
-use parent qw/Catalyst/;
+use Moose;
+use namespace::autoclean;
 use Catalyst qw/
                  -Debug
                  ConfigLoader
@@ -15,8 +11,7 @@ use Catalyst qw/
                  Static::Simple
                  Unicode
                /;
-
-our $VERSION = '0.01';
+extends 'Catalyst';
 
 __PACKAGE__->setup();
 

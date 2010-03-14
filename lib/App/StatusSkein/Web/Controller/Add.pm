@@ -1,6 +1,4 @@
 package App::StatusSkein::Web::Controller::Add;
-use namespace::autoclean;
-
 use Moose;
 BEGIN { extends 'Catalyst::Controller' }
 
@@ -9,6 +7,8 @@ use App::StatusSkein::Web::Form::Add::Identica;
 use App::StatusSkein::Web::Form::Add::Twitter;
 use LWP::Simple;
 use WWW::Facebook::API;
+
+use namespace::autoclean;
 
 has 'form' => (
   isa     => 'App::StatusSkein::Web::Form::Add' ,
