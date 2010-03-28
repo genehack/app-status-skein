@@ -53,7 +53,7 @@ class App::StatusSkein::CLI::Client::Facebook extends App::StatusSkein::CLI::Cli
     die "Unable to find post $id";
   }
 
-  method get_posts ( Num :$since ){
+  method get_posts ( Num :$since! ){
     my $posts = [];
 
     if ( my $response = $self->stream->get( start_time => $since )) {
