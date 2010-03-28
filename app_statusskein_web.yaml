@@ -2,3 +2,7 @@
 name: App::StatusSkein::Web
 default_view: TT
 facebook_api_key: 80ee98239b935775526edc8884db8947
+Model::CLI:
+  class: App::StatusSkein::CLI
+  args:
+    config_file: __path_to( app_statusskein_cli.yaml )__
