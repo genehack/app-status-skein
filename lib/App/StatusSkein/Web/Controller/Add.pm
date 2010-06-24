@@ -4,7 +4,6 @@ BEGIN { extends 'Catalyst::Controller' }
 
 use App::StatusSkein::Web::Form::Add::Facebook;
 use App::StatusSkein::Web::Form::Add::Identica;
-use App::StatusSkein::Web::Form::Add::Twitter;
 use LWP::Simple;
 use WWW::Facebook::API;
 
@@ -110,5 +109,54 @@ sub index :Path {
     $c->response->redirect( $c->uri_for( '/' ));
   }
 };
+
+sub twitter :Local {
+  my( $self , $c ) = @_;
+
+  my $client = $c->model('CLI')->get_twitter_client_for_oauth_setup();
+
+  my $url = $client->get_authorization_url(
+    callback => $c->uri_for( '/add/twitter_auth_callback' ) ,
+  );
+
+  $c->response->cookies->{oauth} = {
+    value => {
+      token => $client->request_token,
+      token_secret => $client->request_token_secret,
+    },
+  };
+
+  $c->response->redirect($url);
+  $c->detach();
+}
+
+sub twitter_auth_callback : Local {
+  my($self, $c) = @_;
+
+  my %cookie = $c->request->cookies->{oauth}->value;
+  my $verifier = $c->req->params->{oauth_verifier};
+
+  my $client = $c->model('CLI')->get_twitter_client_for_oauth_setup();
+  $client->request_token($cookie{token});
+  $client->request_token_secret($cookie{token_secret});
+
+  my($access_token, $access_token_secret, $user_id, $screen_name)
+    = $client->request_access_token(verifier => $verifier);
+
+  my $name = "twitter-$screen_name";
+
+  my $account = {
+    access_token => $access_token ,
+    access_token_secret => $access_token_secret ,
+    type        => 'Twitter' ,
+    account_name => $name
+  };
+
+  $c->model( 'CLI' )->add_account( $name => $account );
+
+  $c->response->redirect('/');
+  $c->detach();
+
+}
 
 1;

@@ -98,6 +98,14 @@ class App::StatusSkein::CLI {
     return $self->get_account( $account )->get_post( $id );
   };
 
+  method get_twitter_client_for_oauth_setup () {
+    use App::StatusSkein::CLI::Client::Twitter;
+
+    return App::StatusSkein::CLI::Client::Twitter->new(
+      account_name => 'temp' ,
+    );
+  }
+
   method post_new_status ( Str $account , HashRef $args ) {
     return $self->get_account( $account )->post_new_status( $args );
   };

@@ -10,6 +10,10 @@ class App::StatusSkein::CLI::Client::Twitter extends App::StatusSkein::CLI::Clie
     handles    => [
       'create_favorite' ,
       'destroy_favorite' ,
+      'get_authorization_url' ,
+      'request_access_token' ,
+      'request_token' ,
+      'request_token_secret' ,
       'retweet' ,
       'show_status' ,
       'update' ,
@@ -22,20 +26,36 @@ class App::StatusSkein::CLI::Client::Twitter extends App::StatusSkein::CLI::Clie
     is       => 'ro' ,
     isa      => 'ArrayRef' ,
     required => 1 ,
-    default  => sub { [ qw/ API::REST InflateObjects / ] }
+    default  => sub { [ qw/ API::REST OAuth InflateObjects / ] }
   );
 
-  has username => ( is => 'ro' , isa => 'Str'      , required => 1 );
-  has password => ( is => 'ro' , isa => 'Str'      , required => 1 );
+  has access_token => (
+    is => 'ro' ,
+    isa => 'Str',
+  );
+
+  has access_token_secret => (
+    is => 'ro' ,
+    isa => 'Str' ,
+  );
+
+  has consumer_key => ( is => 'ro' , default => '1c4qi8rmSJg9bcKZMn22Hg' );
+  has consumer_secret => ( is => 'ro' , default => 'nc6TJuYtjvKhuRiPVOrWkRpq1bOLe6BA90q2doSuLgs');
 
   has '+type' => ( default => 'Twitter' );
 
   method _build__client {
-    return Net::Twitter->new(
-      traits   => $self->traits ,
-      username => $self->username ,
-      password => $self->password ,
+    my $client = Net::Twitter->new(
+      traits          => $self->traits ,
+      consumer_key    => $self->consumer_key ,
+      consumer_secret => $self->consumer_secret ,
     );
+    $client->access_token( $self->access_token ) if $self->access_token;
+    $client->access_token_secret( $self->access_token_secret )
+      if $self->access_token_secret;
+
+    return $client;
+
   };
 
   method add_fave ( Str $id ) { $self->create_favorite( $id ) };
