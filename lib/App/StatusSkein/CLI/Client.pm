@@ -42,7 +42,7 @@ class App::StatusSkein::CLI::Client {
   };
 
   method filter_posts ( Num :$since , ArrayRef :$posts ) {
-    return [ grep { $_->created_at->epoch >= $since } @$posts ];
+    return [ grep { defined $_ && $_->can('created_at') && $_->created_at->epoch >= $since } @$posts ];
   };
 
   method post_class { return sprintf "App::StatusSkein::CLI::Post::%s" , $self->type };
