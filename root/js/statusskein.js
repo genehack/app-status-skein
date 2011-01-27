@@ -108,3 +108,19 @@ function showResponse(data)  {
   }
   else { window.alert( data.message ); }
 }
+
+$(document).keypress(function(event) {
+  var keyCode = event.keyCode;
+  // 117 == 'u'
+  if( keyCode == '117' ) {
+    load_posts(1);
+  }
+  // 120 = 'x'
+  else if( keyCode == '120' ) {
+    clear_posts();
+  }
+  // 99 = 'c'
+  else if( keyCode == '99' ) {
+    $("#post_btn").click()
+  }
+});

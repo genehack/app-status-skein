@@ -10,11 +10,11 @@
   </head>
   <body>
     <div id=icon-bar>
-      <img id=post_btn src=/images/post.png alt="Make a new post" title="Make a new post" width=48 height=48 />
+      <img id=post_btn src=/images/post.png alt="Make a new post (shortcut: c)" title="Make a new post (shortcut: c)" width=48 height=48 />
       <br/>
-      <img id=reload_btn src=/images/reload.png alt="Attempt to load new posts" title="Attempt to load new posts" width=48 height=48 />
+      <img id=reload_btn src=/images/reload.png alt="Attempt to load new posts (shortcut: u)" title="Attempt to load new posts (shortcut: u)" width=48 height=48 />
       <br/>
-      <img id=clear_btn src=/images/clear.png  alt="Clear loaded posts" title="Clear loaded posts" width=48 height=48 />
+      <img id=clear_btn src=/images/clear.png  alt="Clear loaded posts (shortcut: x)" title="Clear loaded posts (shortcut: x)" width=48 height=48 />
       <br/>
       <a href="[% c.uri_for( '/add' ) %]">
         <img id=add_btn src=/images/add.png alt="Add New Account" title="Add New Account" width=48 height=48/>
