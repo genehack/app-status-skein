@@ -58,7 +58,7 @@ $(document).ready(
     $("#reload_btn").everyTime( '300s' , function() { load_posts() });
 
     // set up the clear btn to clean out the 'posts' div
-    $("#clear_btn").click( function() { $("#posts").html('') });
+    $("#clear_btn").click( function() { clear_posts() });
   }
 );
 
@@ -92,6 +92,12 @@ function reply( account, author, id ) {
   };
   $.fn.colorbox( reply_colorboxAttrs );
   return true;
+}
+
+// empty out the posts divs
+function clear_posts () {
+  $("#posts").html('');
+  load_posts();
 }
 
 function showResponse(data)  {
