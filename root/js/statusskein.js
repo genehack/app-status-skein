@@ -69,11 +69,11 @@ $(document).ready(
     // set up the reload btn so that it calls load_posts if clicked
     // and auto-calls load_posts every 300 seconds
     // ###FIXME figure out a way to make this a configurable pref... 
-    $("#reload_btn").click(function() { load_posts() });
-    $("#reload_btn").everyTime( '300s' , function() { load_posts() });
+    $("#reload_btn").click(function() { load_posts(); });
+    $("#reload_btn").everyTime( '300s' , function() { load_posts(); });
 
     // set up the clear btn to clean out the 'posts' div
-    $("#clear_btn").click( function() { clear_posts() });
+    $("#clear_btn").click( function() { clear_posts(); });
   }
 );
 
