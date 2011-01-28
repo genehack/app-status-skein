@@ -76,6 +76,7 @@
     <script type=text/javascript src=/js/jquery.timers.js></script>
     <script type=text/javascript src=/js/jquery.countdown.js></script>
     <script type=text/javascript src=/js/jquery.form.js></script>
+    <script type=text/javascript src=/js/jquery.jkey.js></script>
     <script type=text/javascript src=/js/statusskein.js></script>
   </body>
 </html>
