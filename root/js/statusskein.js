@@ -112,7 +112,6 @@ function reply( account, author, id ) {
 // empty out the posts divs
 function clear_posts () {
   $("#posts").html('');
-  load_posts();
 }
 
 function showResponse(data)  {
