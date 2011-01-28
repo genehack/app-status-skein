@@ -124,18 +124,28 @@ function showResponse(data)  {
   else { window.alert( data.message ); }
 }
 
-$(document).keypress(function(event) {
-  var keyCode = event.keyCode;
-  // 117 == 'u'
-  if( keyCode == '117' ) {
+$(window).jkey( 'c' , true , function() {
+  if( ! colorBoxOpen ) {
+    $("#post_btn").click();
+  }
+});
+
+// shouldn't need to repeat this here but can't seem to bind multiple
+// keys using the syntax in the jkey documentation...
+$(window).jkey( 'u' , true , function() {
+  if( ! colorBoxOpen ) {
     load_posts(1);
   }
-  // 120 = 'x'
-  else if( keyCode == '120' ) {
-    clear_posts();
+});
+
+$(window).jkey( 'r' , true , function() {
+  if( ! colorBoxOpen ) {
+    load_posts(1);
   }
-  // 99 = 'c'
-  else if( keyCode == '99' ) {
-    $("#post_btn").click()
+});
+
+$(window).jkey( 'x' , true , function() {
+  if( ! colorBoxOpen ) {
+    clear_posts();
   }
 });
