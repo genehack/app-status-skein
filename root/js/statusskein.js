@@ -1,9 +1,9 @@
-// base attributes for all color boxes 
+// base attributes for all color boxes
 var colorboxAttrs = {
-  height:"50%", 
-  inline:true, 
+  height:"50%",
+  inline:true,
   opacity:0.5 ,
-  width:"85%", 
+  width:"85%",
 };
 
 // global used to track whether we've got a colorBox open or not.
@@ -11,7 +11,7 @@ var colorBoxOpen = false;
 
 $(document).ready(
   function() {
-    // load up posts -- get this running first 
+    // load up posts -- get this running first
     load_posts();
 
     //// countdown timer
@@ -68,7 +68,7 @@ $(document).ready(
 
     // set up the reload btn so that it calls load_posts if clicked
     // and auto-calls load_posts every 300 seconds
-    // ###FIXME figure out a way to make this a configurable pref... 
+    // ###FIXME figure out a way to make this a configurable pref...
     $("#reload_btn").click(function() { load_posts(); });
     $("#reload_btn").everyTime( '300s' , function() { load_posts(); });
 
@@ -79,7 +79,7 @@ $(document).ready(
 
 // load up a new set of posts and append them to the 'posts' div
 function load_posts (force) {
-  // default force to 0 if it's not set 
+  // default force to 0 if it's not set
   force = typeof(force) != 'undefined' ? force : 0;
 
   $.get('/new_posts/' + force ,
@@ -90,10 +90,10 @@ function load_posts (force) {
         });
 }
 
-// handle the reply btns 
+// handle the reply btns
 function reply( account, author, id ) {
   var account_id = "#accounts\\." + account;
-  // set up the attributes for the color box attached to reply btns    
+  // set up the attributes for the color box attached to reply btns
   var reply_colorboxAttrs = colorboxAttrs;
   reply_colorboxAttrs['href'] = "#update-form-div";
   reply_colorboxAttrs['onComplete'] = function(){
