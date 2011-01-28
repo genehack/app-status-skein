@@ -6,7 +6,10 @@ var colorboxAttrs = {
   width:"85%", 
 };
 
-$(document).ready( 
+// global used to track whether we've got a colorBox open or not.
+var colorBoxOpen = false;
+
+$(document).ready(
   function() {
     // load up posts -- get this running first 
     load_posts();
@@ -31,6 +34,12 @@ $(document).ready(
     // set up the colorbox attached to the debug_btn
     var debug_colorboxAttrs = colorboxAttrs;
     debug_colorboxAttrs['href'] = "#debug_info";
+    debug_colorboxAttrs['onOpen'] = function() {
+      colorBoxOpen = true;
+    };
+    debug_colorboxAttrs['onClosed'] = function() {
+      colorBoxOpen = false;
+    };
     debug_colorboxAttrs['onComplete'] = function(){
       date = new Date();
       epoch = Math.round(date.getTime() / 1000);
@@ -41,6 +50,12 @@ $(document).ready(
     // set up the colorbox attached to the post_btn
     var post_colorboxAttrs = colorboxAttrs;
     post_colorboxAttrs['href'] = "#update-form-div";
+    debug_colorboxAttrs['onOpen'] = function() {
+      colorBoxOpen = true;
+    };
+    debug_colorboxAttrs['onClosed'] = function() {
+      colorBoxOpen = false;
+    };
     post_colorboxAttrs['onComplete'] = function(){
       $(".accounts").removeAttr('disabled');
       $(".accounts").val([]);
