@@ -3,7 +3,8 @@ use Moose;
 BEGIN { extends 'Catalyst::Controller' }
 
 use App::StatusSkein::Web::Form::Update;
-use Data::Dumper;
+use Data::Printer;
+use HTML::FromANSI;
 
 use namespace::autoclean;
 
@@ -56,9 +57,8 @@ sub inspect :Local :Args(2) {
 
   my $status = $c->model( 'CLI' )->get_post( $name , $id );
   my $text   = $status->text;
-  my $body   =  "TEXT: $text\n\n" . Dumper( $status->{post} );
+  my $body   =  "<p>TEXT: $text</p><p>" . ansi2html( p( $status , { colored => 1 , class => { expand => 'all' }}));
 
-  $c->response->content_type( 'text/plain' );
   $c->response->body( $body );
 }
 
