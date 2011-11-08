@@ -1,3 +1,4 @@
+# PODNAME: App::StatusSkein::CLI::Post::Twitter
 use MooseX::Declare;
 
 class App::StatusSkein::CLI::Post::Twitter extends App::StatusSkein::CLI::Post {

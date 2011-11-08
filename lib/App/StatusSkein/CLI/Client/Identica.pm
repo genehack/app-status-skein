@@ -1,3 +1,4 @@
+# PODNAME: App::Statusskein::Cli::Client::Identica
 use MooseX::Declare;
 
 class App::StatusSkein::CLI::Client::Identica extends App::StatusSkein::CLI::Client {

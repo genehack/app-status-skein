@@ -1,3 +1,4 @@
+# PODNAME: App::StatusSkein::CLI::Post
 use MooseX::Declare;
 class App::StatusSkein::CLI::Post {
   has account_name => (

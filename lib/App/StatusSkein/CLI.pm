@@ -1,3 +1,4 @@
+# PODNAME: App::StatusSkein::CLI
 use MooseX::Declare;
 
 class App::StatusSkein::CLI {

@@ -1,3 +1,4 @@
+# PODNAME: App::StatusSkein::CLI::Client::Facebook
 use MooseX::Declare;
 
 class App::StatusSkein::CLI::Client::Facebook extends App::StatusSkein::CLI::Client {

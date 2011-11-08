@@ -1,3 +1,4 @@
+# PODNAME: App::StatusSkein::CLI::Client::Twitter
 use MooseX::Declare;
 
 class App::StatusSkein::CLI::Client::Twitter extends App::StatusSkein::CLI::Client {
@@ -63,4 +64,3 @@ class App::StatusSkein::CLI::Client::Twitter extends App::StatusSkein::CLI::Clie
 
   method recycle_post ( Str $id ) { $self->retweet( $id ) };
 }
-
