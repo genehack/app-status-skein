@@ -32,8 +32,9 @@ class App::StatusSkein::CLI::Post::Twitter extends App::StatusSkein::CLI::Post {
 
     my $text = $self->text;
 
-    $text =~ s|\@([_a-zA-Z0-9]+)|<a target=_blank href=http://twitter.com/$1>\@$1</a>|g;
-    $text =~ s| \#(\S+)| <a target=_blank href="http://twitter.com/#search?q=%23$1">#$1</a>|g;
+    $text =  $self->linkify_text( $text );
+    $text =~ s|(\A\| )\@([_a-zA-Z0-9]+)|$1<a target=_blank href=http://twitter.com/$2>\@$2</a>|g;
+    $text =~ s|(\A\| )\#(\S+)|$1<a target=_blank href="http://twitter.com/#search?q=%23$2">#$2</a>|g;
 
     $self->_set_text( $text );
   }

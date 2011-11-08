@@ -42,12 +42,17 @@ class App::StatusSkein::CLI::Post {
     isa => 'Str'
   );
 
-  method BUILD {
-    my $text = $self->text;
+  method linkify_text ( Str $text ) {
+    use URI::Find;
 
-    $text =~ s|(http://\S+)|<a href=$1 target=_blank>$1</a>|g;
+    my $finder = URI::Find->new( sub {
+      my( $url , $text ) = shift;
+      my $link = $url->as_string;
+      return qq|<a href=$link target=_blank>$link</a>|;
+    });
+    $finder->find( \$text );
 
-    $self->_set_text( $text );
+    return $text;
   }
 
   method pretty_date { return $self->date->strftime( '%H:%M:%S %a %d %b %Y' ) }

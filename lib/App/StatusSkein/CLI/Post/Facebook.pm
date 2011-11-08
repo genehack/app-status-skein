@@ -13,6 +13,12 @@ class App::StatusSkein::CLI::Post::Facebook extends App::StatusSkein::CLI::Post 
     required => 1 ,
   );
 
+  method BUILD {
+    my $text = $self->text;
+    $text = $self->linkify_text( $text );
+    $self->_set_text( $text );
+  }
+
   # lazy builder for 'date' attr, declared in base class
   method _build_date {
     my $dt = DateTime->from_epoch( epoch => $self->post->{created_time} );
