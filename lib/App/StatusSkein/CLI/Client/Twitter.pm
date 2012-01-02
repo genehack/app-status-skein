@@ -62,5 +62,15 @@ class App::StatusSkein::CLI::Client::Twitter extends App::StatusSkein::CLI::Clie
   method add_fave ( Str $id ) { $self->create_favorite( $id ) };
   method del_fave ( Str $id ) { $self->destroy_favorite( $id ) };
 
+  ### FIXME this can't work as things currently are because we don't know the
+  ### screen name of the account...
+  # after filter_posts ( Num :$since , ArrayRef :$posts ) {
+  #   return [ grep {
+  #     defined $_ &&
+  #     $_->can('retweeter') &&
+  #     $_->retweeter->screen_name eq $account->screen_name
+  #   } @$posts ];
+  # };
+
   method recycle_post ( Str $id ) { $self->retweet( $id ) };
 }
