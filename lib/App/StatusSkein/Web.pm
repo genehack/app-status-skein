@@ -13,6 +13,8 @@ use Catalyst qw/
                /;
 extends 'Catalyst';
 
+__PACKAGE__->config( 'Plugin::ConfigLoader' => { file => 'app_statusskein_web.yaml' } );
+
 __PACKAGE__->setup();
 
 1;
