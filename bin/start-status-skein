@@ -1,0 +1,5 @@
+#! /bin/sh
+
+cd /home/genehack/proj/app-status-skein
+script/statusskein_server.pl -p3001
+
