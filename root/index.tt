@@ -5,6 +5,9 @@
     <meta http-equiv=Content-Type content="text/html;charset=utf-8" />
     <link type=text/css media=screen rel=stylesheet href=/css/jquery.countdown.css />
     <script type=text/javascript src=/js/jquery.js></script>
+    <script type=text/javascript>
+window.onbeforeunload = function() { return "derp"; };
+    </script>
     <link type=text/css media=screen rel=stylesheet href=/css/colorbox.css />
     <link type=text/css media=screen rel=stylesheet href=/css/statusskein.css />
   </head>
