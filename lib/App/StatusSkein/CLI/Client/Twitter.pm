@@ -27,7 +27,7 @@ class App::StatusSkein::CLI::Client::Twitter extends App::StatusSkein::CLI::Clie
     is       => 'ro' ,
     isa      => 'ArrayRef' ,
     required => 1 ,
-    default  => sub { [ qw/ API::REST OAuth InflateObjects / ] }
+    default  => sub { [ qw/ API::RESTv1_1 OAuth InflateObjects / ] }
   );
 
   has access_token => (
