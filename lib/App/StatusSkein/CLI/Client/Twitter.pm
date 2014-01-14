@@ -50,6 +50,7 @@ class App::StatusSkein::CLI::Client::Twitter extends App::StatusSkein::CLI::Clie
       traits          => $self->traits ,
       consumer_key    => $self->consumer_key ,
       consumer_secret => $self->consumer_secret ,
+      ssl             => 1 ,              ## twitter started requiring https on 20140114
     );
     $client->access_token( $self->access_token ) if $self->access_token;
     $client->access_token_secret( $self->access_token_secret )
