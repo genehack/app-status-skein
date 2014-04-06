@@ -19,9 +19,7 @@ window.onbeforeunload = function() { return "derp"; };
       <br/>
       <img id=clear_btn src=/images/clear.png  alt="Clear loaded posts (shortcut: x)" title="Clear loaded posts (shortcut: x)" width=48 height=48 />
       <br/>
-      <a href="[% c.uri_for( '/add' ) %]">
-        <img id=add_btn src=/images/add.png alt="Add New Account" title="Add New Account" width=48 height=48/>
-      </a>
+      <a href="[% c.uri_for( '/add' ) %]"><img id=add_btn src=/images/add.png alt="Add New Account" title="Add New Account" width=48 height=48 /></a>
       [% IF c.debug %]
       <br/>
       <img id=debug_btn src="/images/debug.png" alt="Debug Info" title="Debug Info" width=48 height=48 />
