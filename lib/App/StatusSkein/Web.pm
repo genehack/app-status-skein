@@ -9,7 +9,6 @@ use Catalyst qw/
                  Session::Store::FastMmap
                  Session::State::Cookie
                  Static::Simple
-                 Unicode
                /;
 extends 'Catalyst';
 
