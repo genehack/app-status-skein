@@ -56,7 +56,12 @@ class App::StatusSkein::CLI::Post {
         ### a try/catch
         my $r = HTTP::Tiny->new(max_redirect => 0 )->get($link);
         $link = $r->{headers}{location} if $r->{headers}{location};
-        $target = length $link > 50 ? substr( $link , 0 , 45 ) . '…' : $link;
+        if ( $link =~ m|twitter\.com/.*/photo/| ) {
+          $target = '[photo]';
+        }
+        else {
+          $target = length $link > 50 ? substr( $link , 0 , 45 ) . '…' : $link;
+        }
       }
       return qq|<a href=$link target=_blank>$target</a>|;
     });
