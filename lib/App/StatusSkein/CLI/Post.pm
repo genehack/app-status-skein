@@ -1,4 +1,5 @@
 # PODNAME: App::StatusSkein::CLI::Post
+use utf8;
 use MooseX::Declare;
 class App::StatusSkein::CLI::Post {
   has account_name => (
@@ -44,12 +45,20 @@ class App::StatusSkein::CLI::Post {
   );
 
   method linkify_text ( Str $text ) {
+    use HTTP::Tiny;
     use URI::Find;
 
     my $finder = URI::Find->new( sub {
       my( $url , $text ) = shift;
-      my $link = $url->as_string;
-      return qq|<a href=$link target=_blank>$link</a>|;
+      my $link = my $target = $url->as_string;
+      if ( $link =~ /t\.co/ ) {
+        ### FIXME should probably have a timeout or something, and do this in
+        ### a try/catch
+        my $r = HTTP::Tiny->new(max_redirect => 0 )->get($link);
+        $link = $r->{headers}{location} if $r->{headers}{location};
+        $target = length $link > 50 ? substr( $link , 0 , 45 ) . '…' : $link;
+      }
+      return qq|<a href=$link target=_blank>$target</a>|;
     });
     $finder->find( \$text );
 
