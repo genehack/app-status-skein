@@ -1,6 +1,6 @@
 #! /bin/sh
 # PODNAME: start-status-skein
 
-cd /home/genehack/proj/app-status-skein
+cd /Users/genehack/proj/app-status-skein
 script/statusskein_server.pl -p3001
 
