@@ -62,8 +62,11 @@ class App::StatusSkein::CLI::Post::Twitter extends App::StatusSkein::CLI::Post {
   }
 
   method reply_permalink {
-    return sprintf 'http://twitter.com/%s/status/%s' ,
-      $self->in_reply_to , $self->post->in_reply_to_status_id;
+    my $permalink = $self->in_reply_to;
+    my $status_id = $self->post->in_reply_to_status_id;
+    return $permalink && $status_id
+        ? sprintf 'http://twitter.com/%s/status/%s' , $permalink , $status_id
+        : '';
   }
 
   method retweeter_url { return sprintf 'http://twitter.com/%s' , $self->retweeter->screen_name }
